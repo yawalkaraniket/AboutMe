@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.aboutme.avenjr.aboutme.main.activity.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/home"
+        android:layout_marginBottom="190dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:clickable="true">
+
+            <Button
+                android:id="@+id/layout_continue_with_facebook"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/green"
+                android:text="@string/sign_in_with_facebook"
+                android:textColor="@color/white"
+                android:layout_below="@+id/have_an_account_button"/>
+
+            <Button
+                android:id="@+id/layout_continue_with_mail"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/continue_with_mail"
+                android:textColor="@color/white"
+                android:layout_below="@id/layout_continue_with_facebook"/>
+
+            <Button
+                android:id="@+id/have_an_account_button"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="@string/already_have_an_account"
+                android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
