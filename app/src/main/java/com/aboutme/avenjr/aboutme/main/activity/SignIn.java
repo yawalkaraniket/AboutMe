@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import com.aboutme.avenjr.aboutme.R;
 public class SignIn extends AppCompatActivity {
 
     String id, password;
+    int touchCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +34,22 @@ public class SignIn extends AppCompatActivity {
         final EditText userPassword = findViewById(R.id.request_user_password);
         Button buttonSubmit = findViewById(R.id.submit_button);
 
-        userId.setOnClickListener(new View.OnClickListener() {
+        userId.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                userId.setText("");
+            public boolean onTouch(View v, MotionEvent event) {
+                if(touchCount==0) {
+                    userId.setText("");
+                    touchCount++;
+                }
+                return true;
             }
         });
+//        userId.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                userId.setText("");
+//            }
+//        });
         userPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
