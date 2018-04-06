@@ -34,22 +34,13 @@ public class SignIn extends AppCompatActivity {
         final EditText userPassword = findViewById(R.id.request_user_password);
         Button buttonSubmit = findViewById(R.id.submit_button);
 
-        userId.setOnTouchListener(new View.OnTouchListener() {
+        userId.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(touchCount==0) {
-                    userId.setText("");
-                    touchCount++;
-                }
-                return true;
+            public void onClick(View v) {
+                userId.setText("");
             }
         });
-//        userId.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                userId.setText("");
-//            }
-//        });
+
         userPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,10 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aboutme.avenjr.aboutme.main.activity.SignUp">
+    tools:context="com.aboutme.avenjr.aboutme.main.activity.SignIn"
+    >
+    <!--downloaded from unsplash.com-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/sign_in"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:clickable="true">
 
+        <Button
+            android:id="@+id/layout_continue_with_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/green"
+            android:text="@string/submit_button"
+            android:textColor="@color/white"
+            android:layout_below="@+id/have_an_account_button"/>
+    </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="100dp"
+        android:id="@+id/input_credentials"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/request_user_id"
+                android:id="@+id/request_user_id"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/request_user_password"
+                android:id="@+id/request_user_password"
+                style="@style/Widget.AppCompat.EditText" />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgot_password"
+            android:text="@string/forgot_password"
+            android:layout_gravity="center"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            />
+    </LinearLayout>
+</RelativeLayout>

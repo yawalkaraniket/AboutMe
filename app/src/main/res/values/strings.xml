@@ -7,4 +7,5 @@
     <string name="sign_in_with_facebook">CONTINUE WITH FACEBOOK</string>
     <string name="continue_with_mail">CONTINUE WITH MAIL</string>
     <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="forgot_password">FORGOT PASSWORD</string>
 </resources>
