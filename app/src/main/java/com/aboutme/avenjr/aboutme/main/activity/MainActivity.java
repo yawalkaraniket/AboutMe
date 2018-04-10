@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.aboutme.avenjr.aboutme.R;
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,8 +14,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
 
         Button continueWithFacebook = findViewById(R.id.layout_continue_with_facebook);
         Button continueWithMail = findViewById(R.id.layout_continue_with_mail);
