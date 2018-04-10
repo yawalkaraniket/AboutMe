@@ -39,12 +39,15 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:id="@+id/username_wrapper">
+            android:id="@+id/username_wrapper"
+            android:paddingTop="50dp">
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/request_user_id"
+                android:textColorHint="@color/dark_black"
                 android:id="@+id/request_user_id"
+                android:singleLine="true"
                 android:textSize="20dp"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -56,8 +59,10 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/request_user_password"
+                android:textColorHint="@color/dark_black"
                 android:id="@+id/request_user_password"
                 android:textSize="20dp"
+                android:singleLine="true"
                 style="@style/Widget.AppCompat.EditText" />
         </android.support.design.widget.TextInputLayout>
         <Button

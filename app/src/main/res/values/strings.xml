@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">AboutMe</string>
-    <string name="request_user_id">Enter your ID:</string>
-    <string name="request_user_password">Enter Password:</string>
+    <string name="request_user_id">Enter your id..</string>
+    <string name="request_user_password">Enter password..</string>
+    <string name="request_user_repassword">Enter password again..</string>
     <string name="submit_button">Submit</string>
     <string name="already_have_an_account">Have an account? SIGN IN</string>
     <string name="sign_in_with_facebook">CONTINUE WITH FACEBOOK</string>
     <string name="continue_with_mail">CONTINUE WITH MAIL</string>
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="forgot_password">FORGOT PASSWORD</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -6,28 +6,29 @@
     android:background="@color/white"
     >
 
-    <ImageView
-    android:layout_width="50dp"
-    android:layout_height="match_parent"
+    <ImageButton
         android:id="@+id/navigation_header_home"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
         android:clickable="true"
-       android:src="@drawable/ic_view_headline_black_24dp" />
-
+        android:src="@drawable/ic_view_headline_black_24dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+    />
     <TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:id="@+id/navigation_headr_text"/>
-
-    <ImageView
+    <ImageButton
         android:id="@+id/navigation_header_profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_info_black_24dp" />
+        android:src="@drawable/ic_info_black_24dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
     <View
         android:id="@+id/navigation_header_separator"
         android:layout_width="match_parent"
