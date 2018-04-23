@@ -10,6 +10,17 @@ public class UserInformation {
     private String lastName;
     private String email;
     private String password;
+    private String mobileNo;
+
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+
 
     public String getName() {
         return name;
@@ -44,10 +55,11 @@ public class UserInformation {
         return password;
     }
 
-    UserInformation(String email, String password, String name, String lastName) {
+    UserInformation(String email, String password, String name, String lastName, String mobileNo) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
+        this.mobileNo = mobileNo;
     }
 }

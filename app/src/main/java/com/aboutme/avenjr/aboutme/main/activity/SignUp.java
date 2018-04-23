@@ -2,6 +2,7 @@ package com.aboutme.avenjr.aboutme.main.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,19 +13,30 @@ import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.main.Utils.FireBaseUtil;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
+
+import java.util.concurrent.TimeUnit;
 
 public class SignUp extends AppCompatActivity {
 
     private RelativeLayout signUpView;
-    private EditText emailId, password, passwordAgain, name, lastName;
+    private EditText emailId, password, passwordAgain, name, lastName, mobileNo;
     private Button signUp;
-    private String userId, userPassword, userPasswordAgain, userName, userLastName;
+    private String userId, userPassword, userPasswordAgain, userName, userLastName, userMobileNo;
     DatabaseReference mDatabaseReference;
     Context mContext;
     Toast successToast, failToast;
     private int duration;
     CharSequence success, fail;
+    FirebaseAuth mFirebaseAuth;
+    PhoneAuthProvider.OnVerificationStateChangedCallbacks mOnVerificationStateChangedCallbacks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +51,8 @@ public class SignUp extends AppCompatActivity {
         name = findViewById(R.id.request_user_name);
         lastName = findViewById(R.id.request_user_lastName);
         signUp = findViewById(R.id.button_sign_up);
+        mobileNo = findViewById(R.id.request_user_mobile_number);
+
         mDatabaseReference = FireBaseUtil.getFireBaseReference("UserInformation");
         mContext = getApplicationContext();
         success = "success";
@@ -46,7 +60,7 @@ public class SignUp extends AppCompatActivity {
         duration = Toast.LENGTH_SHORT;
         successToast = Toast.makeText(mContext, success, duration);
         failToast = Toast.makeText(mContext, fail, duration);
-
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         //  Adding the back header
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -60,9 +74,28 @@ public class SignUp extends AppCompatActivity {
                 userPasswordAgain = passwordAgain.getText().toString().trim();
                 userName = name.getText().toString().trim();
                 userLastName = lastName.getText().toString().trim();
+                userMobileNo = mobileNo.getText().toString().trim();
 
-                if (userPassword.equals(userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userLastName.isEmpty() && !userPassword.isEmpty()) {
-                    UserInformation userInformation = new UserInformation(userId, userPassword, userName, userLastName);
+                if (userPassword.equals(userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userLastName.isEmpty() && !userPassword.isEmpty() && !userMobileNo.isEmpty()) {
+                    UserInformation userInformation = new UserInformation(userId, userPassword, userName, userLastName, userMobileNo);
+
+                    mOnVerificationStateChangedCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                        @Override
+                        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+
+                        }
+
+                        @Override
+                        public void onVerificationFailed(FirebaseException e) {
+
+                        }
+
+                        @Override
+                        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                            send_code();
+                            super.onCodeSent(s, forceResendingToken);
+                        }
+                    };
                     FireBaseUtil.saveInformation(userInformation, mDatabaseReference);
                     successToast.show();
                 } else {
@@ -71,4 +104,25 @@ public class SignUp extends AppCompatActivity {
             }
         });
     }
+    public void send_code() {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                userMobileNo,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                mOnVerificationStateChangedCallbacks);
+    }
+
+    public void sign_in_withMobileNo(PhoneAuthCredential credential) {
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            successToast.show();
+                        }
+                    }
+                });
+    }
+
 }

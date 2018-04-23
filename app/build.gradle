@@ -33,6 +33,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.android.support:cardview-v7:26.1.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     //    https://console.firebase.google.com/project/aboutme-3908c/settings/general/android:com.aboutme.avenjr.aboutme
     compile 'com.google.firebase:firebase-core:15.0.0'

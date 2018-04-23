@@ -4,6 +4,7 @@
     <string name="request_user_password">Enter password..</string>
     <string name="request_user_repassword">Enter password again..</string>
     <string name="request_user_name">Enter your name....</string>
+    <string name="request_user_mobile_number">Enter mobile number....</string>
     <string name="request_user_lastName">Enter last name....</string>
     <string name="submit_button">Submit</string>
     <string name="already_have_an_account">Have an account? SIGN IN</string>

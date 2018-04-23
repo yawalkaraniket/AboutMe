@@ -3,30 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:id="@+id/back_header"
-    android:background="@color/white"
-    >
+    android:background="@color/white" >
 
     <ImageButton
-        android:id="@+id/navigation_header_home"
+        android:id="@+id/back_header_right"
         android:layout_width="70dp"
         android:layout_height="match_parent"
         android:clickable="true"
         android:src="@drawable/ic_action_arrow_back"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        />
-    />
+        style="@style/Widget.AppCompat.Button.Borderless" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:id="@+id/navigation_headr_text"/>
+
     <View
         android:id="@+id/navigation_header_separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/blue"
-        />
+        android:background="@color/blue" />
 
 </RelativeLayout>
