@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +12,7 @@ import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.main.Utils.FireBaseUtil;
+import com.aboutme.avenjr.aboutme.main.view.BackHeader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -37,6 +37,7 @@ public class SignUp extends AppCompatActivity {
     CharSequence success, fail;
     FirebaseAuth mFirebaseAuth;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mOnVerificationStateChangedCallbacks;
+    BackHeader backHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class SignUp extends AppCompatActivity {
         lastName = findViewById(R.id.request_user_lastName);
         signUp = findViewById(R.id.button_sign_up);
         mobileNo = findViewById(R.id.request_user_mobile_number);
+        backHeader =  findViewById(R.id.back_header);
 
         mDatabaseReference = FireBaseUtil.getFireBaseReference("UserInformation");
         mContext = getApplicationContext();
@@ -61,10 +63,7 @@ public class SignUp extends AppCompatActivity {
         successToast = Toast.makeText(mContext, success, duration);
         failToast = Toast.makeText(mContext, fail, duration);
         mFirebaseAuth = FirebaseAuth.getInstance();
-
-        //  Adding the back header
-        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View backHeader = layoutInflater.inflate(R.layout.backheader, signUpView, true);
+        backHeader.setUp(this);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,11 +104,7 @@ public class SignUp extends AppCompatActivity {
         });
     }
     public void send_code() {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                userMobileNo,        // Phone number to verify
-                60,                 // Timeout duration
-                TimeUnit.SECONDS,   // Unit of timeout
-                this,               // Activity (for callback binding)
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(userMobileNo,60, TimeUnit.SECONDS, this,
                 mOnVerificationStateChangedCallbacks);
     }
 

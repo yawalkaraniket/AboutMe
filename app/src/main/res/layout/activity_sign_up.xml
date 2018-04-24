@@ -7,10 +7,18 @@
     tools:context="com.aboutme.avenjr.aboutme.main.activity.SignIn"
     >
     <!--downloaded from unsplash.com-->
+    <com.aboutme.avenjr.aboutme.main.view.BackHeader
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/back_header">
+    </com.aboutme.avenjr.aboutme.main.view.BackHeader>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/sign_up"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="70dp"
         />
 
     <RelativeLayout

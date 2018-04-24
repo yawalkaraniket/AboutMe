@@ -10,10 +10,6 @@ import com.aboutme.avenjr.aboutme.R;
 
 public class NavigationHeaderHome extends Fragment {
 
-    public NavigationHeaderHome() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

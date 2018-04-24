@@ -1,6 +1,6 @@
 package com.aboutme.avenjr.aboutme.main.view;
 
-import android.app.Fragment;
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -23,17 +23,18 @@ public class BackHeader extends RelativeLayout {
     ImageButton backHeader;
 
     public BackHeader(Context context, AttributeSet attributeSet) {
-        super(context,attributeSet);
-        View view = LayoutInflater.from(context).inflate(R.layout.backheader,null);
-        ButterKnife.bind(this,view);
+        super(context, attributeSet);
+        View view = LayoutInflater.from(context).inflate(R.layout.backheader, null);
+        ButterKnife.bind(this, view);
+        addView(view);
     }
 
-    public void setUp(final Fragment fragment) {
-          backHeader.setOnClickListener(new OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  fragment.getFragmentManager().popBackStack();
-              }
-          });
+    public void setUp(final Activity activity) {
+        backHeader.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.finish();
+            }
+        });
     }
 }
