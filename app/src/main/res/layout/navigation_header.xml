@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navigation_hrader"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:id="@+id/navigation_hrader"
-    android:background="@color/white"
-    >
+    android:background="@color/white">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/navigation_header_home"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="70dp"
         android:layout_height="match_parent"
         android:clickable="true"
-        android:src="@drawable/ic_view_headline_black_24dp"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+        android:src="@drawable/ic_view_headline_black_24dp" />
     />
+
     <TextView
+        android:id="@+id/navigation_headr_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:id="@+id/navigation_headr_text"/>
+        android:layout_marginRight="50dp" />
+
     <ImageButton
         android:id="@+id/navigation_header_profile"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_info_black_24dp"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+        android:src="@drawable/ic_info_black_24dp" />
+
     <View
         android:id="@+id/navigation_header_separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/blue"
-        />
+        android:background="@color/blue" />
 
 </RelativeLayout>

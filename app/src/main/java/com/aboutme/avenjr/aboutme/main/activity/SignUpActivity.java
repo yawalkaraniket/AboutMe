@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.main.Utils.FireBaseUtil;
-import com.aboutme.avenjr.aboutme.main.view.BackHeader;
+import com.aboutme.avenjr.aboutme.main.view.NavigationHeader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.concurrent.TimeUnit;
 
-public class SignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private RelativeLayout signUpView;
     private EditText emailId, password, passwordAgain, name, lastName, mobileNo;
@@ -37,7 +37,7 @@ public class SignUp extends AppCompatActivity {
     CharSequence success, fail;
     FirebaseAuth mFirebaseAuth;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mOnVerificationStateChangedCallbacks;
-    BackHeader backHeader;
+    NavigationHeader backHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,8 @@ public class SignUp extends AppCompatActivity {
         successToast = Toast.makeText(mContext, success, duration);
         failToast = Toast.makeText(mContext, fail, duration);
         mFirebaseAuth = FirebaseAuth.getInstance();
-        backHeader.setUp(this);
+        backHeader.setUp(this,"SignUp");
+        backHeader.setView("SignUp");
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,10 +1,10 @@
 package com.aboutme.avenjr.aboutme.main.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,11 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.main.view.DialogUtil;
+import com.aboutme.avenjr.aboutme.main.view.NavigationHeader;
 import com.google.firebase.database.DatabaseReference;
 
 import static com.aboutme.avenjr.aboutme.main.Utils.FireBaseUtil.getFireBaseReference;
 
-public class SignIn extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     String id, password;
     EditText userId, userPassword;
@@ -24,6 +26,7 @@ public class SignIn extends AppCompatActivity {
     Toast successToast, failureToast, sendEmailToast;
     RelativeLayout layoutSignIn;
     private DatabaseReference mDatabaseReference;
+    NavigationHeader mBackHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +40,22 @@ public class SignIn extends AppCompatActivity {
         buttonForgotPassword = findViewById(R.id.forgot_password);
         layoutSignIn = findViewById(R.id.layout_signin);
         mDatabaseReference = getFireBaseReference("userInfo");
+        mBackHeader = findViewById(R.id.back_header);
+
+        mBackHeader.setUp(this,"Login");
+        mBackHeader.setView("Login");
 
         // Creating toast messages.
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
         CharSequence successText = "Successful!";
         CharSequence failText = "Sorry please enter right information...";
         CharSequence sendEmail = "Your password has been send on your registered mail id...";
-
-        //  Adding back header
-        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View backHeader = layoutInflater.inflate(R.layout.backheader,layoutSignIn,true);
 
         int duration = Toast.LENGTH_SHORT;
         successToast = Toast.makeText(context, successText, duration);
         failureToast = Toast.makeText(context, failText, duration);
         sendEmailToast = Toast.makeText(context, sendEmail,duration);
+        final Activity activity = this;
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,10 +66,10 @@ public class SignIn extends AppCompatActivity {
                 if ((id.isEmpty()) && (password.isEmpty())) {
                     failureToast.show();
                 } else {
-//                    UserInformation userInformation = new UserInformation(id,password);
-//                    saveInformation(userInformation,mDatabaseReference);
+                    DialogUtil.yesDialog(activity,"Login","Login Successful",click->{
+                        startActivity(homeScreen);
+                    });
                     successToast.show();
-                    startActivity(homeScreen);
                 }
             }
         });
@@ -77,5 +81,10 @@ public class SignIn extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBackHeader.setView("Login");
+        mBackHeader.setUp(this,"Login");
+    }
 }

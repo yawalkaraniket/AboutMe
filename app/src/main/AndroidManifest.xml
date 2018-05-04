@@ -18,14 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.activity.SignIn">
+        <activity android:name=".main.activity.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.activity.SignUp">
+        <activity android:name=".main.activity.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,6 +36,8 @@
             android:name=".main.activity.HomeScreen"
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".main.activity.LearnKotlin" />
+        <activity android:name=".main.activity.Main2Activity" />
     </application>
 
 </manifest>

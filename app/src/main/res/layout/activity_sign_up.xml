@@ -4,14 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/signup_view"
-    tools:context="com.aboutme.avenjr.aboutme.main.activity.SignIn"
+    tools:context="com.aboutme.avenjr.aboutme.main.activity.SignInActivity"
     >
     <!--downloaded from unsplash.com-->
-    <com.aboutme.avenjr.aboutme.main.view.BackHeader
+    <!--<com.aboutme.avenjr.aboutme.main.view.BackHeader-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:id="@+id/back_header">-->
+    <!--</com.aboutme.avenjr.aboutme.main.view.BackHeader>-->
+    <com.aboutme.avenjr.aboutme.main.view.NavigationHeader
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/back_header">
-    </com.aboutme.avenjr.aboutme.main.view.BackHeader>
+    </com.aboutme.avenjr.aboutme.main.view.NavigationHeader>
 
     <ImageView
         android:layout_width="match_parent"
@@ -25,8 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:orientation="vertical"
-        android:clickable="true">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/button_sign_up"

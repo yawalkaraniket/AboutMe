@@ -4,22 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_signin"
-    tools:context="com.aboutme.avenjr.aboutme.main.activity.SignIn"
+    tools:context="com.aboutme.avenjr.aboutme.main.activity.SignInActivity"
     >
-
-    <!--downloaded from unsplash.com-->
+    <!--</com.aboutme.avenjr.aboutme.main.view.BackHeader>-->
+    <com.aboutme.avenjr.aboutme.main.view.NavigationHeader
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/back_header">
+    </com.aboutme.avenjr.aboutme.main.view.NavigationHeader>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/back_header"
         android:background="@drawable/sign_in_new"
         />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:orientation="vertical"
-        android:clickable="true">
-
+        android:orientation="vertical">
     <Button
         android:id="@+id/submit_button"
         android:layout_width="match_parent"

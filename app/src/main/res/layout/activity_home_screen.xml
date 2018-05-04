@@ -11,8 +11,21 @@
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
+        <com.aboutme.avenjr.aboutme.main.view.NavigationHeader
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            android:id="@+id/navigation_header">
+        </com.aboutme.avenjr.aboutme.main.view.NavigationHeader>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="150dp"
+            android:text="@string/request_user_mobile_number"
+            android:id="@+id/drawer_layout_toggle"/>
+
+    </FrameLayout>
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <android.support.design.widget.NavigationView
@@ -23,5 +36,4 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/drawermanu"
         app:headerLayout="@layout/drawer_header"/>
-
 </android.support.v4.widget.DrawerLayout>

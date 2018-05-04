@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         continueWithFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),SignUp.class);
+                Intent intent = new Intent(getBaseContext(),SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -30,14 +30,14 @@ public class MainActivity extends AppCompatActivity {
         continueWithMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),SignIn.class);
+                Intent intent = new Intent(getBaseContext(),SignInActivity.class);
                 startActivity(intent);
             }
         });
         haveAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),SignUp.class);
+                Intent intent = new Intent(getBaseContext(),SignUpActivity.class);
                 startActivity(intent);
             }
         });

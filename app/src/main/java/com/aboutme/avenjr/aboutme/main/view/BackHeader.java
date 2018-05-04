@@ -33,7 +33,7 @@ public class BackHeader extends RelativeLayout {
         backHeader.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.finish();
+                activity.onBackPressed();
             }
         });
     }
