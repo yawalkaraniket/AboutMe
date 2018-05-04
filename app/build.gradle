@@ -42,11 +42,16 @@ dependencies {
 
     //    https://console.firebase.google.com/project/aboutme-3908c/settings/general/android:com.aboutme.avenjr.aboutme
     compile 'com.google.firebase:firebase-core:15.0.0'
-    compile 'com.google.firebase:firebase-auth:15.0.0'
+
+    //      https://developers.facebook.com/apps/399005583914563/add/
+    compile 'com.google.firebase:firebase-auth:15.1.0'
     //    Adding the database "https://www.youtube.com/watch?v=NjTs4lMkRM4"
     compile 'com.google.firebase:firebase-database:15.0.0'
     // TO implement the firebase mobile notification
+
     compile 'com.firebaseui:firebase-ui-auth:3.3.1'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.facebook.android:facebook-login:4.x'
 }
 repositories {
     mavenCentral()

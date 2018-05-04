@@ -20,19 +20,22 @@
         android:orientation="vertical"
         android:clickable="true">
 
-            <Button
-                android:id="@+id/layout_continue_with_facebook"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@color/green"
-                android:text="@string/sign_in_with_facebook"
-                android:textColor="@color/white"
-                android:layout_below="@+id/have_an_account_button"/>
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/layout_continue_with_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/have_an_account_button"
+            android:background="@color/green"
+            android:textSize="@dimen/fui_auth_method_button_drawablePadding"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/sign_in_with_facebook"
+            android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/layout_continue_with_mail"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:background="@color/colorPrimary"
                 android:text="@string/continue_with_mail"
                 android:textColor="@color/white"
@@ -41,7 +44,7 @@
             <Button
                 android:id="@+id/have_an_account_button"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
                 android:text="@string/already_have_an_account"

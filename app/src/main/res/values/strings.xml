@@ -9,7 +9,9 @@
     <string name="submit_button">Submit</string>
     <string name="already_have_an_account">Have an account? SIGN IN</string>
     <string name="sign_in_with_facebook">CONTINUE WITH FACEBOOK</string>
-    <string name="continue_with_mail">CONTINUE WITH MAIL</string>
+    <string name="continue_with_mail">Continue With Mail</string>
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="forgot_password">FORGOT PASSWORD</string>
+    <string name="facebook_app_id">399005583914563</string>
+    <string name="fb_login_protocol_scheme">fb399005583914563</string>
 </resources>
