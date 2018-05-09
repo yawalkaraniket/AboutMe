@@ -6,12 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.main.Adapter.RecyclerViewAdapterExample;
 import com.aboutme.avenjr.aboutme.main.view.NavigationHeader;
 
 public class HomeScreen extends AppCompatActivity {
@@ -21,7 +24,10 @@ public class HomeScreen extends AppCompatActivity {
     private FrameLayout homeScreenLayout;
     private Boolean mSlideState = false;
     private NavigationHeader mNavigationHeader;
+    private RecyclerView mRecyclerView;
 
+    String data[] = {"sfsd","dfsf","sefsdfs","sfsfsdf","sfsdfsd","sdfsdfsd",
+            "dfsfsf","sdfsfdsd","dsdfsdf","dsf","sdfkjsdd","kjsdfkjshd"};
     Button drawerToggle;
 
     @Override
@@ -34,9 +40,13 @@ public class HomeScreen extends AppCompatActivity {
         homeScreenLayout = findViewById(R.id.content_frame);
         drawerToggle = findViewById(R.id.drawer_layout_toggle);
         mNavigationHeader = findViewById(R.id.navigation_header);
+        mRecyclerView = findViewById(R.id.home_page_recycler_view);
 
         mNavigationHeader.setUp(this, "HomeScreen");
         mNavigationHeader.setView("HomeScreen");
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(new RecyclerViewAdapterExample(data));
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -55,5 +65,6 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }

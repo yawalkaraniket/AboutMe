@@ -21,9 +21,17 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="50dp"
             android:text="@string/request_user_mobile_number"
             android:id="@+id/drawer_layout_toggle"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/home_page_recycler_view"
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
 
     </FrameLayout>
 
