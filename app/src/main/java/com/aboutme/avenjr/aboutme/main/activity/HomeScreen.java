@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.main.Adapter.RecyclerViewAdapterExample;
@@ -25,6 +26,7 @@ public class HomeScreen extends AppCompatActivity {
     private Boolean mSlideState = false;
     private NavigationHeader mNavigationHeader;
     private RecyclerView mRecyclerView;
+    private ProgressBar mProgressBar;
 
     String data[] = {"sfsd","dfsf","sefsdfs","sfsfsdf","sfsdfsd","sdfsdfsd",
             "dfsfsf","sdfsfdsd","dsdfsdf","dsf","sdfkjsdd","kjsdfkjshd"};
@@ -41,9 +43,11 @@ public class HomeScreen extends AppCompatActivity {
         drawerToggle = findViewById(R.id.drawer_layout_toggle);
         mNavigationHeader = findViewById(R.id.navigation_header);
         mRecyclerView = findViewById(R.id.home_page_recycler_view);
+        mProgressBar = findViewById(R.id.progress_bar);
 
         mNavigationHeader.setUp(this, "HomeScreen");
         mNavigationHeader.setView("HomeScreen");
+        mProgressBar.setVisibility(View.GONE);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new RecyclerViewAdapterExample(data));
@@ -63,8 +67,15 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), LearnKotlin.class);
                 startActivity(intent);
+                mProgressBar.setVisibility(View.VISIBLE);
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mProgressBar.setVisibility(View.GONE);
     }
 }

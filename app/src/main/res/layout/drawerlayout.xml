@@ -7,9 +7,9 @@
     <android.support.design.widget.NavigationView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="@color/white"
-        app:menu="@menu/drawermanu">
-
+        app:menu="@menu/drawermanu"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true">
     </android.support.design.widget.NavigationView>
 
 
