@@ -1,4 +1,4 @@
-package com.aboutme.avenjr.aboutme.main.activity;
+package com.aboutme.avenjr.aboutme.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.aboutme.avenjr.aboutme.main.activity;
+package com.aboutme.avenjr.aboutme.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.main.Utils.FireBaseUtil;
-import com.aboutme.avenjr.aboutme.main.view.NavigationHeader;
+import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
+import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;

@@ -1,4 +1,4 @@
-package com.aboutme.avenjr.aboutme.main.view;
+package com.aboutme.avenjr.aboutme.view;
 
 import android.app.Activity;
 import android.app.Dialog;

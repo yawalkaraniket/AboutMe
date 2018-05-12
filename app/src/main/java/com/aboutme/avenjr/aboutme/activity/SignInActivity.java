@@ -1,4 +1,4 @@
-package com.aboutme.avenjr.aboutme.main.activity;
+package com.aboutme.avenjr.aboutme.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,11 +11,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.main.view.DialogUtil;
-import com.aboutme.avenjr.aboutme.main.view.NavigationHeader;
+import com.aboutme.avenjr.aboutme.view.DialogUtil;
+import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import com.google.firebase.database.DatabaseReference;
 
-import static com.aboutme.avenjr.aboutme.main.Utils.FireBaseUtil.getFireBaseReference;
+import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
 public class SignInActivity extends BaseActivity {
 

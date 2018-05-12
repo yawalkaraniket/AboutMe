@@ -1,4 +1,4 @@
-package com.aboutme.avenjr.aboutme.main.Utils;
+package com.aboutme.avenjr.aboutme.Utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

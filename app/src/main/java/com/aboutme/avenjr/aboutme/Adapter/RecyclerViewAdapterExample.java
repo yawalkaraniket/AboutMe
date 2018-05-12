@@ -1,4 +1,4 @@
-package com.aboutme.avenjr.aboutme.main.Adapter;
+package com.aboutme.avenjr.aboutme.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

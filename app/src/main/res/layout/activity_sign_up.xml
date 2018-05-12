@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/signup_view"
-    tools:context="com.aboutme.avenjr.aboutme.main.activity.SignInActivity"
+    tools:context="com.aboutme.avenjr.aboutme.activity.SignInActivity"
     >
     <!--downloaded from unsplash.com-->
     <!--<com.aboutme.avenjr.aboutme.main.view.BackHeader-->

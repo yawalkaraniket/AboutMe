@@ -1,22 +1,20 @@
-package com.aboutme.avenjr.aboutme.main.activity;
+package com.aboutme.avenjr.aboutme.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.main.Adapter.RecyclerViewAdapterExample;
-import com.aboutme.avenjr.aboutme.main.view.NavigationHeader;
+import com.aboutme.avenjr.aboutme.Adapter.RecyclerViewAdapterExample;
+import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 public class HomeScreen extends BaseActivity {
 
@@ -51,16 +49,8 @@ public class HomeScreen extends BaseActivity {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new RecyclerViewAdapterExample(data));
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                item.setChecked(true);
-                mDrawerLayout.closeDrawers();
-
-                return true;
-            }
-        });
+        navigationViewSetUp(mNavigationView,this);
 
         drawerToggle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +65,6 @@ public class HomeScreen extends BaseActivity {
             }
         });
     }
-
     @Override
     protected void onResume() {
         super.onResume();

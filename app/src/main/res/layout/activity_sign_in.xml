@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_signin"
-    tools:context="com.aboutme.avenjr.aboutme.main.activity.SignInActivity"
+    tools:context="com.aboutme.avenjr.aboutme.activity.SignInActivity"
     >
-    <!--</com.aboutme.avenjr.aboutme.main.view.BackHeader>-->
-    <com.aboutme.avenjr.aboutme.main.view.NavigationHeader
+    <!--</com.aboutme.avenjr.aboutme.view.BackHeader>-->
+    <com.aboutme.avenjr.aboutme.view.NavigationHeader
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/back_header">
-    </com.aboutme.avenjr.aboutme.main.view.NavigationHeader>
+    </com.aboutme.avenjr.aboutme.view.NavigationHeader>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

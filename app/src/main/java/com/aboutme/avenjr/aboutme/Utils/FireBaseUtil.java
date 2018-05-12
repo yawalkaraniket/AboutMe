@@ -1,6 +1,6 @@
-package com.aboutme.avenjr.aboutme.main.Utils;
+package com.aboutme.avenjr.aboutme.Utils;
 
-import com.aboutme.avenjr.aboutme.main.activity.UserInformation;
+import com.aboutme.avenjr.aboutme.activity.UserInformation;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

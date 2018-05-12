@@ -1,4 +1,4 @@
-package com.aboutme.avenjr.aboutme.main.activity;
+package com.aboutme.avenjr.aboutme.activity;
 
 /**
  * Created by tudip on 11/4/18.
