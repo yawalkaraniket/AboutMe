@@ -1,11 +1,11 @@
 package com.aboutme.avenjr.aboutme.main.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -18,7 +18,7 @@ import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.main.Adapter.RecyclerViewAdapterExample;
 import com.aboutme.avenjr.aboutme.main.view.NavigationHeader;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends BaseActivity {
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -27,6 +27,7 @@ public class HomeScreen extends AppCompatActivity {
     private NavigationHeader mNavigationHeader;
     private RecyclerView mRecyclerView;
     private ProgressBar mProgressBar;
+    Activity mActivity;
 
     String data[] = {"sfsd","dfsf","sefsdfs","sfsfsdf","sfsdfsd","sdfsdfsd",
             "dfsfsf","sdfsfdsd","dsdfsdf","dsf","sdfkjsdd","kjsdfkjshd"};
@@ -36,7 +37,6 @@ public class HomeScreen extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavigationView = findViewById(R.id.nav_view);
         homeScreenLayout = findViewById(R.id.content_frame);
@@ -47,7 +47,7 @@ public class HomeScreen extends AppCompatActivity {
 
         mNavigationHeader.setUp(this, "HomeScreen");
         mNavigationHeader.setView("HomeScreen");
-        mProgressBar.setVisibility(View.GONE);
+        hideProgress(mProgressBar);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new RecyclerViewAdapterExample(data));
@@ -65,12 +65,15 @@ public class HomeScreen extends AppCompatActivity {
         drawerToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), LearnKotlin.class);
-                startActivity(intent);
-                mProgressBar.setVisibility(View.VISIBLE);
+                if(isConnectedToInternet()) {
+                    Intent intent = new Intent(getBaseContext(), LearnKotlin.class);
+                    startActivity(intent);
+                    showProgress(mProgressBar);
+                }else{
+                    netWorkErrorDialog();
+                }
             }
         });
-
     }
 
     @Override

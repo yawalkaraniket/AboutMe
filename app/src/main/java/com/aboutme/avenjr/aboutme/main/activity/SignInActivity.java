@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import static com.aboutme.avenjr.aboutme.main.Utils.FireBaseUtil.getFireBaseReference;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignInActivity extends BaseActivity {
 
     String id, password;
     EditText userId, userPassword;
@@ -84,6 +83,8 @@ public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        if(!isConnectedToInternet())
+            netWorkErrorDialog();
         super.onResume();
         mBackHeader.setView("Login");
         mBackHeader.setUp(this,"Login");
