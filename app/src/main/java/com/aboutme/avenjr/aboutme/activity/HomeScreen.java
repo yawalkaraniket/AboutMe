@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
-import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Adapter.RecyclerViewAdapterExample;
+import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 public class HomeScreen extends BaseActivity {
@@ -27,8 +27,8 @@ public class HomeScreen extends BaseActivity {
     private ProgressBar mProgressBar;
     Activity mActivity;
 
-    String data[] = {"sfsd","dfsf","sefsdfs","sfsfsdf","sfsdfsd","sdfsdfsd",
-            "dfsfsf","sdfsfdsd","dsdfsdf","dsf","sdfkjsdd","kjsdfkjshd"};
+    String data[] = {"sfsd", "dfsf", "sefsdfs", "sfsfsdf", "sfsdfsd", "sdfsdfsd",
+            "dfsfsf", "sdfsfdsd", "dsdfsdf", "dsf", "sdfkjsdd", "kjsdfkjshd"};
     Button drawerToggle;
 
     @Override
@@ -50,21 +50,22 @@ public class HomeScreen extends BaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new RecyclerViewAdapterExample(data));
 
-        navigationViewSetUp(mNavigationView,this);
+        navigationViewSetUp(mNavigationView, this);
 
         drawerToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isConnectedToInternet()) {
+                if (isConnectedToInternet()) {
                     Intent intent = new Intent(getBaseContext(), LearnKotlin.class);
                     startActivity(intent);
                     showProgress(mProgressBar);
-                }else{
+                } else {
                     netWorkErrorDialog();
                 }
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
