@@ -53,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
         lastName = findViewById(R.id.request_user_lastName);
         signUp = findViewById(R.id.button_sign_up);
         mobileNo = findViewById(R.id.request_user_mobile_number);
-        backHeader =  findViewById(R.id.back_header);
+        backHeader = findViewById(R.id.back_header);
 
         mDatabaseReference = FireBaseUtil.getFireBaseReference("UserInformation");
         mContext = getApplicationContext();
@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         successToast = Toast.makeText(mContext, success, duration);
         failToast = Toast.makeText(mContext, fail, duration);
         mFirebaseAuth = FirebaseAuth.getInstance();
-        backHeader.setUp(this,"SignUp");
+        backHeader.setUp(this, "SignUp");
         backHeader.setView("SignUp");
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
                 userLastName = lastName.getText().toString().trim();
                 userMobileNo = mobileNo.getText().toString().trim();
 
-                if (userPassword.equals(userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userLastName.isEmpty() && !userPassword.isEmpty() && !userMobileNo.isEmpty()) {
+                if (!verifyRenterPassword(userPassword, userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userLastName.isEmpty() && !userMobileNo.isEmpty()) {
                     UserInformation userInformation = new UserInformation(userId, userPassword, userName, userLastName, userMobileNo);
 
                     mOnVerificationStateChangedCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -104,8 +104,9 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
     public void send_code() {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(userMobileNo,60, TimeUnit.SECONDS, this,
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(userMobileNo, 60, TimeUnit.SECONDS, this,
                 mOnVerificationStateChangedCallbacks);
     }
 
@@ -114,11 +115,19 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             successToast.show();
                         }
                     }
                 });
+    }
+
+    public boolean verifyRenterPassword(String userPassword, String userPasswordAgain) {
+        if (userPassword.equals(userPasswordAgain) && !userPassword.isEmpty() && !userPasswordAgain.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
