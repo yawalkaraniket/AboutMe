@@ -7,8 +7,10 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
 
@@ -24,6 +26,12 @@ public class NavigationHeader extends RelativeLayout {
 
     @BindView(R.id.navigation_header_home)
     ImageView navigationHome;
+
+    @BindView(R.id.navigation_header_text)
+    TextView headerText;
+
+    @BindView(R.id.navigation_header_right)
+    ImageButton headerRight;
 
 
     public NavigationHeader(Context context, AttributeSet attributeSet) {
@@ -46,9 +54,20 @@ public class NavigationHeader extends RelativeLayout {
         });
     }
 
+    public void setUp(Activity activity) {
+        navigationHome.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDrawer(activity);
+            }
+        });
+    }
+
     public void setView(final String screen) {
+        headerText.setText(screen.toUpperCase());
         if (screen.equals("Login") || screen.equals("SignUp")) {
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_arrow_back));
+            headerRight.setVisibility(GONE);
         }
     }
 

@@ -5,22 +5,29 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.fragment.BlogFragment;
+import com.aboutme.avenjr.aboutme.fragment.DocumentsFragment;
+import com.aboutme.avenjr.aboutme.fragment.FeedbackFragment;
+import com.aboutme.avenjr.aboutme.fragment.HomeFragment;
+import com.aboutme.avenjr.aboutme.fragment.WorkFragment;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 
 /**
  * Created by AvenjR on 11/5/18.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends FragmentActivity {
 
     public boolean isConnectedToInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -55,40 +62,33 @@ public abstract class BaseActivity extends AppCompatActivity {
                 int selectedMenuId = item.getItemId();
                 switch (selectedMenuId) {
                     case R.id.my_blog:
-                        Toast.makeText(activity, "My Blog", Toast.LENGTH_SHORT).
-                                show();
                         item.setChecked(true);
+                        replaceFragment(new BlogFragment());
                         closeDrawer(activity);
                         break;
                     case R.id.my_work:
-                        Toast.makeText(activity, "My Work", Toast.LENGTH_SHORT).
-                                show();
                         item.setChecked(true);
                         closeDrawer(activity);
+                        replaceFragment(new WorkFragment());
                         break;
                     case R.id.documents:
-                        Toast.makeText(activity, "My Documents", Toast.LENGTH_SHORT).
-                                show();
                         item.setChecked(true);
                         closeDrawer(activity);
+                        replaceFragment(new DocumentsFragment());
                         break;
                     case R.id.app_share:
-                        Toast.makeText(activity, "My AppShare", Toast.LENGTH_SHORT).
-                                show();
                         item.setChecked(true);
                         closeDrawer(activity);
+                        replaceFragment(new HomeFragment());
                         break;
                     case R.id.app_rate:
-                        Toast.makeText(activity, "My AppRate", Toast.LENGTH_SHORT).
-                                show();
                         item.setChecked(true);
                         closeDrawer(activity);
                         break;
                     case R.id.app_feedback:
-                        Toast.makeText(activity, "My AppFeedback", Toast.LENGTH_SHORT).
-                                show();
                         item.setChecked(true);
                         closeDrawer(activity);
+                        replaceFragment(new FeedbackFragment());
                         break;
                 }
                 return true;
@@ -109,4 +109,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         DrawerLayout drawer = activity.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(Gravity.START);
     }
+
+    public void replaceFragment(Object object){
+        Fragment fragment= (Fragment) object;
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.blank_frgment,fragment);
+        transaction.commit();
+    }
+    public void addFragment(Object object){
+        Fragment fragment= (Fragment) object;
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(fragment,"gfd");
+        transaction.commit();
+    }
+
 }

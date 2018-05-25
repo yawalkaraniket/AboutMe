@@ -7,14 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.view.NavigationHeader;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class DocumentsFragment extends Fragment {
+
+    @BindView(R.id.navigation_header)
+    NavigationHeader header;
 
       @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_documents, container, false);
+        View view = inflater.inflate(R.layout.fragment_documents, container, false);
+          ButterKnife.bind(this,view);
+        header.setUp(this.getActivity());
+        header.setView("Documents");
+        return view;
     }
 }

@@ -2,21 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aboutme.avenjr.aboutme.fragment.FeedbackFragment">
+    tools:context="com.aboutme.avenjr.aboutme.fragment.HomeFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <com.aboutme.avenjr.aboutme.view.NavigationHeader
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/feedback_navigation">
+        android:id="@+id/work_navigation">
     </com.aboutme.avenjr.aboutme.view.NavigationHeader>
-    <RelativeLayout
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:id="@+id/feedback_body">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/white"></ImageView>
-    </RelativeLayout>
+        android:id="@+id/home_page_recycler_view"
+        android:scrollbars="vertical">
+    </android.support.v7.widget.RecyclerView>
 </FrameLayout>
