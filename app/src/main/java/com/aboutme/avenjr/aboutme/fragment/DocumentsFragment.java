@@ -25,7 +25,7 @@ public class DocumentsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_documents, container, false);
           ButterKnife.bind(this,view);
         header.setUp(this.getActivity());
-        header.setView("Documents");
+        header.setView("Documents",this.getActivity());
         return view;
     }
 }

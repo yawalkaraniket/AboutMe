@@ -28,7 +28,7 @@ public class BlogFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_blog_frgment, container, false);
         ButterKnife.bind(this,view);
         header.setUp(this.getActivity());
-        header.setView("My Blog");
+        header.setView("My Blog",this.getActivity());
         return view;
     }
 }

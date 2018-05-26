@@ -64,7 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
         failToast = Toast.makeText(mContext, fail, duration);
         mFirebaseAuth = FirebaseAuth.getInstance();
         backHeader.setUp(this, "SignUp");
-        backHeader.setView("SignUp");
+        backHeader.setView("SignUp", this);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override

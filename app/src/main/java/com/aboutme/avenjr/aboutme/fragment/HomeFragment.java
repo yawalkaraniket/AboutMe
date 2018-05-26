@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this,view);
         header.setUp(this.getActivity());
-        header.setView("Home");
+        header.setView("Home", this.getActivity());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mRecyclerView.setAdapter(new RecyclerViewAdapterExample(data));
         return view;

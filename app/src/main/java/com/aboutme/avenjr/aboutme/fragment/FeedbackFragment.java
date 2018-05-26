@@ -24,7 +24,7 @@ public class FeedbackFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_feedback, container, false);
         ButterKnife.bind(this,view);
         header.setUp(this.getActivity());
-        header.setView("Feedback");
+        header.setView("Feedback", this.getActivity());
         return view;
     }
 

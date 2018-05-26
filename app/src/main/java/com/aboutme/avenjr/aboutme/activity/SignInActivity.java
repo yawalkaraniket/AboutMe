@@ -42,7 +42,7 @@ public class SignInActivity extends BaseActivity {
         mBackHeader = findViewById(R.id.back_header);
 
         mBackHeader.setUp(this,"Login");
-        mBackHeader.setView("Login");
+        mBackHeader.setView("Login", this);
 
         // Creating toast messages.
         final Context context = getApplicationContext();
@@ -61,7 +61,7 @@ public class SignInActivity extends BaseActivity {
             public void onClick(View v) {
                 id = userId.getText().toString().trim();
                 password = userPassword.getText().toString().trim();
-                Intent homeScreen = new Intent(getBaseContext(), HomeScreen.class);
+                Intent homeScreen = new Intent(getBaseContext(), WelcomeScreenActivity.class);
                 if ((id.isEmpty()) && (password.isEmpty())) {
                     failureToast.show();
                 } else {
@@ -86,7 +86,7 @@ public class SignInActivity extends BaseActivity {
         if(!isConnectedToInternet())
             netWorkErrorDialog();
         super.onResume();
-        mBackHeader.setView("Login");
+        mBackHeader.setView("Login",this);
         mBackHeader.setUp(this,"Login");
     }
 }

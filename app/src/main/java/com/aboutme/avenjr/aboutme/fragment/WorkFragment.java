@@ -24,7 +24,7 @@ public class WorkFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_work, container, false);
         ButterKnife.bind(this,view);
         header.setUp(this.getActivity());
-        header.setView("My Work");
+        header.setView("My Work", this.getActivity());
         return view;
     }
 }

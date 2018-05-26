@@ -33,6 +33,9 @@ public class NavigationHeader extends RelativeLayout {
     @BindView(R.id.navigation_header_right)
     ImageButton headerRight;
 
+    @BindView(R.id.navigation_header_separator)
+    View seperator;
+
 
     public NavigationHeader(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -63,12 +66,23 @@ public class NavigationHeader extends RelativeLayout {
         });
     }
 
-    public void setView(final String screen) {
+    public void setView(final String screen,Activity activity) {
         headerText.setText(screen.toUpperCase());
         if (screen.equals("Login") || screen.equals("SignUp")) {
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_arrow_back));
             headerRight.setVisibility(GONE);
-        }
+        } else if (screen.equals("mPin")){
+            headerRight.setImageDrawable(getResources().getDrawable(R.drawable.baseline_more_vert_black_18));
+            seperator.setVisibility(GONE);
+            headerText.setVisibility(GONE);
+            navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.baseline_chevron_left_black_18));
+            navigationHome.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.onBackPressed();
+                }
+            });
+         }
     }
 
     public void openDrawer(Activity activity) {

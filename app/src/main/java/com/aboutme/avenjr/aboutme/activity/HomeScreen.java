@@ -1,69 +1,50 @@
 package com.aboutme.avenjr.aboutme.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.view.DialogUtil;
+
+import butterknife.ButterKnife;
 
 public class HomeScreen extends BaseActivity {
 
-    private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private FrameLayout homeScreenLayout;
-    private Boolean mSlideState = false;
-    private RecyclerView mRecyclerView;
     private ProgressBar mProgressBar;
-    Activity mActivity;
 
-    String data[] = {"sfsd", "dfsf", "sefsdfs", "sfsfsdf", "sfsdfsd", "sdfsdfsd",
-            "dfsfsf", "sdfsfdsd", "dsdfsdf", "dsf", "sdfkjsdd", "kjsdfkjshd"};
-    Button drawerToggle;
+    private int backPressCount = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         setContentView(R.layout.activity_home_screen);
-        mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavigationView = findViewById(R.id.nav_view);
-        homeScreenLayout = findViewById(R.id.content_frame);
-//        drawerToggle = findViewById(R.id.drawer_layout_toggle);
-//        mNavigationHeader = findViewById(R.id.navigation_header);
-//        mRecyclerView = findViewById(R.id.home_page_recycler_view);
         mProgressBar = findViewById(R.id.progress_bar);
-
-//        mNavigationHeader.setUp(this, "HomeScreen");
-//        mNavigationHeader.setView("Home");
         hideProgress(mProgressBar);
-//
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        mRecyclerView.setAdapter(new RecyclerViewAdapterExample(data));
 
         navigationViewSetUp(mNavigationView, this);
-
-//        drawerToggle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (isConnectedToInternet()) {
-////                    Intent intent = new Intent(getBaseContext(), LearnKotlin.class);
-////                    startActivity(intent);
-//                    showProgress(mProgressBar);
-//                } else {
-//                    netWorkErrorDialog();
-//                }
-//            }
-//        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressCount == 2) {
+            DialogUtil.yesDialog(this, "Close Application", "you want to close application?", click -> {
+                moveTaskToBack(true);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+            });
+        } else {
+            backPressCount++;
+        }
     }
 }
