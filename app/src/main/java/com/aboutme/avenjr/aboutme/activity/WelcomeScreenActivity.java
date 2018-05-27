@@ -1,7 +1,9 @@
 package com.aboutme.avenjr.aboutme.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.view.Mpin;
@@ -9,6 +11,8 @@ import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.aboutme.avenjr.aboutme.activity.SignUpActivity.setMpin;
 
 public class WelcomeScreenActivity extends BaseActivity {
 
@@ -21,6 +25,15 @@ public class WelcomeScreenActivity extends BaseActivity {
     @BindView(R.id.layout_mpin)
     Mpin pin;
 
+    @BindView(R.id.mpin_title)
+    TextView mPinTitle;
+
+    @BindView(R.id.mpin_email)
+    TextView mPinEmail;
+
+    @BindView(R.id.set_mpin)
+    TextView setMpinText;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +43,14 @@ public class WelcomeScreenActivity extends BaseActivity {
         header.setUp(this);
         header.setView("mPin", this);
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
+        if (setMpin) {
+            setMpinText.setVisibility(View.VISIBLE);
+            mPinTitle.setVisibility(View.GONE);
+            mPinEmail.setVisibility(View.GONE);
+        }else{
+            mPinTitle.setVisibility(View.VISIBLE);
+            mPinEmail.setVisibility(View.VISIBLE);
+            setMpinText.setVisibility(View.GONE);
+        }
     }
 }

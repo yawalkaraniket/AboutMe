@@ -5,56 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.aboutme.avenjr.aboutme.activity.WelcomeScreenActivity">
+
     <ProgressBar
+        android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progress_bar"
-        android:progressDrawable="@drawable/progress_bar"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:visibility="gone"/>
+        android:progressDrawable="@drawable/progress_bar"
+        android:visibility="gone" />
+
     <ImageView
+        android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@color/white"
-        android:id="@+id/img"/>
+        android:src="@color/white" />
+
     <com.aboutme.avenjr.aboutme.view.NavigationHeader
+        android:id="@+id/mPinHeader"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/mPinHeader">
-    </com.aboutme.avenjr.aboutme.view.NavigationHeader>
+        android:layout_height="50dp"></com.aboutme.avenjr.aboutme.view.NavigationHeader>
+
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@+id/mPinHeader"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/progress_bar"
-        android:id="@+id/logo"
-        />
+        android:src="@drawable/mpin_logo" />
+
     <TextView
+        android:id="@+id/mpin_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
-        android:text="ENTER ABOUT ME PIN"
         android:gravity="center"
-        android:id="@+id/title"/>
+        android:text="ENTER ABOUT ME PIN" />
+
     <TextView
+        android:id="@+id/set_mpin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:textSize="15dp"
-        android:text="yawalkaraniket93@gmail.com"
+        android:layout_below="@+id/logo"
         android:gravity="center"
-        android:id="@+id/email"/>
+        android:text="@string/set_mPin"
+        android:textColor="@color/red"
+        android:textSize="25dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/mpin_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mpin_title"
+        android:gravity="center"
+        android:text="yawalkaraniket93@gmail.com"
+        android:textSize="15dp" />
 
     <com.aboutme.avenjr.aboutme.view.Mpin
+        android:id="@+id/layout_mpin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_marginTop="40dp"
-        android:id="@+id/layout_mpin"
-        android:layout_centerHorizontal="true">
-    </com.aboutme.avenjr.aboutme.view.Mpin>
+        android:layout_below="@+id/mpin_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"></com.aboutme.avenjr.aboutme.view.Mpin>
 </RelativeLayout>

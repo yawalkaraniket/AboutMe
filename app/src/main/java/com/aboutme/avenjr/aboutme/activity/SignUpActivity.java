@@ -1,6 +1,8 @@
 package com.aboutme.avenjr.aboutme.activity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
+import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,6 +41,8 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mOnVerificationStateChangedCallbacks;
     NavigationHeader backHeader;
+    Activity activity = this;
+    public static boolean setMpin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
                 userLastName = lastName.getText().toString().trim();
                 userMobileNo = mobileNo.getText().toString().trim();
 
-                if (!verifyRenterPassword(userPassword, userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userLastName.isEmpty() && !userMobileNo.isEmpty()) {
+                if (verifyRenterPassword(userPassword, userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userLastName.isEmpty() && !userMobileNo.isEmpty()) {
                     UserInformation userInformation = new UserInformation(userId, userPassword, userName, userLastName, userMobileNo);
 
                     mOnVerificationStateChangedCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -97,7 +102,11 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     };
                     FireBaseUtil.saveInformation(userInformation, mDatabaseReference);
-                    successToast.show();
+                    DialogUtil.yesDialog(activity,"Success!","you are registered please \n conform your pin..",click->{
+                        Intent intent = new Intent(getBaseContext(),WelcomeScreenActivity.class);
+                        startActivity(intent);
+                        setMpin = true;
+                    });
                 } else {
                     failToast.show();
                 }

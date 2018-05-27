@@ -1,18 +1,17 @@
 <resources>
     <string name="app_name">AboutMe</string>
-    <string name="request_user_id">Enter your id..</string>
-    <string name="request_user_password">Enter password..</string>
-    <string name="request_user_repassword">Enter password again..</string>
-    <string name="request_user_name">Enter your name....</string>
-    <string name="request_user_mobile_number">Enter mobile number....</string>
-    <string name="request_user_lastName">Enter last name....</string>
+    <string name="request_user_id">enter your id....</string>
+    <string name="request_user_password">enter password..</string>
+    <string name="request_user_repassword">enter password again..</string>
+    <string name="request_user_name">enter your name....</string>
+    <string name="request_user_mobile_number">enter mobile number....</string>
+    <string name="request_user_lastName">enter last name....</string>
     <string name="submit_button">Submit</string>
     <string name="already_have_an_account">Have an account? SIGN IN</string>
-    <string name="sign_in_with_facebook">CONTINUE WITH FACEBOOK</string>
-    <string name="continue_with_mail">CONTINUE WITH MAIL</string>
+    <string name="sign_in_with_facebook">Continue With Facebook</string>
+    <string name="continue_with_mail">Continue With Mail</string>
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="forgot_password">FORGOT PASSWORD</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mPin_error">please enter right pin....</string>
+    <string name="set_mPin">please set your mPin....</string>
 </resources>
