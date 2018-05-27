@@ -2,6 +2,7 @@ package com.aboutme.avenjr.aboutme.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.activity.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,11 +38,14 @@ public class NavigationHeader extends RelativeLayout {
     @BindView(R.id.navigation_header_separator)
     View seperator;
 
+    Context mContext;
+
 
     public NavigationHeader(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         View view = LayoutInflater.from(context).inflate(R.layout.navigation_header, null);
         ButterKnife.bind(this, view);
+        this.mContext = context;
         addView(view);
     }
 
@@ -66,12 +71,12 @@ public class NavigationHeader extends RelativeLayout {
         });
     }
 
-    public void setView(final String screen,Activity activity) {
+    public void setView(final String screen, Activity activity) {
         headerText.setText(screen.toUpperCase());
         if (screen.equals("Login") || screen.equals("SignUp")) {
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_arrow_back));
             headerRight.setVisibility(GONE);
-        } else if (screen.equals("mPin")){
+        } else if (screen.equals("mPin")) {
             headerRight.setImageDrawable(getResources().getDrawable(R.drawable.baseline_more_vert_black_18));
             seperator.setVisibility(GONE);
             headerText.setVisibility(GONE);
@@ -79,10 +84,13 @@ public class NavigationHeader extends RelativeLayout {
             navigationHome.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.onBackPressed();
+                    Intent intent = new Intent(mContext, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("EXIT", true);
+                    mContext.startActivity(intent);
                 }
             });
-         }
+        }
     }
 
     public void openDrawer(Activity activity) {

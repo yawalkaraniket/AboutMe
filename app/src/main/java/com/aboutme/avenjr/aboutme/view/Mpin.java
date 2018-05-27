@@ -2,6 +2,7 @@ package com.aboutme.avenjr.aboutme.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class Mpin extends RelativeLayout {
     ArrayList<Integer> mPinConform = new ArrayList<>();
     Context context;
     private boolean wantToConfirm = false;
+    private long mLastClickTime = 0;
 
     public void setPinVerify(ArrayList<Integer> pinVerify) {
         mPinVerify = pinVerify;
@@ -83,10 +85,10 @@ public class Mpin extends RelativeLayout {
         imageView.setImageDrawable(getResources().getDrawable(R.drawable.selected_circle));
         imageView.setSelected(true);
         selectedCount++;
-        if(wantToConfirm){
+        if (wantToConfirm) {
             mPinConform.add(number);
         }
-        if(!wantToConfirm) {
+        if (!wantToConfirm) {
             mPin.add(number);
         }
     }
@@ -100,9 +102,9 @@ public class Mpin extends RelativeLayout {
                     removeSelectionView(imageView);
                 } else {
                     setSelectionView(imageView, number);
-                    if(setMpin){
-                        if(getSelectedCount() == 4){
-                            if(wantToConfirm && mPin.equals(mPinConform)) {
+                    if (setMpin) {
+                        if (getSelectedCount() == 4) {
+                            if (wantToConfirm && mPin.equals(mPinConform)) {
                                 wantToConfirm = false;
                                 Intent intent = new Intent(context, HomeScreen.class);
                                 context.startActivity(intent);
@@ -114,7 +116,7 @@ public class Mpin extends RelativeLayout {
                     if (getSelectedCount() == 4 && mPin.equals(mPinVerify) && !setMpin) {
                         Intent intent = new Intent(context, HomeScreen.class);
                         context.startActivity(intent);
-                    }else if (getSelectedCount() == 4 ){
+                    } else if (getSelectedCount() == 4) {
                         clearAllSelectedView();
                         mPin.clear();
                         mPinError.setVisibility(VISIBLE);
@@ -153,11 +155,19 @@ public class Mpin extends RelativeLayout {
         imageView.setImageDrawable(getResources().getDrawable(R.drawable.circle));
         imageView.setSelected(false);
         selectedCount--;
-        mPin.remove(mPin.size()-1);
-        if(wantToConfirm){
-            mPinConform.remove(mPinConform.size()-1);
-        }else{
-            mPin.remove(mPin.size()-1);
+        mPin.remove(mPin.size() - 1);
+        if (wantToConfirm) {
+            mPinConform.remove(mPinConform.size() - 1);
+        } else {
+            mPin.remove(mPin.size() - 1);
         }
+    }
+
+    protected boolean restrictDoubleTap() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return true;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        return false;
     }
 }

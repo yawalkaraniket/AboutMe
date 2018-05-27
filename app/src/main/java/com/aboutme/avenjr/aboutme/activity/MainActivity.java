@@ -9,8 +9,18 @@ import com.aboutme.avenjr.aboutme.R;
 
 public class MainActivity extends BaseActivity {
 
+    private static boolean alreadyLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+            alreadyLogin = true;
+        } else if(alreadyLogin){
+            Intent intent = new Intent(getBaseContext(),WelcomeScreenActivity.class);
+            startActivity(intent);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

@@ -3,6 +3,7 @@ package com.aboutme.avenjr.aboutme.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,8 @@ import com.aboutme.avenjr.aboutme.view.DialogUtil;
  */
 
 public abstract class BaseActivity extends FragmentActivity {
+
+    private long mLastClickTime = 0;
 
     public boolean isConnectedToInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -125,4 +128,11 @@ public abstract class BaseActivity extends FragmentActivity {
         transaction.commit();
     }
 
+    protected boolean restrictDoubleTap() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return true;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        return false;
+    }
 }

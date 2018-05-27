@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.aboutme.avenjr.aboutme.fragment.DocumentsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <com.aboutme.avenjr.aboutme.view.NavigationHeader
         android:layout_width="match_parent"
         android:layout_height="50dp"
