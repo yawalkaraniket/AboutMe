@@ -14,4 +14,6 @@
     <string name="forgot_password">FORGOT PASSWORD</string>
     <string name="mPin_error">please enter right pin....</string>
     <string name="set_mPin">please set your mPin....</string>
+    <string name="oops_blank">Opps!...you are blank...</string>
+    <string name="add_content">please get first registered </string>
 </resources>

@@ -103,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
                     };
                     FireBaseUtil.saveInformation(userInformation, mDatabaseReference);
                     DialogUtil.yesDialog(activity,"Success!","you are registered please \n conform your pin..",click->{
-                        Intent intent = new Intent(getBaseContext(),WelcomeScreenActivity.class);
+                        Intent intent = new Intent(getBaseContext(),MpinActivity.class);
                         startActivity(intent);
                         setMpin = true;
                     });

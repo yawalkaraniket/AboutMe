@@ -38,7 +38,7 @@
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.LearnKotlin" />
-        <activity android:name=".activity.WelcomeScreenActivity"></activity>
+        <activity android:name=".activity.MpinActivity"></activity>
     </application>
 
 </manifest>

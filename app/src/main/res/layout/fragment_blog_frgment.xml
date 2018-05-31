@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,10 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
-        android:id="@+id/blog_body">
+        android:id="@+id/blog_body"
+        android:gravity="bottom"
+        android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@color/white"></ImageView>
+        <com.aboutme.avenjr.aboutme.view.DataRegistration
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.aboutme.avenjr.aboutme.view.DataRegistration>
     </RelativeLayout>
-</FrameLayout>
+</RelativeLayout>

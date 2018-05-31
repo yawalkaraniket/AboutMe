@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_registration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/oops_icon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/face_surprise_icon"></ImageView>
+
+        <TextView
+            android:id="@+id/oops_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/oops_icon"
+            android:layout_centerHorizontal="true"
+            android:text="@string/oops_blank"
+            android:textColor="@color/red"
+            android:textSize="35dp" />
+
+        <TextView
+            android:id="@+id/get_registered_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/oops_text"
+            android:layout_centerHorizontal="true"
+            android:text="@string/add_content"
+            android:textSize="25dp" />
+
+        <ImageView
+            android:id="@+id/add_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/get_registered_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/baseline_add_circle_black_18" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/blog_registration">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@color/grey"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="30dp"
+        android:background="@drawable/input_background">
+
+        <TextView
+            android:id="@+id/registration_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Please Register"
+            android:textColor="@color/dark_black"
+            android:textSize="30dp" />
+
+        <RelativeLayout
+            android:id="@+id/input_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_heading"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/id_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:clickable="false"
+                android:fontFamily="sans-serif"
+                android:padding="4dp"
+                android:text="Enter ID:"
+                android:textColor="@color/dark_black" />
+
+            <android.inputmethodservice.ExtractEditText
+                android:id="@+id/blog_id"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/id_heading"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/input_textview_layout" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/input_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_id"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/password_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:clickable="false"
+                android:fontFamily="sans-serif"
+                android:padding="4dp"
+                android:text="Enter ID:"
+                android:textColor="@color/dark_black" />
+
+            <android.inputmethodservice.ExtractEditText
+                android:id="@+id/blog_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/password_heading"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/input_textview_layout" />
+        </RelativeLayout>
+    </RelativeLayout>
+        <Button
+            android:id="@+id/layout_continue_with_facebook"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/green"
+            android:text="@string/submit_button"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -17,7 +17,7 @@ public class MainActivity extends BaseActivity {
             finish();
             alreadyLogin = true;
         } else if(alreadyLogin){
-            Intent intent = new Intent(getBaseContext(),WelcomeScreenActivity.class);
+            Intent intent = new Intent(getBaseContext(),MpinActivity.class);
             startActivity(intent);
         }
 

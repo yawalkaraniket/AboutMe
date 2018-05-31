@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 
 import static com.aboutme.avenjr.aboutme.activity.SignUpActivity.setMpin;
 
-public class WelcomeScreenActivity extends BaseActivity {
+public class MpinActivity extends BaseActivity {
 
     @BindView(R.id.img)
     ImageView mImageView;
@@ -38,7 +38,7 @@ public class WelcomeScreenActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome_screen);
+        setContentView(R.layout.activity_mpin_screen);
         ButterKnife.bind(this);
 
         header.setUp(this);

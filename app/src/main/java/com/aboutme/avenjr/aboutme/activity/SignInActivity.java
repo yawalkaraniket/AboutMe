@@ -61,7 +61,7 @@ public class SignInActivity extends BaseActivity {
             public void onClick(View v) {
                 id = userId.getText().toString().trim();
                 password = userPassword.getText().toString().trim();
-                Intent homeScreen = new Intent(getBaseContext(), WelcomeScreenActivity.class);
+                Intent homeScreen = new Intent(getBaseContext(), MpinActivity.class);
                 if ((id.isEmpty()) && (password.isEmpty())) {
                     failureToast.show();
                 } else {
