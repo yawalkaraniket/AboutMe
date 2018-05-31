@@ -1,5 +1,6 @@
 package com.aboutme.avenjr.aboutme.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.view.View;
@@ -39,9 +40,10 @@ public class HomeScreen extends BaseActivity {
     public void onBackPressed() {
         if (backPressCount == 2) {
             DialogUtil.yesDialog(this, "Close Application", "you want to close application?", click -> {
-                moveTaskToBack(true);
-                android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(1);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
             });
         } else {
             backPressCount++;
