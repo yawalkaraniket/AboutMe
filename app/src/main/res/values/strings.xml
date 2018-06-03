@@ -7,6 +7,7 @@
     <string name="request_user_mobile_number">enter mobile number....</string>
     <string name="request_user_lastName">enter last name....</string>
     <string name="submit_button">Submit</string>
+    <string name="font_bold_futura">fonts/Futura-Bold.otf</string>
     <string name="already_have_an_account">Have an account? SIGN IN</string>
     <string name="sign_in_with_facebook">Continue With Facebook</string>
     <string name="continue_with_mail">Continue With Mail</string>
@@ -14,6 +15,6 @@
     <string name="forgot_password">FORGOT PASSWORD</string>
     <string name="mPin_error">please enter right pin....</string>
     <string name="set_mPin">please set your mPin....</string>
-    <string name="oops_blank">Opps!...you are blank...</string>
+    <string name="oops_blank">Opps!....</string>
     <string name="add_content">please get first registered </string>
 </resources>

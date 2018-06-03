@@ -10,14 +10,15 @@ import com.aboutme.avenjr.aboutme.R;
 public class MainActivity extends BaseActivity {
 
     private static boolean alreadyLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         if (getIntent().getBooleanExtra("EXIT", false)) {
             finish();
             alreadyLogin = true;
-        } else if(alreadyLogin){
-            Intent intent = new Intent(getBaseContext(),MpinActivity.class);
+        } else if (alreadyLogin) {
+            Intent intent = new Intent(getBaseContext(), MpinActivity.class);
             startActivity(intent);
         }
 
@@ -31,7 +32,7 @@ public class MainActivity extends BaseActivity {
         continueWithFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),SignUpActivity.class);
+                Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -39,14 +40,14 @@ public class MainActivity extends BaseActivity {
         continueWithMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),SignInActivity.class);
+                Intent intent = new Intent(getBaseContext(), SignInActivity.class);
                 startActivity(intent);
             }
         });
         haveAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),SignUpActivity.class);
+                Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -54,7 +55,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        if(!isConnectedToInternet())
+        if (!isConnectedToInternet())
             netWorkErrorDialog();
         super.onResume();
     }

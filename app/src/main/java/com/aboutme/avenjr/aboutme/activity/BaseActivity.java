@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.fragment.BlogFragment;
@@ -31,7 +32,12 @@ import com.aboutme.avenjr.aboutme.view.DialogUtil;
 public abstract class BaseActivity extends FragmentActivity {
 
     private long mLastClickTime = 0;
+    Toast toast;
 
+    public void displayToast(Context context, CharSequence message){
+        toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
+        toast.show();
+    }
     public boolean isConnectedToInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return connectivityManager.getActiveNetworkInfo() != null;

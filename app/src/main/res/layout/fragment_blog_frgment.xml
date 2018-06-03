@@ -22,7 +22,8 @@
             android:src="@color/white"></ImageView>
         <com.aboutme.avenjr.aboutme.view.DataRegistration
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/registration_layout">
         </com.aboutme.avenjr.aboutme.view.DataRegistration>
     </RelativeLayout>
 </RelativeLayout>

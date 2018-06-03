@@ -27,7 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.concurrent.TimeUnit;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
 
     private RelativeLayout signUpView;
     private EditText emailId, password, passwordAgain, name, lastName, mobileNo;
@@ -35,8 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     private String userId, userPassword, userPasswordAgain, userName, userLastName, userMobileNo;
     DatabaseReference mDatabaseReference;
     Context mContext;
-    Toast successToast, failToast;
-    private int duration;
     CharSequence success, fail;
     FirebaseAuth mFirebaseAuth;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mOnVerificationStateChangedCallbacks;
@@ -64,9 +62,6 @@ public class SignUpActivity extends AppCompatActivity {
         mContext = getApplicationContext();
         success = "success";
         fail = "Please enter correct credentials....";
-        duration = Toast.LENGTH_SHORT;
-        successToast = Toast.makeText(mContext, success, duration);
-        failToast = Toast.makeText(mContext, fail, duration);
         mFirebaseAuth = FirebaseAuth.getInstance();
         backHeader.setUp(this, "SignUp");
         backHeader.setView("SignUp", this);
@@ -102,13 +97,13 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     };
                     FireBaseUtil.saveInformation(userInformation, mDatabaseReference);
-                    DialogUtil.yesDialog(activity,"Success!","you are registered please \n conform your pin..",click->{
-                        Intent intent = new Intent(getBaseContext(),MpinActivity.class);
+                    DialogUtil.yesDialog(activity, "Success!", "you are registered please \n conform your pin..", click -> {
+                        Intent intent = new Intent(getBaseContext(), MpinActivity.class);
                         startActivity(intent);
                         setMpin = true;
                     });
                 } else {
-                    failToast.show();
+                    displayToast(getApplicationContext(), fail);
                 }
             }
         });
@@ -125,7 +120,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            successToast.show();
+                            displayToast(getApplicationContext(), success);
                         }
                     }
                 });
@@ -138,5 +133,4 @@ public class SignUpActivity extends AppCompatActivity {
             return false;
         }
     }
-
 }

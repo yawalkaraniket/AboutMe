@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.view.DataRegistration;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 import butterknife.BindView;
@@ -21,14 +22,18 @@ public class BlogFragment extends Fragment {
     @BindView(R.id.blog_body)
     RelativeLayout body;
 
+    @BindView(R.id.registration_layout)
+    DataRegistration registrationLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blog_frgment, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         header.setUp(this.getActivity());
-        header.setView("My Blog",this.getActivity());
+        header.setView("My Blog", this.getActivity());
+        registrationLayout.setUp();
         return view;
     }
 }

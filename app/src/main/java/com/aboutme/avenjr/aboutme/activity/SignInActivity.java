@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
@@ -22,7 +21,6 @@ public class SignInActivity extends BaseActivity {
     String id, password;
     EditText userId, userPassword;
     Button buttonSubmit, buttonForgotPassword;
-    Toast successToast, failureToast, sendEmailToast;
     RelativeLayout layoutSignIn;
     private DatabaseReference mDatabaseReference;
     NavigationHeader mBackHeader;
@@ -32,7 +30,6 @@ public class SignInActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
         userId = findViewById(R.id.request_user_id);
         userPassword = findViewById(R.id.request_user_password);
         buttonSubmit = findViewById(R.id.submit_button);
@@ -40,20 +37,12 @@ public class SignInActivity extends BaseActivity {
         layoutSignIn = findViewById(R.id.layout_signin);
         mDatabaseReference = getFireBaseReference("userInfo");
         mBackHeader = findViewById(R.id.back_header);
-
-        mBackHeader.setUp(this,"Login");
+        mBackHeader.setUp(this, "Login");
         mBackHeader.setView("Login", this);
 
         // Creating toast messages.
-        final Context context = getApplicationContext();
-        CharSequence successText = "Successful!";
         CharSequence failText = "Sorry please enter right information...";
         CharSequence sendEmail = "Your password has been send on your registered mail id...";
-
-        int duration = Toast.LENGTH_SHORT;
-        successToast = Toast.makeText(context, successText, duration);
-        failureToast = Toast.makeText(context, failText, duration);
-        sendEmailToast = Toast.makeText(context, sendEmail,duration);
         final Activity activity = this;
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -63,30 +52,28 @@ public class SignInActivity extends BaseActivity {
                 password = userPassword.getText().toString().trim();
                 Intent homeScreen = new Intent(getBaseContext(), MpinActivity.class);
                 if ((id.isEmpty()) && (password.isEmpty())) {
-                    failureToast.show();
+                    displayToast(getApplicationContext(), failText);
                 } else {
-                    DialogUtil.yesDialog(activity,"Login","Login Successful",click->{
+                    DialogUtil.yesDialog(activity, "Login", "Login Successful", click -> {
                         startActivity(homeScreen);
                     });
-                    successToast.show();
                 }
             }
         });
         buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendEmailToast.show();
+                displayToast(getApplicationContext(), sendEmail);
             }
         });
     }
 
-
     @Override
     protected void onResume() {
-        if(!isConnectedToInternet())
+        if (!isConnectedToInternet())
             netWorkErrorDialog();
         super.onResume();
-        mBackHeader.setView("Login",this);
-        mBackHeader.setUp(this,"Login");
+        mBackHeader.setView("Login", this);
+        mBackHeader.setUp(this, "Login");
     }
 }
