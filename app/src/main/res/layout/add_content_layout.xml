@@ -146,7 +146,7 @@
         </RelativeLayout>
     </RelativeLayout>
         <Button
-            android:id="@+id/layout_continue_with_facebook"
+            android:id="@+id/blog_registration_submit"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@color/green"

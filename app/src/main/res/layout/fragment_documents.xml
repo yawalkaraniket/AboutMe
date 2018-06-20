@@ -1,8 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aboutme.avenjr.aboutme.fragment.DocumentsFragment">
+    tools:context="com.aboutme.avenjr.aboutme.fragment.DocumentsFragment"
+    android:id="@+id/documents_layout"
+    android:background="@color/white">
 
     <com.aboutme.avenjr.aboutme.view.NavigationHeader
         android:layout_width="match_parent"
@@ -15,9 +17,5 @@
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
         android:id="@+id/documents_body">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/white"></ImageView>
     </RelativeLayout>
-</FrameLayout>
+</RelativeLayout>

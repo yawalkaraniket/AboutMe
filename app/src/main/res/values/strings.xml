@@ -17,4 +17,10 @@
     <string name="set_mPin">please set your mPin....</string>
     <string name="oops_blank">Opps!....</string>
     <string name="add_content">please get first registered </string>
+    <string name="loading_generic_message">Loading...</string>
+    <string name="hi_aboutme">Hi AboutMe, \nHere\'s what I think:\n\n\n\n\nPlease don\'t alter
+        the lines below\n==============================\nProduct: AboutMe\n\nVersion @version
+        Build @build\n\nPlatform Type: Android\n\nDevice Type: @device_type\n\nOS version:
+        @os_version\n\nEmail address: @email</string>
+    <string name="aboutme_app_support">AboutMe App Support</string>
 </resources>

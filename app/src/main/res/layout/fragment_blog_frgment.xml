@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aboutme.avenjr.aboutme.fragment.BlogFragment">
+    android:id="@+id/blog_layout"
+    tools:context="com.aboutme.avenjr.aboutme.fragment.BlogFragment"
+   >
 
     <com.aboutme.avenjr.aboutme.view.NavigationHeader
         android:id="@+id/work_navigation"
@@ -15,11 +17,8 @@
         android:layout_marginTop="50dp"
         android:id="@+id/blog_body"
         android:gravity="bottom"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/white"></ImageView>
+        android:orientation="vertical"
+        android:background="@color/white">
         <com.aboutme.avenjr.aboutme.view.DataRegistration
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -7,15 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.Adapter.RecyclerViewAdapterExample;
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.work_navigation)
     NavigationHeader header;
@@ -35,7 +37,14 @@ public class HomeFragment extends Fragment {
         header.setUp(this.getActivity());
         header.setView("Home", this.getActivity());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setAdapter(new RecyclerViewAdapterExample(data));
+        RecyclerViewAdapterExample adapter = new RecyclerViewAdapterExample(data);
+        mRecyclerView.setAdapter(adapter);
+        adapter.setItemClickListener(new RecyclerViewListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                displayToast(getContext(),data[position]);
+            }
+        });
         return view;
     }
 

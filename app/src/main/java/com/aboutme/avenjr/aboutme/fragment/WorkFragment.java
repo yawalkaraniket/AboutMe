@@ -12,7 +12,7 @@ import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WorkFragment extends Fragment {
+public class WorkFragment extends BaseFragment {
 
     @BindView(R.id.work_navigation)
     NavigationHeader header;

@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class DocumentsFragment extends Fragment {
+public class DocumentsFragment extends BaseFragment {
 
     @BindView(R.id.navigation_header)
     NavigationHeader header;

@@ -1,7 +1,6 @@
 package com.aboutme.avenjr.aboutme.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BlogFragment extends Fragment {
+public class BlogFragment extends BaseFragment {
 
     @BindView(R.id.work_navigation)
     NavigationHeader header;
@@ -33,7 +32,9 @@ public class BlogFragment extends Fragment {
         ButterKnife.bind(this, view);
         header.setUp(this.getActivity());
         header.setView("My Blog", this.getActivity());
-        registrationLayout.setUp();
+        registrationLayout.setUp(this.getActivity());
+        setupProgress((RelativeLayout) view);
+        showProgress();
         return view;
     }
 }

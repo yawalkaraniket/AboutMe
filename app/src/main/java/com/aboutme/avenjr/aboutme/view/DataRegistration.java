@@ -1,11 +1,14 @@
 package com.aboutme.avenjr.aboutme.view;
 
+import android.app.Activity;
 import android.content.Context;
-import android.inputmethodservice.ExtractEditText;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -20,6 +23,7 @@ public class DataRegistration extends RelativeLayout {
     FontEditText blogId, blogPassword;
     RelativeLayout blogRegistrationLayout, blankRegistrationLayout;
     ImageView addButton;
+    Button submitRegistration;
 
     String inputBlogId = null, inputBlogPassword = null;
 
@@ -31,11 +35,12 @@ public class DataRegistration extends RelativeLayout {
         blogRegistrationLayout = view.findViewById(R.id.blog_registration);
         blankRegistrationLayout = view.findViewById(R.id.registration_blank);
         addButton = view.findViewById(R.id.add_button);
+        submitRegistration = view.findViewById(R.id.blog_registration_submit);
         blogPassword.setCursorVisible(false);
         addView(view);
     }
 
-    public void setUp() {
+    public void setUp(Activity activity) {
 
         if (!(inputBlogId == null) && !(inputBlogPassword == null)) {
             blogRegistrationLayout.setVisibility(VISIBLE);
@@ -52,6 +57,13 @@ public class DataRegistration extends RelativeLayout {
                 }
             });
         }
+
+        submitRegistration.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     public static void showKeyboard(View view) {
