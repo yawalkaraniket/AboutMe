@@ -1,9 +1,14 @@
 package com.aboutme.avenjr.aboutme.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +18,12 @@ import com.aboutme.avenjr.aboutme.Adapter.RecyclerViewAdapterExample;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +39,7 @@ public class HomeFragment extends BaseFragment {
     String data[] = {"sfsd", "dfsf", "sefsdfs", "sfsfsdf", "sfsdfsd", "sdfsdfsd",
             "dfsfsf", "sdfsfdsd", "dsdfsdf", "dsf", "sdfkjsdd", "kjsdfkjshd"};
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,10 +51,22 @@ public class HomeFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         RecyclerViewAdapterExample adapter = new RecyclerViewAdapterExample(data);
         mRecyclerView.setAdapter(adapter);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("swipe");
+        getActivity().registerReceiver(mBroadcastReceiver,filter);
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                getContext().sendBroadcast(new Intent("swipe"));
+            }
+        });
         adapter.setItemClickListener(new RecyclerViewListener() {
             @Override
             public void onItemClick(View view, int position) {
-                displayToast(getContext(),data[position]);
+                displayToast(getContext(), data[position]);
             }
         });
         return view;
@@ -58,4 +82,16 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
     }
+
+    BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction()!=null){
+                if(intent.getAction().equals("swipe")){
+                    displayToast(context,"Recycler view scrolling");
+                }
+            }
+        }
+    };
+
 }

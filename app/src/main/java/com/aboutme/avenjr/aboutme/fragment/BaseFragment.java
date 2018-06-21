@@ -1,6 +1,8 @@
 package com.aboutme.avenjr.aboutme.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.widget.RelativeLayout;
 import android.widget.Toast;

@@ -3,11 +3,19 @@ package com.aboutme.avenjr.aboutme.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 
@@ -15,6 +23,9 @@ public class HomeScreen extends BaseActivity {
 
     private NavigationView mNavigationView;
     private ProgressBar mProgressBar;
+    private FirebaseDatabase mFirebase = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef = mFirebase.getReference("UserInformation");
+
 
     private int backPressCount = 1;
 
@@ -26,6 +37,30 @@ public class HomeScreen extends BaseActivity {
         mNavigationView = findViewById(R.id.nav_view);
         mProgressBar = findViewById(R.id.progress_bar);
         hideProgress(mProgressBar);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<DataSnapshot> userInfo = new ArrayList<>();
+                ArrayList<DataSnapshot> token = new ArrayList<>();
+
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    token.add(userSnapshot);
+                    for (DataSnapshot programSnapshot : userSnapshot.getChildren()) {
+                        userInfo.add(programSnapshot);
+                    }
+                }
+                Log.d("Token",token.get(0).getKey()) ;
+                Log.d("UserInformation",userInfo.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         navigationViewSetUp(mNavigationView, this);
     }
