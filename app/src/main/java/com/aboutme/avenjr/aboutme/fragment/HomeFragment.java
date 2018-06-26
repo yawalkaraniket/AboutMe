@@ -5,28 +5,33 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.Adapter.RecyclerViewAdapterExample;
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.activity.RecyclerViewExample;
+import com.aboutme.avenjr.aboutme.data.Movie;
+import com.aboutme.avenjr.aboutme.data.MovieResponse;
+import com.aboutme.avenjr.aboutme.data.apiUtil;
+import com.aboutme.avenjr.aboutme.interfaces.MovieApiService;
 import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends BaseFragment {
 
@@ -36,8 +41,9 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.home_page_recycler_view)
     RecyclerView mRecyclerView;
 
-    String data[] = {"sfsd", "dfsf", "sefsdfs", "sfsfsdf", "sfsdfsd", "sdfsdfsd",
-            "dfsfsf", "sdfsfdsd", "dsdfsdf", "dsf", "sdfkjsdd", "kjsdfkjshd"};
+    private static final String TAG = RecyclerViewExample.class.getSimpleName();
+    ArrayList<String> data = new ArrayList<>();
+    ArrayList<String> Imagedata = new ArrayList<>();
 
 
     @Override
@@ -48,25 +54,17 @@ public class HomeFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         header.setUp(this.getActivity());
         header.setView("Home", this.getActivity());
+        connectAndGetApiData();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        RecyclerViewAdapterExample adapter = new RecyclerViewAdapterExample(data);
-        mRecyclerView.setAdapter(adapter);
-
         IntentFilter filter = new IntentFilter();
         filter.addAction("swipe");
-        getActivity().registerReceiver(mBroadcastReceiver,filter);
+        getActivity().registerReceiver(mBroadcastReceiver, filter);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 getContext().sendBroadcast(new Intent("swipe"));
-            }
-        });
-        adapter.setItemClickListener(new RecyclerViewListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                displayToast(getContext(), data[position]);
             }
         });
         return view;
@@ -86,12 +84,38 @@ public class HomeFragment extends BaseFragment {
     BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction()!=null){
-                if(intent.getAction().equals("swipe")){
-                    displayToast(context,"Recycler view scrolling");
+            if (intent.getAction() != null) {
+                if (intent.getAction().equals("swipe")) {
+//                    Do on swipe of recycler view.
                 }
             }
         }
     };
 
+    public void connectAndGetApiData() {
+        apiUtil.getBaseUri().enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+
+                List<Movie> movies = response.body().getResults();
+                for (int i = 0; i < movies.size(); i++) {
+                    data.add(movies.get(i).getOriginalTitle());
+                    Imagedata.add(movies.get(i).getPosterPath());
+                }
+                RecyclerViewAdapterExample adapter = new RecyclerViewAdapterExample(data, Imagedata, getContext());
+                mRecyclerView.setAdapter(adapter);
+                Log.d(TAG, "Number of movies received: " + movies.size());
+                adapter.setItemClickListener(new RecyclerViewListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        displayToast(getContext(), data.get(position));
+                    }
+                });
+            }
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable throwable) {
+                Log.e(TAG, throwable.toString());
+            }
+        });
+    }
 }

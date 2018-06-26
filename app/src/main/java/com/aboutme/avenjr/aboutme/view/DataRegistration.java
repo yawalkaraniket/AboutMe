@@ -3,7 +3,6 @@ package com.aboutme.avenjr.aboutme.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.activity.RecyclerViewExample;
 
 /**
  * Created by AvenjR on 28/5/18.
@@ -24,6 +24,7 @@ public class DataRegistration extends RelativeLayout {
     RelativeLayout blogRegistrationLayout, blankRegistrationLayout;
     ImageView addButton;
     Button submitRegistration;
+    Context context;
 
     String inputBlogId = null, inputBlogPassword = null;
 
@@ -36,6 +37,7 @@ public class DataRegistration extends RelativeLayout {
         blankRegistrationLayout = view.findViewById(R.id.registration_blank);
         addButton = view.findViewById(R.id.add_button);
         submitRegistration = view.findViewById(R.id.blog_registration_submit);
+        this.context = context;
         blogPassword.setCursorVisible(false);
         addView(view);
     }
@@ -61,7 +63,8 @@ public class DataRegistration extends RelativeLayout {
         submitRegistration.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, RecyclerViewExample.class);
+                context.startActivity(intent);
             }
         });
     }

@@ -12,4 +12,6 @@
     <color name="transparent">#0000</color>
     <color name="pink">#FF9CCE</color>
     <color name="black_transparent">#a000</color>
+    <color name="colorGreyLight">#8A8A8A</color>
+    <color name="colorBlack">#555555</color>
 </resources>

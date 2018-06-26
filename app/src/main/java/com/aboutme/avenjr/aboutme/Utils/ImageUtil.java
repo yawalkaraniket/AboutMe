@@ -1,5 +1,6 @@
 package com.aboutme.avenjr.aboutme.Utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,6 +9,9 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.Environment;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -70,4 +74,11 @@ public class ImageUtil {
         return output;
     }
 
+    public static void setImage(Context context, String url, ImageView imageView) {
+        Picasso.with(context)
+                .load(url)
+                .placeholder(android.R.drawable.sym_def_app_icon)
+                .error(android.R.drawable.sym_def_app_icon)
+                .into(imageView);
+    }
 }

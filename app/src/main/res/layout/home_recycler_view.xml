@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="10dp">
 
     <ImageView
                 android:id="@+id/recycler_view_image"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:src="@color/dark_black" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_toRightOf="@+id/recycler_view_image"
+                android:layout_below="@+id/recycler_view_image"
                 android:id="@+id/recycler_view_text"/>
 
-</LinearLayout>
+</RelativeLayout>
