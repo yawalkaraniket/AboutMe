@@ -49,7 +49,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.RecyclerViewExample" />
     </application>
 
 </manifest>

@@ -2,7 +2,6 @@ package com.aboutme.avenjr.aboutme.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.activity.RecyclerViewExample;
 
 /**
  * Created by AvenjR on 28/5/18.
@@ -63,8 +61,7 @@ public class DataRegistration extends RelativeLayout {
         submitRegistration.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, RecyclerViewExample.class);
-                context.startActivity(intent);
+
             }
         });
     }

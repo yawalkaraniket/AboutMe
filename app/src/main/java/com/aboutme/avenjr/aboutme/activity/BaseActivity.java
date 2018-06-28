@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -30,7 +31,6 @@ import com.aboutme.avenjr.aboutme.BuildConfig;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.fragment.BlogFragment;
 import com.aboutme.avenjr.aboutme.fragment.DocumentsFragment;
-import com.aboutme.avenjr.aboutme.fragment.FeedbackFragment;
 import com.aboutme.avenjr.aboutme.fragment.HomeFragment;
 import com.aboutme.avenjr.aboutme.fragment.WorkFragment;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
@@ -79,7 +79,7 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void showProgress() {
-        showProgress(PROGRESS_TYPE_NO_BLOCK);
+        showProgress(PROGRESS_TYPE_BLOCK_TRANSPARENT);
     }
 
     public void showProgress(int type) {
@@ -154,13 +154,17 @@ public abstract class BaseActivity extends FragmentActivity {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
-    public void navigationViewSetUp(NavigationView navigationView, Activity activity) {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+    public void bottomNavigationSetUp(BottomNavigationView navigationView, Activity activity) {
+        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                deselectAllMenus(navigationView);
                 int selectedMenuId = item.getItemId();
                 switch (selectedMenuId) {
+                    case R.id.home:
+                        item.setChecked(true);
+                        replaceFragment(new HomeFragment());
+                        closeDrawer(activity);
+                        break;
                     case R.id.my_blog:
                         item.setChecked(true);
                         replaceFragment(new BlogFragment());
@@ -175,6 +179,24 @@ public abstract class BaseActivity extends FragmentActivity {
                         item.setChecked(true);
                         closeDrawer(activity);
                         replaceFragment(new DocumentsFragment());
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    public void navigationViewSetUp(NavigationView navigationView, Activity activity) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                deselectAllMenus(navigationView);
+                int selectedMenuId = item.getItemId();
+                switch (selectedMenuId) {
+                    case R.id.home:
+                        item.setChecked(true);
+                        replaceFragment(new HomeFragment());
+                        closeDrawer(activity);
                         break;
                     case R.id.app_share:
                         item.setChecked(true);
@@ -214,7 +236,7 @@ public abstract class BaseActivity extends FragmentActivity {
         Fragment fragment= (Fragment) object;
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.blank_frgment,fragment);
+        transaction.replace(R.id.blank_fragment,fragment);
         transaction.commit();
     }
     public void addFragment(Object object){

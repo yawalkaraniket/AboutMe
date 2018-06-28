@@ -4,19 +4,9 @@
         <item android:title="Navigation">
             <menu>
                 <item
-                    android:id="@+id/my_blog"
-                    android:icon="@drawable/dialog_right_click"
-                    android:title="My Blog"></item>
-
-                <item
-                    android:id="@+id/my_work"
-                    android:icon="@drawable/dialog_right_click"
-                    android:title="My Work"></item>
-
-                <item
-                    android:id="@+id/documents"
-                    android:icon="@drawable/dialog_right_click"
-                    android:title="My Documents"></item>
+                    android:id="@+id/home"
+                    android:icon="@drawable/home_navigation"
+                    android:title="Home"></item>
             </menu>
         </item>
     </group>
@@ -25,17 +15,17 @@
             <menu>
                 <item
                     android:id="@+id/app_share"
-                    android:icon="@drawable/dialog_right_click"
+                    android:icon="@drawable/share"
                     android:title="Share"></item>
 
                 <item
                     android:id="@+id/app_rate"
-                    android:icon="@drawable/dialog_right_click"
+                    android:icon="@drawable/rate_app"
                     android:title="Rate app"></item>
 
                 <item
                     android:id="@+id/app_feedback"
-                    android:icon="@drawable/dialog_right_click"
+                    android:icon="@drawable/feedback"
                     android:title="Send us feedback"></item>
             </menu>
         </item>

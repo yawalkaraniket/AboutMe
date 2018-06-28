@@ -2,6 +2,7 @@ package com.aboutme.avenjr.aboutme.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.util.Log;
 import android.view.View;
@@ -17,9 +18,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeScreen extends BaseActivity {
+
+    BottomNavigationView bottomNavigationView;
 
     private NavigationView mNavigationView;
     private ProgressBar mProgressBar;
@@ -35,6 +39,7 @@ public class HomeScreen extends BaseActivity {
         ButterKnife.bind(this);
         setContentView(R.layout.activity_home_screen);
         mNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView = findViewById(R.id.navigation);
         mProgressBar = findViewById(R.id.progress_bar);
         hideProgress(mProgressBar);
 
@@ -60,8 +65,7 @@ public class HomeScreen extends BaseActivity {
             }
         });
 
-
-
+        bottomNavigationSetUp(bottomNavigationView,this);
         navigationViewSetUp(mNavigationView, this);
     }
 

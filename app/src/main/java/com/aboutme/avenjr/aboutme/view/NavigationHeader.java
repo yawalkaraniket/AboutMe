@@ -7,9 +7,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,7 +38,7 @@ public class NavigationHeader extends RelativeLayout {
     ImageButton headerRight;
 
     @BindView(R.id.navigation_header_separator)
-    View seperator;
+    View separator;
 
     Context mContext;
 
@@ -60,6 +62,13 @@ public class NavigationHeader extends RelativeLayout {
                 }
             }
         });
+
+        headerRight.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopup(headerRight, activity);
+            }
+        });
     }
 
     public void setUp(Activity activity) {
@@ -67,6 +76,12 @@ public class NavigationHeader extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 openDrawer(activity);
+            }
+        });
+        headerRight.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopup(headerRight, activity);
             }
         });
     }
@@ -78,7 +93,7 @@ public class NavigationHeader extends RelativeLayout {
             headerRight.setVisibility(GONE);
         } else if (screen.equals("mPin")) {
             headerRight.setImageDrawable(getResources().getDrawable(R.drawable.baseline_more_vert_black_18));
-            seperator.setVisibility(GONE);
+            separator.setVisibility(GONE);
             headerText.setVisibility(GONE);
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.baseline_chevron_left_black_18));
             navigationHome.setOnClickListener(new OnClickListener() {
@@ -97,4 +112,12 @@ public class NavigationHeader extends RelativeLayout {
         DrawerLayout drawer = activity.findViewById(R.id.drawer_layout);
         drawer.openDrawer(Gravity.START);
     }
+
+    public void showPopup(View v, Activity activity) {
+        PopupMenu popup = new PopupMenu(activity, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.top_left_pop_up_menu, popup.getMenu());
+        popup.show();
+    }
+
 }

@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.activity.RecyclerViewExample;
 import com.aboutme.avenjr.aboutme.data.Movie;
 import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
 
@@ -30,7 +29,6 @@ public class RecyclerViewAdapterExample extends RecyclerView.Adapter<RecyclerVie
     public static final String IMAGE_URL_BASE_PATH = "http://image.tmdb.org/t/p/w342";
     private List<Movie> movies;
     Context mContext;
-    private static final String TAG = RecyclerViewExample.class.getSimpleName();
 
     public static final String BASE_URL = "http://api.themoviedb.org/3/";
     private ArrayList<String> data;

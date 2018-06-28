@@ -11,14 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.aboutme.avenjr.aboutme.Adapter.RecyclerViewAdapterExample;
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.activity.RecyclerViewExample;
 import com.aboutme.avenjr.aboutme.data.Movie;
 import com.aboutme.avenjr.aboutme.data.MovieResponse;
 import com.aboutme.avenjr.aboutme.data.apiUtil;
-import com.aboutme.avenjr.aboutme.interfaces.MovieApiService;
 import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
@@ -30,8 +29,8 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.firebase.ui.auth.ui.phone.SubmitConfirmationCodeFragment.TAG;
 
 public class HomeFragment extends BaseFragment {
 
@@ -41,7 +40,6 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.home_page_recycler_view)
     RecyclerView mRecyclerView;
 
-    private static final String TAG = RecyclerViewExample.class.getSimpleName();
     ArrayList<String> data = new ArrayList<>();
     ArrayList<String> Imagedata = new ArrayList<>();
 
@@ -53,7 +51,9 @@ public class HomeFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         header.setUp(this.getActivity());
+        setupProgress((RelativeLayout) view);
         header.setView("Home", this.getActivity());
+        showProgress();
         connectAndGetApiData();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         IntentFilter filter = new IntentFilter();
@@ -96,7 +96,6 @@ public class HomeFragment extends BaseFragment {
         apiUtil.getBaseUri().enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-
                 List<Movie> movies = response.body().getResults();
                 for (int i = 0; i < movies.size(); i++) {
                     data.add(movies.get(i).getOriginalTitle());
@@ -104,7 +103,7 @@ public class HomeFragment extends BaseFragment {
                 }
                 RecyclerViewAdapterExample adapter = new RecyclerViewAdapterExample(data, Imagedata, getContext());
                 mRecyclerView.setAdapter(adapter);
-                Log.d(TAG, "Number of movies received: " + movies.size());
+                hideProgress();
                 adapter.setItemClickListener(new RecyclerViewListener() {
                     @Override
                     public void onItemClick(View view, int position) {
@@ -114,7 +113,7 @@ public class HomeFragment extends BaseFragment {
             }
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable throwable) {
-                Log.e(TAG, throwable.toString());
+                Log.e("Response fail", throwable.toString());
             }
         });
     }
