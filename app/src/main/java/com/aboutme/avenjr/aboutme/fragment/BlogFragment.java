@@ -12,6 +12,7 @@ import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class BlogFragment extends BaseFragment {
 
@@ -31,10 +32,14 @@ public class BlogFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_blog_frgment, container, false);
         ButterKnife.bind(this, view);
         header.setUp(this.getActivity());
-        header.setView("My Blog", this.getActivity());
+        header.setView("BLOG", this.getActivity());
         registrationLayout.setUp(this.getActivity());
         setupProgress((RelativeLayout) view);
         showProgress();
         return view;
+    }
+    @OnClick(R.id.blog_body)
+    public void blockLayout(){
+//        do nothing
     }
 }

@@ -53,5 +53,4 @@ public class FontEditText extends AppCompatEditText {
     private void setDefaultTypeface(Context context) {
         setTypeface(Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_bold_futura)));
     }
-
 }
