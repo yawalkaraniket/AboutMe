@@ -46,6 +46,8 @@ dependencies {
     // TO implement the firebase mobile notification
     compile 'com.firebaseui:firebase-ui-auth:3.3.1'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
+    // Implementing login with gmail
+    compile 'com.google.android.gms:play-services-auth:15.0.1'
 
     // retrofit, gson
     compile 'com.squareup.picasso:picasso:2.5.2'

@@ -23,4 +23,5 @@
         Build @build\n\nPlatform Type: Android\n\nDevice Type: @device_type\n\nOS version:
         @os_version\n\nEmail address: @email</string>
     <string name="aboutme_app_support">AboutMe App Support</string>
+    <string name="clientId">1049134607378-bqigv85qg4ub2ts6bjdr27uvnkmr7c3b.apps.googleusercontent.com</string>
 </resources>

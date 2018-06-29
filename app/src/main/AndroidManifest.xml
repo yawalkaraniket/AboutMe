@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aboutme.avenjr.aboutme">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -33,11 +34,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.HomeScreen"
-            android:label="@string/title_activity_home_screen"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.HomeScreen">
+            <intent-filter>
+                <action android:name=".activity.HomeScreen"
+                    android:theme="@style/AppTheme.NoActionBar"
+                    android:windowSoftInputMode="adjustPan"
+                    android:label="@string/title_activity_home_screen"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.MpinActivity" />
 
         <receiver

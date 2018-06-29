@@ -25,16 +25,20 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.BuildConfig;
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.ImageUtil;
 import com.aboutme.avenjr.aboutme.fragment.BlogFragment;
 import com.aboutme.avenjr.aboutme.fragment.DocumentsFragment;
 import com.aboutme.avenjr.aboutme.fragment.HomeFragment;
 import com.aboutme.avenjr.aboutme.fragment.WorkFragment;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.FontEditText;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by AvenjR on 11/5/18.
@@ -187,6 +191,14 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void navigationViewSetUp(NavigationView navigationView, Activity activity) {
+
+        CircleImageView profileImge = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
+        TextView name = navigationView.getHeaderView(0).findViewById(R.id.profile_name);
+        TextView email = navigationView.getHeaderView(0).findViewById(R.id.profile_email);
+        ImageUtil.setImage(activity,getIntent().getExtras().getString("photo"),profileImge);
+        name.setText(getIntent().getExtras().getString("name"));
+        email.setText(getIntent().getExtras().getString("email"));
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -201,7 +213,7 @@ public abstract class BaseActivity extends FragmentActivity {
                     case R.id.app_share:
                         item.setChecked(true);
                         closeDrawer(activity);
-                        replaceFragment(new HomeFragment());
+                        shareApplication();
                         break;
                     case R.id.app_rate:
                         item.setChecked(true);
@@ -280,5 +292,14 @@ public abstract class BaseActivity extends FragmentActivity {
                 .replace("@os_version", Build.VERSION.RELEASE+"")
                 .replace("@email","yawalkaraniket93@gmail.com");
         return str;
+    }
+
+    private void shareApplication() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        String shareBodyText = "Check it out. Your message goes here";
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Subject here");
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+        startActivity(Intent.createChooser(shareIntent, "Shearing Option"));
     }
 }

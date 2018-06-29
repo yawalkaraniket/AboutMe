@@ -35,7 +35,6 @@ public class BlogFragment extends BaseFragment {
         header.setView("BLOG", this.getActivity());
         registrationLayout.setUp(this.getActivity());
         setupProgress((RelativeLayout) view);
-        showProgress();
         return view;
     }
     @OnClick(R.id.blog_body)
