@@ -9,7 +9,7 @@
     <string name="submit_button">Submit</string>
     <string name="font_bold_futura">fonts/Futura-Bold.otf</string>
     <string name="already_have_an_account">Have an account? SIGN IN</string>
-    <string name="sign_in_with_facebook">Continue With Facebook</string>
+    <string name="sign_in_with_email">Sign-up With Email</string>
     <string name="continue_with_mail">Continue With Mail</string>
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="forgot_password">FORGOT PASSWORD</string>
@@ -24,4 +24,6 @@
         @os_version\n\nEmail address: @email</string>
     <string name="aboutme_app_support">AboutMe App Support</string>
     <string name="clientId">1049134607378-bqigv85qg4ub2ts6bjdr27uvnkmr7c3b.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">399005583914563</string>
+    <string name="fb_login_protocol_scheme">fb399005583914563</string>
 </resources>

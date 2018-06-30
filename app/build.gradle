@@ -48,6 +48,8 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     // Implementing login with gmail
     compile 'com.google.android.gms:play-services-auth:15.0.1'
+    //Implementing login with facebook
+    implementation 'com.facebook.android:facebook-login:[4,5)'
 
     // retrofit, gson
     compile 'com.squareup.picasso:picasso:2.5.2'
