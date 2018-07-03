@@ -19,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.interfaces.NavigationHeaderInterface;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
+import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -62,8 +64,8 @@ public class MainActivity extends BaseActivity {
     TextView selectEnvironment;
 
     private static boolean alreadyLogin;
-    public GoogleSignInClient mGoogleApiClient;
-    private FirebaseAuth mAuth;
+    public static GoogleSignInClient mGoogleApiClient;
+    public static FirebaseAuth mAuth;
     Activity activity;
 
     @Override
@@ -198,7 +200,6 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         if (!isConnectedToInternet())
             netWorkErrorDialog();
-        signOut();
         // to verify user is already login or not
 //        if(!mAuth.equals(null)){
 //            Intent intent = new Intent(activity, MpinActivity.class);
@@ -256,10 +257,7 @@ public class MainActivity extends BaseActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        // ...
-//                        DialogUtil.yesDialog(activity, "Success", "you are successfully logout from the application!...", click -> {
-//
-//                        });
+
                     }
                 });
     }

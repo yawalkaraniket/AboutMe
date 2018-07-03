@@ -3,6 +3,7 @@ package com.aboutme.avenjr.aboutme.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -19,16 +20,20 @@ import android.widget.TextView;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.activity.MainActivity;
 import com.aboutme.avenjr.aboutme.interfaces.NavigationHeaderInterface;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.aboutme.avenjr.aboutme.activity.MainActivity.mAuth;
+import static com.aboutme.avenjr.aboutme.activity.MainActivity.mGoogleApiClient;
 
 /**
  * Created by AvenjR on 24/4/18.
  */
 
 public class NavigationHeader extends RelativeLayout {
-
 
     @BindView(R.id.navigation_header_home)
     ImageView navigationHome;
@@ -143,8 +148,13 @@ public class NavigationHeader extends RelativeLayout {
                         break;
                     case R.id.logout:
                         DialogUtil.yesDialog(activity, "Success", "you are successfully logout from the application!...", click -> {
-                            Intent intent = new Intent(activity, MainActivity.class);
-                            context.startActivity(intent);
+                            mGoogleApiClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Intent intent = new Intent(activity, MainActivity.class);
+                                     context.startActivity(intent);
+                                }
+                            });
                         });
                         break;
                     default:
