@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.activity.MainActivity;
+import com.aboutme.avenjr.aboutme.interfaces.NavigationHeaderInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,23 +42,29 @@ public class NavigationHeader extends RelativeLayout {
     @BindView(R.id.navigation_header_separator)
     View separator;
 
-    Context mContext;
+    Context context;
+    Activity activity;
 
 
     public NavigationHeader(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         View view = LayoutInflater.from(context).inflate(R.layout.navigation_header, null);
         ButterKnife.bind(this, view);
-        this.mContext = context;
+        this.context = context;
         addView(view);
     }
 
+    public NavigationHeader(Context context) {
+        super(context);
+    }
+
     public void setUp(final Activity activity, final String screen) {
+        this.activity = activity;
         navigationHome.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (screen.equals("HomeScreen")) {
-                    openDrawer(activity);
+                    openDrawer();
                 } else {
                     activity.onBackPressed();
                 }
@@ -66,27 +74,29 @@ public class NavigationHeader extends RelativeLayout {
         headerRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup(headerRight, activity);
+                showPopup(headerRight);
             }
         });
     }
 
     public void setUp(Activity activity) {
+        this.activity = activity;
         navigationHome.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDrawer(activity);
+                openDrawer();
             }
         });
         headerRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup(headerRight, activity);
+                showPopup(headerRight);
             }
         });
     }
 
     public void setView(final String screen, Activity activity) {
+        this.activity = activity;
         headerText.setText(screen.toUpperCase());
         if (screen.equals("Login") || screen.equals("SignUp")) {
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_arrow_back));
@@ -99,25 +109,49 @@ public class NavigationHeader extends RelativeLayout {
             navigationHome.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, MainActivity.class);
+                    Intent intent = new Intent(context, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.putExtra("EXIT", true);
-                    mContext.startActivity(intent);
+                    context.startActivity(intent);
                 }
             });
         }
     }
 
-    public void openDrawer(Activity activity) {
+    public void openDrawer() {
         DrawerLayout drawer = activity.findViewById(R.id.drawer_layout);
         drawer.openDrawer(Gravity.START);
     }
 
-    public void showPopup(View v, Activity activity) {
+    public void showPopup(View v) {
         PopupMenu popup = new PopupMenu(activity, v);
+        setUpMenu(popup);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.top_left_pop_up_menu, popup.getMenu());
         popup.show();
     }
 
+    public void setUpMenu(PopupMenu upMenu) {
+        upMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.view_profile:
+                        DialogUtil.yesDialog(activity, "Success", "view profile...", click -> {
+
+                        });
+                        break;
+                    case R.id.logout:
+                        DialogUtil.yesDialog(activity, "Success", "you are successfully logout from the application!...", click -> {
+                            Intent intent = new Intent(activity, MainActivity.class);
+                            context.startActivity(intent);
+                        });
+                        break;
+                    default:
+                        return true;
+                }
+                return true;
+            }
+        });
+    }
 }

@@ -1,29 +1,31 @@
 package com.aboutme.avenjr.aboutme.activity;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.Utils.ImageUtil;
-import com.aboutme.avenjr.aboutme.fragment.HomeFragment;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
-import com.aboutme.avenjr.aboutme.view.Mpin;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -32,10 +34,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.io.Serializable;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
@@ -45,17 +46,23 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.layout_continue_with_facebook)
     Button continueWithFacebook;
 
-    @BindView(R.id.layout_continue_with_mail)
+    @BindView(R.id.continue_with_google)
+    Button getContinueWithGoogle;
+
+    @BindView(R.id.sign_up_with_mail)
     Button continueWithMail;
 
-    @BindView(R.id.have_an_account_button)
-    Button haveAnAccount;
+    @BindView(R.id.sign_in)
+    LinearLayout signIn;
 
     @BindView(R.id.main_layout)
     RelativeLayout body;
 
+    @BindView(R.id.select_environment)
+    TextView selectEnvironment;
+
     private static boolean alreadyLogin;
-    private GoogleSignInClient mGoogleApiClient;
+    public GoogleSignInClient mGoogleApiClient;
     private FirebaseAuth mAuth;
     Activity activity;
 
@@ -67,6 +74,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        registerForContextMenu(home_image);
         setupProgress(body);
         this.activity = this;
         mAuth = FirebaseAuth.getInstance();
@@ -84,29 +92,34 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         }
 
-
         continueWithFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                https://developers.google.com/identity/sign-in/android/
-                showProgress();
-                signIn();
+                startButtonAnimation(continueWithFacebook);
+                DialogUtil.yesDialog(activity, "Sorry", "No functionality implemented", click -> {
+                    signOut();
+                    removeAnimation(continueWithFacebook);
+                });
             }
         });
 
         continueWithMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), SignInActivity.class);
-                startActivity(intent);
-            }
-        });
-        haveAnAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                startButtonAnimation(continueWithMail);
                 Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivity(intent);
-                signIn();
+                removeAnimation(continueWithMail);
+            }
+        });
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startButtonAnimation(signIn);
+                Intent intent = new Intent(getBaseContext(), SignInActivity.class);
+                intent.putExtra("login_with", "signIn");
+                startActivity(intent);
+                removeAnimation(signIn);
             }
         });
     }
@@ -129,10 +142,26 @@ public class MainActivity extends BaseActivity {
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed, update UI appropriately
+                removeAnimation(getContinueWithGoogle);
+                hideProgress();
                 Toast.makeText(getBaseContext(), "Authentication failed.",
                         Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @OnClick(R.id.continue_with_google)
+    public void googleSignIn() {
+        startButtonAnimation(getContinueWithGoogle);
+//                https://developers.google.com/identity/sign-in/android/
+        showProgress();
+        signIn();
+    }
+
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.select_environment_menu, menu);
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -147,7 +176,6 @@ public class MainActivity extends BaseActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Success", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            ImageUtil.setImage(getBaseContext(), user.getPhotoUrl().toString(), home_image);
                             hideProgress();
                             DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
                                     + user.getEmail() + " Success.", click -> {
@@ -155,19 +183,13 @@ public class MainActivity extends BaseActivity {
                                 intent.putExtra("photo", user.getPhotoUrl().toString());
                                 intent.putExtra("email", user.getEmail().toString());
                                 intent.putExtra("name", user.getDisplayName().toString());
+                                intent.putExtra("login_with", "google");
                                 startActivity(intent);
-//
+                                removeAnimation(continueWithFacebook);
                             });
-//                            updateUI(user);
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("Fail", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(getBaseContext(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
+                            hideProgress();
                         }
-
-                        // ...
                     }
                 });
     }
@@ -176,6 +198,69 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         if (!isConnectedToInternet())
             netWorkErrorDialog();
+        signOut();
+        // to verify user is already login or not
+//        if(!mAuth.equals(null)){
+//            Intent intent = new Intent(activity, MpinActivity.class);
+//            startActivity(intent);
+//        }
         super.onResume();
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.prod:
+                DialogUtil.yesDialog(activity, "Production", "you are on production!..", click -> {
+
+                });
+                break;
+            case R.id.prepod:
+                DialogUtil.yesDialog(activity, "Prepod", "you are on Propod!..", click -> {
+
+                });
+                break;
+            case R.id.dev:
+                DialogUtil.yesDialog(activity, "Integration", "you are on integration!..", click -> {
+
+                });
+                break;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
+        return true;
+    }
+
+    public void startButtonAnimation(View view) {
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationX", 50f);
+        animation.setDuration(500);
+        animation.start();
+    }
+
+    public void removeAnimation(View view) {
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationX", 0f);
+        animation.setDuration(500);
+        animation.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        hideProgress();
+        super.onBackPressed();
+    }
+
+    private void signOut() {
+        mGoogleApiClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+//                        DialogUtil.yesDialog(activity, "Success", "you are successfully logout from the application!...", click -> {
+//
+//                        });
+                    }
+                });
     }
 }

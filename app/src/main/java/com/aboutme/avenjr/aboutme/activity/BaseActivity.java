@@ -75,7 +75,8 @@ public abstract class BaseActivity extends FragmentActivity {
         blockLayout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         layout.addView(blockLayout);
         blockLayout.setBackgroundColor(getResources().getColor(R.color.black_transparent));
-        blockLayout.setOnClickListener(click -> {});
+        blockLayout.setOnClickListener(click -> {
+        });
         layout.addView(linearLayout);
         blockLayout.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
@@ -126,10 +127,11 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
-    public void displayToast(Context context, CharSequence message){
-        toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
+    public void displayToast(Context context, CharSequence message) {
+        toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         toast.show();
     }
+
     public boolean isConnectedToInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return connectivityManager.getActiveNetworkInfo() != null;
@@ -191,13 +193,16 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void navigationViewSetUp(NavigationView navigationView, Activity activity) {
+        if (getIntent().getExtras().getString("login_with").toString().equals("google")) {
 
-        CircleImageView profileImge = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
-        TextView name = navigationView.getHeaderView(0).findViewById(R.id.profile_name);
-        TextView email = navigationView.getHeaderView(0).findViewById(R.id.profile_email);
-        ImageUtil.setImage(activity,getIntent().getExtras().getString("photo"),profileImge);
-        name.setText(getIntent().getExtras().getString("name"));
-        email.setText(getIntent().getExtras().getString("email"));
+            CircleImageView profileImge = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
+            TextView name = navigationView.getHeaderView(0).findViewById(R.id.profile_name);
+            TextView email = navigationView.getHeaderView(0).findViewById(R.id.profile_email);
+            ImageUtil.setImage(activity, getIntent().getExtras().getString("photo"), profileImge);
+            name.setText(getIntent().getExtras().getString("name"));
+            email.setText(getIntent().getExtras().getString("email"));
+
+        }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -244,18 +249,19 @@ public abstract class BaseActivity extends FragmentActivity {
         drawer.closeDrawer(Gravity.START);
     }
 
-    public void replaceFragment(Object object){
-        Fragment fragment= (Fragment) object;
+    public void replaceFragment(Object object) {
+        Fragment fragment = (Fragment) object;
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.blank_fragment,fragment);
+        transaction.replace(R.id.blank_fragment, fragment);
         transaction.commit();
     }
-    public void addFragment(Object object){
-        Fragment fragment= (Fragment) object;
+
+    public void addFragment(Object object) {
+        Fragment fragment = (Fragment) object;
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(fragment,"gfd");
+        transaction.add(fragment, "gfd");
         transaction.commit();
     }
 
@@ -276,7 +282,7 @@ public abstract class BaseActivity extends FragmentActivity {
         return Resources.getSystem().getDisplayMetrics();
     }
 
-    public void sendMail(){
+    public void sendMail() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "support@aboutme.com", null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.aboutme_app_support));
@@ -286,11 +292,11 @@ public abstract class BaseActivity extends FragmentActivity {
 
     private String generateText() {
         String str = getString(R.string.hi_aboutme)
-                .replace("@version", BuildConfig.VERSION_NAME+"")
-                .replace("@build",BuildConfig.VERSION_CODE+"")
-                .replace("@device_type",android.os.Build.MODEL+"")
-                .replace("@os_version", Build.VERSION.RELEASE+"")
-                .replace("@email","yawalkaraniket93@gmail.com");
+                .replace("@version", BuildConfig.VERSION_NAME + "")
+                .replace("@build", BuildConfig.VERSION_CODE + "")
+                .replace("@device_type", android.os.Build.MODEL + "")
+                .replace("@os_version", Build.VERSION.RELEASE + "")
+                .replace("@email", "yawalkaraniket93@gmail.com");
         return str;
     }
 
@@ -298,7 +304,7 @@ public abstract class BaseActivity extends FragmentActivity {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         String shareBodyText = "Check it out. Your message goes here";
-        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Subject here");
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject here");
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
         startActivity(Intent.createChooser(shareIntent, "Shearing Option"));
     }

@@ -8,9 +8,10 @@
     <string name="request_user_lastName">enter last name....</string>
     <string name="submit_button">Submit</string>
     <string name="font_bold_futura">fonts/Futura-Bold.otf</string>
-    <string name="already_have_an_account">Have an account? SIGN IN</string>
-    <string name="sign_in_with_facebook">Continue With Facebook</string>
-    <string name="continue_with_mail">Continue With Mail</string>
+    <string name="coninue_with_google">Continue with GOOGLE</string>
+    <string name="already_have_an_account">Have an account ?</string>
+    <string name="sign_in_with_facebook">Continue With FACEBOOK</string>
+    <string name="sign_up_with_mail">Sign Up With MAIL</string>
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="forgot_password">FORGOT PASSWORD</string>
     <string name="mPin_error">please enter right pin....</string>

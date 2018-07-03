@@ -107,6 +107,7 @@ public class Mpin extends RelativeLayout {
                             if (wantToConfirm && mPin.equals(mPinConform)) {
                                 wantToConfirm = false;
                                 Intent intent = new Intent(context, HomeScreen.class);
+                                intent.putExtra("login_with","signIn");
                                 context.startActivity(intent);
                             }
                             clearAllSelectedView();
@@ -115,6 +116,7 @@ public class Mpin extends RelativeLayout {
                     }
                     if (getSelectedCount() == 4 && mPin.equals(mPinVerify) && !setMpin) {
                         Intent intent = new Intent(context, HomeScreen.class);
+                        intent.putExtra("login_with","signIn");
                         context.startActivity(intent);
                     } else if (getSelectedCount() == 4) {
                         clearAllSelectedView();

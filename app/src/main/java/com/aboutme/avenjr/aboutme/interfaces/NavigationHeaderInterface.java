@@ -7,5 +7,6 @@ import android.widget.ImageView;
  */
 
 public interface NavigationHeaderInterface {
-    public ImageView addButton();
+
+    public void logout();
 }

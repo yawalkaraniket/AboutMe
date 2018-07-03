@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/title">
+        <item android:title="Choose an environment"></item>
+    </group>
+    <group android:id="@+id/select">
+        <item
+            android:id="@+id/prod"
+            android:icon="@drawable/share"
+            android:title="Production">
+        </item>
+
+        <item
+            android:id="@+id/prepod"
+            android:icon="@drawable/rate_app"
+            android:title="Preprod"></item>
+
+        <item
+            android:id="@+id/dev"
+            android:icon="@drawable/feedback"
+            android:title="Development"></item>
+    </group>
+</menu>
