@@ -2,7 +2,9 @@ package com.aboutme.avenjr.aboutme.activity;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -19,9 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.interfaces.NavigationHeaderInterface;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
-import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -43,7 +44,7 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.home_image)
-    ImageView home_image;
+    LinearLayout home_image;
 
     @BindView(R.id.layout_continue_with_facebook)
     Button continueWithFacebook;
@@ -60,13 +61,12 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_layout)
     RelativeLayout body;
 
-    @BindView(R.id.select_environment)
-    TextView selectEnvironment;
-
     private static boolean alreadyLogin;
     public static GoogleSignInClient mGoogleApiClient;
     public static FirebaseAuth mAuth;
     Activity activity;
+    Context context;
+    SharedPreferencesUtil preference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        this.context = getApplicationContext();
+        preference = new SharedPreferencesUtil(getApplicationContext());
         registerForContextMenu(home_image);
         setupProgress(body);
         this.activity = this;
@@ -146,7 +147,7 @@ public class MainActivity extends BaseActivity {
                 // Google Sign In failed, update UI appropriately
                 removeAnimation(getContinueWithGoogle);
                 hideProgress();
-                Toast.makeText(getBaseContext(), "Authentication failed.",
+                Toast.makeText(getBaseContext(), "Sign-in failed.",
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -155,7 +156,8 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.continue_with_google)
     public void googleSignIn() {
         startButtonAnimation(getContinueWithGoogle);
-//                https://developers.google.com/identity/sign-in/android/
+        preference.setUser();
+        //                https://developers.google.com/identity/sign-in/android/
         showProgress();
         signIn();
     }

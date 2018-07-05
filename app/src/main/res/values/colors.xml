@@ -14,4 +14,5 @@
     <color name="black_transparent">#a000</color>
     <color name="colorGreyLight">#8A8A8A</color>
     <color name="colorBlack">#555555</color>
+    <color name="home_button_background">#33ccff</color>
 </resources>

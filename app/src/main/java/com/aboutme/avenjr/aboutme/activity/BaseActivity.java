@@ -55,6 +55,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected View progressBar;
     protected View blockLayout;
     protected FontEditText loading;
+    Activity activity;
 
     public void setupProgress(RelativeLayout layout) {
         LinearLayout linearLayout = new LinearLayout(this);

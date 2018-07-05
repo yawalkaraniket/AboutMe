@@ -1,15 +1,15 @@
 package com.aboutme.avenjr.aboutme.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.Utils.ImageUtil;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,32 +19,26 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeScreen extends BaseActivity {
 
     BottomNavigationView bottomNavigationView;
-
-    private NavigationView mNavigationView;
-    private ProgressBar mProgressBar;
+    private NavigationView navigationView;
     private FirebaseDatabase mFirebase = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = mFirebase.getReference("UserInformation");
-
-
     private int backPressCount = 1;
+    SharedPreferencesUtil preferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setContentView(R.layout.activity_home_screen);
-        mNavigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.navigation);
-        mProgressBar = findViewById(R.id.progress_bar);
-        hideProgress(mProgressBar);
-
+        this.preferences = new SharedPreferencesUtil(getApplicationContext());
+        String highScore = preferences.getUser();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -68,13 +62,12 @@ public class HomeScreen extends BaseActivity {
         });
 
         bottomNavigationSetUp(bottomNavigationView,this);
-        navigationViewSetUp(mNavigationView, this);
+        navigationViewSetUp(navigationView, this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
