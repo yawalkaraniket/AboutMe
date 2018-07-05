@@ -1,8 +1,6 @@
 package com.aboutme.avenjr.aboutme.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -38,7 +36,7 @@ public class HomeScreen extends BaseActivity {
         navigationView = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.navigation);
         this.preferences = new SharedPreferencesUtil(getApplicationContext());
-        String highScore = preferences.getUser();
+        String highScore = preferences.getName();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

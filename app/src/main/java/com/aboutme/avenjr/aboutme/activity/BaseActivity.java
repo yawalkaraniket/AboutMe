@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.aboutme.avenjr.aboutme.BuildConfig;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.ImageUtil;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.fragment.BlogFragment;
 import com.aboutme.avenjr.aboutme.fragment.DocumentsFragment;
 import com.aboutme.avenjr.aboutme.fragment.HomeFragment;
@@ -56,6 +57,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected View blockLayout;
     protected FontEditText loading;
     Activity activity;
+    private SharedPreferencesUtil preferences;
 
     public void setupProgress(RelativeLayout layout) {
         LinearLayout linearLayout = new LinearLayout(this);
@@ -194,14 +196,15 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void navigationViewSetUp(NavigationView navigationView, Activity activity) {
+        preferences = new SharedPreferencesUtil(activity.getApplicationContext());
         if (getIntent().getExtras().getString("login_with").toString().equals("google")) {
 
             CircleImageView profileImge = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
             TextView name = navigationView.getHeaderView(0).findViewById(R.id.profile_name);
             TextView email = navigationView.getHeaderView(0).findViewById(R.id.profile_email);
-            ImageUtil.setImage(activity, getIntent().getExtras().getString("photo"), profileImge);
-            name.setText(getIntent().getExtras().getString("name"));
-            email.setText(getIntent().getExtras().getString("email"));
+            ImageUtil.setImage(activity, preferences.getProfileImageUrl(), profileImge);
+            name.setText(preferences.getName());
+            email.setText(preferences.getEmail());
 
         }
 

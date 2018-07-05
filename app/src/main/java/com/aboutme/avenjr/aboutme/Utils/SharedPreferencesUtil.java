@@ -7,9 +7,9 @@ import com.aboutme.avenjr.aboutme.R;
 
 public class SharedPreferencesUtil {
 
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
-    Context context;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+    private Context context;
 
     public SharedPreferencesUtil(Context context) {
         this.context = context;
@@ -18,13 +18,30 @@ public class SharedPreferencesUtil {
         this.editor = sharedPref.edit();
     }
 
-    public void setUser() {
-        editor.putString(context.getString(R.string.shared), "aniket");
-        editor.apply();
+    public void setName(String user) {
+        editor.putString(context.getString(R.string.user_name), user).apply();
     }
 
-    public String getUser() {
-        String defaultValue = context.getResources().getString(R.string.shared).toString();
-        return sharedPref.getString(context.getString(R.string.shared), defaultValue);
+    public String getName() {
+        String defaultValue = context.getResources().getString(R.string.user_name).toString();
+        return sharedPref.getString(context.getString(R.string.user_name), defaultValue);
+    }
+
+    public void setEmail(String email) {
+        editor.putString(context.getString(R.string.email), email).apply();
+    }
+
+    public String getEmail() {
+        String defaultValue = context.getResources().getString(R.string.email).toString();
+        return sharedPref.getString(context.getString(R.string.email), defaultValue);
+    }
+
+    public void setProfileImageUrl(String url){
+        editor.putString(context.getString(R.string.photo_url),url).apply();
+    }
+
+    public String getProfileImageUrl(){
+        String defaultValue = context.getResources().getString(R.string.photo_url).toString();
+        return sharedPref.getString(context.getString(R.string.photo_url), defaultValue);
     }
 }

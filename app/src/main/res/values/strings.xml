@@ -25,6 +25,11 @@
         @os_version\n\nEmail address: @email</string>
     <string name="aboutme_app_support">AboutMe App Support</string>
     <string name="clientId">1049134607378-bqigv85qg4ub2ts6bjdr27uvnkmr7c3b.apps.googleusercontent.com</string>
-    <string name="shared">aaaaaaaaaaaa</string>
+
+    <!--These string are for preferences-->
+    <string name="user_name">username</string>
+    <string name="user_id">id</string>
+    <string name="photo_url">url</string>
+    <string name="email">email</string>
     <string name="preferenxce_file_key">com.aboutme.avenjr.aboutme</string>
 </resources>

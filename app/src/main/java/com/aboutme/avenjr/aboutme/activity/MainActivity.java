@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -14,10 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
@@ -71,7 +68,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -100,7 +96,6 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 startButtonAnimation(continueWithFacebook);
                 DialogUtil.yesDialog(activity, "Sorry", "No functionality implemented", click -> {
-                    signOut();
                     removeAnimation(continueWithFacebook);
                 });
             }
@@ -156,7 +151,6 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.continue_with_google)
     public void googleSignIn() {
         startButtonAnimation(getContinueWithGoogle);
-        preference.setUser();
         //                https://developers.google.com/identity/sign-in/android/
         showProgress();
         signIn();
@@ -184,9 +178,9 @@ public class MainActivity extends BaseActivity {
                             DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
                                     + user.getEmail() + " Success.", click -> {
                                 Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
-                                intent.putExtra("photo", user.getPhotoUrl().toString());
-                                intent.putExtra("email", user.getEmail().toString());
-                                intent.putExtra("name", user.getDisplayName().toString());
+                                preference.setName(user.getDisplayName());
+                                preference.setEmail(user.getEmail());
+                                preference.setProfileImageUrl(user.getPhotoUrl().toString());
                                 intent.putExtra("login_with", "google");
                                 startActivity(intent);
                                 activity.finish();
@@ -253,15 +247,5 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         hideProgress();
         activity.finish();
-    }
-
-    private void signOut() {
-        mGoogleApiClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                    }
-                });
     }
 }
