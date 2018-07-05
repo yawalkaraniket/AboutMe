@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="M"
-                android:textColor="@color/dark_black"
+                android:textColor="@color/pink_dark"
                 android:textSize="100dp"
                 android:textStyle="bold"
                 android:focusable="false"
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="E"
-                android:textColor="@color/dark_black"
+                android:textColor="@color/pink_dark"
                 android:textSize="60dp"
                 android:textStyle="bold"
                 android:focusable="false"
@@ -60,30 +60,32 @@
         android:layout_centerHorizontal="true">
 
         <Button
-            android:id="@+id/continue_with_google"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/colorAccent"
-            android:gravity="center"
-            android:text="@string/coninue_with_google"
-            android:textColor="@color/white" />
-
-        <Button
-            android:layout_marginTop="10dp"
             android:id="@+id/layout_continue_with_facebook"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_below="@+id/continue_with_google"
+            android:textStyle="bold"
             android:background="@color/colorPrimary"
             android:text="@string/sign_in_with_facebook"
             android:textColor="@color/white" />
 
         <Button
             android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:id="@+id/continue_with_google"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:layout_below="@+id/layout_continue_with_facebook"
+            android:text="@string/coninue_with_google"
+            android:textColor="@color/white" />
+        <Button
+            android:layout_marginTop="10dp"
             android:id="@+id/sign_up_with_mail"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_below="@id/layout_continue_with_facebook"
+            android:textStyle="bold"
+            android:layout_below="@id/continue_with_google"
             android:background="@color/colorGreyLight"
             android:text="@string/sign_up_with_mail"
             android:textColor="@color/white" />
@@ -97,17 +99,18 @@
         android:layout_below="@+id/sign_in_buttons"
         >
         <TextView
-            android:layout_width="170dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:text="@string/already_have_an_account"
-            android:textSize="19dp"
-            android:textColor="@color/black_transparent"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:textColor="@color/pink_dark"
             android:layout_marginLeft="20dp"/>
         <TextView
             android:layout_width="130dp"
             android:layout_height="match_parent"
             android:text="SIGN IN"
-            android:textColor="@color/dark_black"
+            android:textColor="@color/pink_dark"
             android:textSize="20dp"
             android:textStyle="bold"
             />
