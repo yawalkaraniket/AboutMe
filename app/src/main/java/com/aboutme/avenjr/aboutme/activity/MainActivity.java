@@ -189,6 +189,7 @@ public class MainActivity extends BaseActivity {
                                 intent.putExtra("name", user.getDisplayName().toString());
                                 intent.putExtra("login_with", "google");
                                 startActivity(intent);
+                                activity.finish();
                                 removeAnimation(continueWithFacebook);
                             });
                         } else {
@@ -251,7 +252,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         hideProgress();
-        super.onBackPressed();
+        activity.finish();
     }
 
     private void signOut() {

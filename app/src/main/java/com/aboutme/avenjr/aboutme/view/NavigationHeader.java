@@ -153,6 +153,7 @@ public class NavigationHeader extends RelativeLayout {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Intent intent = new Intent(activity, MainActivity.class);
                                      context.startActivity(intent);
+                                     activity.finish();
                                 }
                             });
                         });
