@@ -44,4 +44,9 @@ public class SharedPreferencesUtil {
         String defaultValue = context.getResources().getString(R.string.photo_url).toString();
         return sharedPref.getString(context.getString(R.string.photo_url), defaultValue);
     }
+
+    public void clearPreferences(){
+        editor.clear().apply();
+    }
+
 }

@@ -3,6 +3,7 @@ package com.aboutme.avenjr.aboutme.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.activity.MainActivity;
 import com.aboutme.avenjr.aboutme.interfaces.NavigationHeaderInterface;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,6 +51,7 @@ public class NavigationHeader extends RelativeLayout {
 
     Context context;
     Activity activity;
+    SharedPreferencesUtil preferences;
 
 
     public NavigationHeader(Context context, AttributeSet attributeSet) {
@@ -86,6 +89,7 @@ public class NavigationHeader extends RelativeLayout {
 
     public void setUp(Activity activity) {
         this.activity = activity;
+        this.preferences = new SharedPreferencesUtil(activity.getApplicationContext());
         navigationHome.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,6 +158,7 @@ public class NavigationHeader extends RelativeLayout {
                                     Intent intent = new Intent(activity, MainActivity.class);
                                      context.startActivity(intent);
                                      activity.finish();
+                                     preferences.clearPreferences();
                                 }
                             });
                         });

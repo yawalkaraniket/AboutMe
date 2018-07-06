@@ -68,14 +68,17 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        this.context = getApplicationContext();
+        this.activity = this;
+        this.preference = new SharedPreferencesUtil(getApplicationContext());
+
+        verifyAlreadyLogin();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        this.context = getApplicationContext();
-        preference = new SharedPreferencesUtil(getApplicationContext());
         registerForContextMenu(home_image);
         setupProgress(body);
-        this.activity = this;
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -120,6 +123,14 @@ public class MainActivity extends BaseActivity {
                 removeAnimation(signIn);
             }
         });
+    }
+
+    private void verifyAlreadyLogin() {
+        if(!preference.getEmail().equals("email")){
+            Intent intent = new Intent(activity,MpinActivity.class);
+            activity.finish();
+            startActivity(intent);
+        }
     }
 
     private void signIn() {
@@ -177,7 +188,7 @@ public class MainActivity extends BaseActivity {
                             hideProgress();
                             DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
                                     + user.getEmail() + " Success.", click -> {
-                                Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
+                                Intent intent = new Intent(getApplicationContext(), MpinActivity.class);
                                 preference.setName(user.getDisplayName());
                                 preference.setEmail(user.getEmail());
                                 preference.setProfileImageUrl(user.getPhotoUrl().toString());
@@ -197,12 +208,7 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         if (!isConnectedToInternet())
             netWorkErrorDialog();
-        // to verify user is already login or not
-//        if(!mAuth.equals(null)){
-//            Intent intent = new Intent(activity, MpinActivity.class);
-//            startActivity(intent);
-//        }
-        super.onResume();
+            super.onResume();
     }
 
     @Override
