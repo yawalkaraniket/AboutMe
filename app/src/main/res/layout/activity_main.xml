@@ -47,7 +47,7 @@
     android:id="@+id/button_parent_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="50dp"
+    android:paddingBottom="40dp"
     android:layout_centerHorizontal="true"
     android:layout_alignParentBottom="true"
     android:background="@color/home_button_background">
@@ -115,6 +115,14 @@
             android:textStyle="bold"
             />
     </LinearLayout>
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/sign_in"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/home"/>
+
 </RelativeLayout>
 
 </RelativeLayout>

@@ -1,82 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_signin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:design="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_signin"
     tools:context="com.aboutme.avenjr.aboutme.activity.SignInActivity">
     <!--</com.aboutme.avenjr.aboutme.view.BackHeader>-->
     <com.aboutme.avenjr.aboutme.view.NavigationHeader
+        android:id="@+id/back_header"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/back_header">
+        android:layout_height="50dp">
     </com.aboutme.avenjr.aboutme.view.NavigationHeader>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/back_header"
-        android:background="@drawable/sign_in_new"
-        />
+        android:background="@drawable/sign_in_new" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
         android:orientation="vertical">
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/green"
-        android:text="@string/submit_button"
-        android:textColor="@color/white"
-        android:layout_below="@+id/have_an_account_button"/>
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="100dp"
-        android:id="@+id/input_credentials"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/username_wrapper"
-            android:paddingTop="50dp">
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/request_user_id"
-                android:textColorHint="@color/dark_black"
-                android:id="@+id/request_user_id"
-                android:singleLine="true"
-                android:textSize="20dp"/>
-        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/password_wrapper">
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/request_user_password"
-                android:textColorHint="@color/dark_black"
-                android:id="@+id/request_user_password"
-                android:textSize="20dp"
-                android:singleLine="true"
-                style="@style/Widget.AppCompat.EditText" />
-        </android.support.design.widget.TextInputLayout>
         <Button
-            android:layout_width="300dp"
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/have_an_account_button"
+            android:background="@color/green"
+            android:text="@string/submit_button"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/input_credentials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/back_header"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/input_background"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_heading"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/id_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:clickable="false"
+                android:fontFamily="sans-serif"
+                android:padding="4dp"
+                android:text="@string/request_user_id"
+                android:textColor="@color/dark_black" />
+
+            <com.aboutme.avenjr.aboutme.view.FontEditText
+                android:id="@+id/input_id"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/id_heading"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/input_textview_layout"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:minLines="1"
+                android:padding="5dp"
+                android:singleLine="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registration_heading"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/password_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:clickable="false"
+                android:fontFamily="sans-serif"
+                android:padding="4dp"
+                android:text="@string/request_user_password"
+                android:textColor="@color/dark_black" />
+
+            <com.aboutme.avenjr.aboutme.view.FontEditText
+                android:id="@+id/request_user_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/password_heading"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/input_textview_layout"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:minLines="1"
+                android:padding="5dp"
+                android:singleLine="true" />
+        </RelativeLayout>
+
+        <TextView
             android:id="@+id/forgot_password"
-            android:text="@string/forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_marginTop="20dp"
+            android:text="@string/forgot_password"
             android:textColor="@color/blue"
             android:textSize="17dp"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

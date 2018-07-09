@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
+import com.aboutme.avenjr.aboutme.view.FontEditText;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import com.google.firebase.database.DatabaseReference;
 
@@ -19,10 +21,10 @@ import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference
 public class SignInActivity extends BaseActivity {
 
     String id, password;
-    EditText userId, userPassword;
-    Button buttonSubmit, buttonForgotPassword;
+    FontEditText userId, userPassword;
+    Button buttonSubmit;
+    TextView buttonForgotPassword;
     RelativeLayout layoutSignIn;
-    private DatabaseReference mDatabaseReference;
     NavigationHeader mBackHeader;
 
     @Override
@@ -30,12 +32,11 @@ public class SignInActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        userId = findViewById(R.id.request_user_id);
+        userId = findViewById(R.id.input_id);
         userPassword = findViewById(R.id.request_user_password);
         buttonSubmit = findViewById(R.id.submit_button);
         buttonForgotPassword = findViewById(R.id.forgot_password);
         layoutSignIn = findViewById(R.id.layout_signin);
-        mDatabaseReference = getFireBaseReference("userInfo");
         mBackHeader = findViewById(R.id.back_header);
         mBackHeader.setUp(this, "Login");
         mBackHeader.setView("Login", this);
@@ -63,15 +64,15 @@ public class SignInActivity extends BaseActivity {
         buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayToast(getApplicationContext(), sendEmail);
+                Intent intent = new Intent(activity,ResetPassword.class);
+                startActivity(intent);
             }
         });
     }
 
     @Override
     protected void onResume() {
-        if (!isConnectedToInternet())
-            netWorkErrorDialog();
+        verifyNetwork();
         super.onResume();
         mBackHeader.setView("Login", this);
         mBackHeader.setUp(this, "Login");

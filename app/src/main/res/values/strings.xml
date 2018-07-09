@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">AboutMe</string>
-    <string name="request_user_id">enter your id....</string>
+    <string name="request_user_id">enter your mail id....</string>
     <string name="request_user_password">enter password..</string>
     <string name="request_user_repassword">enter password again..</string>
     <string name="request_user_name">enter your name....</string>
     <string name="request_user_mobile_number">enter mobile number....</string>
     <string name="request_user_lastName">enter last name....</string>
     <string name="submit_button">Submit</string>
+    <string name="send_button">Send</string>
     <string name="font_bold_futura">fonts/Futura-Bold.otf</string>
     <string name="coninue_with_google">Continue with GOOGLE</string>
     <string name="already_have_an_account">Have an account ?</string>
@@ -31,5 +32,12 @@
     <string name="user_id">id</string>
     <string name="photo_url">url</string>
     <string name="email">email</string>
-    <string name="preferenxce_file_key">com.aboutme.avenjr.aboutme</string>
+    <string name="preference_file_key">com.aboutme.avenjr.aboutme</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_reset_password">ResetPassword</string>
+    <string name="no_network">No Network</string>
+    <string name="refresh">Refresh</string>
+    <string name="loginFrom">noLogin</string>
 </resources>

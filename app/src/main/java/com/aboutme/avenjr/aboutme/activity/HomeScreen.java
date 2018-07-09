@@ -49,8 +49,8 @@ public class HomeScreen extends BaseActivity {
                         userInfo.add(programSnapshot);
                     }
                 }
-                Log.d("Token",token.get(0).getKey()) ;
-                Log.d("UserInformation",userInfo.toString());
+                Log.d("Token", token.get(0).getKey());
+                Log.d("UserInformation", userInfo.toString());
             }
 
             @Override
@@ -59,7 +59,7 @@ public class HomeScreen extends BaseActivity {
             }
         });
 
-        bottomNavigationSetUp(bottomNavigationView,this);
+        bottomNavigationSetUp(bottomNavigationView, this);
         navigationViewSetUp(navigationView, this);
     }
 
@@ -70,7 +70,7 @@ public class HomeScreen extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (backPressCount == 2) {
+        if ((backPressCount == 2) && (getSupportFragmentManager().getBackStackEntryCount() == 0)) {
             DialogUtil.yesDialog(this, "Close Application", "you want to close application?", click -> {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

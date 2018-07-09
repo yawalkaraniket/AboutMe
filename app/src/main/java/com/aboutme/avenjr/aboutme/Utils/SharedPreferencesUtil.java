@@ -14,7 +14,7 @@ public class SharedPreferencesUtil {
     public SharedPreferencesUtil(Context context) {
         this.context = context;
         sharedPref = context.getSharedPreferences(
-                context.getString(R.string.preferenxce_file_key), Context.MODE_PRIVATE);
+                context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         this.editor = sharedPref.edit();
     }
 
@@ -43,6 +43,15 @@ public class SharedPreferencesUtil {
     public String getProfileImageUrl(){
         String defaultValue = context.getResources().getString(R.string.photo_url).toString();
         return sharedPref.getString(context.getString(R.string.photo_url), defaultValue);
+    }
+
+    public void putLoginWith(String loginFrom){
+        editor.putString(context.getString(R.string.loginFrom),loginFrom).apply();
+    }
+
+    public String getLoginWith(){
+        String defaultValue = context.getResources().getString(R.string.loginFrom).toString();
+        return sharedPref.getString(context.getString(R.string.loginFrom), defaultValue);
     }
 
     public void clearPreferences(){

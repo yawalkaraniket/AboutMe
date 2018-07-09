@@ -39,6 +39,8 @@ import com.aboutme.avenjr.aboutme.fragment.WorkFragment;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.FontEditText;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -146,10 +148,14 @@ public abstract class BaseActivity extends FragmentActivity {
         });
     }
 
-    public void netWorkErrorDialog() {
-        DialogUtil.yesDialog(this, "Network Error", "please check your network....", click -> {
+    public void verifyNetwork() {
+        if (!isConnectedToInternet()) {
+            netWorkErrorDialog();
+        }
+    }
 
-        });
+    public void netWorkErrorDialog() {
+        DialogUtil.noNetworkDialog(this);
     }
 
     public void showProgress(ProgressBar progressBar) {
@@ -197,7 +203,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public void navigationViewSetUp(NavigationView navigationView, Activity activity) {
         preferences = new SharedPreferencesUtil(activity.getApplicationContext());
-        if (getIntent().getExtras().getString("login_with").toString().equals("google")) {
+        if (preferences.getLoginWith().equals("google")) {
 
             CircleImageView profileImge = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
             TextView name = navigationView.getHeaderView(0).findViewById(R.id.profile_name);
@@ -258,6 +264,7 @@ public abstract class BaseActivity extends FragmentActivity {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.blank_fragment, fragment);
+        transaction.addToBackStack(object.getClass().getSimpleName());
         transaction.commit();
     }
 
@@ -311,5 +318,14 @@ public abstract class BaseActivity extends FragmentActivity {
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject here");
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
         startActivity(Intent.createChooser(shareIntent, "Shearing Option"));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount() == 0){
+            finish();
+        }else {
+            super.onBackPressed();
+        }
     }
 }

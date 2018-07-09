@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
+import com.aboutme.avenjr.aboutme.services.NetworkService;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -58,12 +59,12 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_layout)
     RelativeLayout body;
 
-    private static boolean alreadyLogin;
     public static GoogleSignInClient mGoogleApiClient;
     public static FirebaseAuth mAuth;
     Activity activity;
     Context context;
     SharedPreferencesUtil preference;
+    Intent service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +87,11 @@ public class MainActivity extends BaseActivity {
                 .build();
         mGoogleApiClient = GoogleSignIn.getClient(this, gso);
 
+        this.service = new Intent(context, NetworkService.class);
+        context.startService(service);
+
         if (getIntent().getBooleanExtra("EXIT", false)) {
-            finish();
-            alreadyLogin = true;
-        } else if (alreadyLogin) {
-            Intent intent = new Intent(getBaseContext(), MpinActivity.class);
-            startActivity(intent);
+            onBackPressed();
         }
 
         continueWithFacebook.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +192,7 @@ public class MainActivity extends BaseActivity {
                                 preference.setName(user.getDisplayName());
                                 preference.setEmail(user.getEmail());
                                 preference.setProfileImageUrl(user.getPhotoUrl().toString());
-                                intent.putExtra("login_with", "google");
+                                preference.putLoginWith("google");
                                 startActivity(intent);
                                 activity.finish();
                                 removeAnimation(continueWithFacebook);
@@ -206,8 +206,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        if (!isConnectedToInternet())
-            netWorkErrorDialog();
+            verifyNetwork();
             super.onResume();
     }
 
@@ -253,5 +252,11 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         hideProgress();
         activity.finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(service);
+        super.onDestroy();
     }
 }
