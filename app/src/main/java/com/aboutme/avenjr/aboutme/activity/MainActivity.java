@@ -126,7 +126,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void verifyAlreadyLogin() {
-        if(!preference.getEmail().equals("email")){
+        if(!preference.getLoginWith().equals("noLogin")){
             Intent intent = new Intent(activity,MpinActivity.class);
             activity.finish();
             startActivity(intent);

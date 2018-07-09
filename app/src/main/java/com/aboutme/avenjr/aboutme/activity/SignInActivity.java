@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.FontEditText;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
@@ -26,6 +27,7 @@ public class SignInActivity extends BaseActivity {
     TextView buttonForgotPassword;
     RelativeLayout layoutSignIn;
     NavigationHeader mBackHeader;
+    SharedPreferencesUtil preference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class SignInActivity extends BaseActivity {
         mBackHeader = findViewById(R.id.back_header);
         mBackHeader.setUp(this, "Login");
         mBackHeader.setView("Login", this);
+        preference = new SharedPreferencesUtil(getApplicationContext());
 
         // Creating toast messages.
         CharSequence failText = "Sorry please enter right information...";
@@ -57,6 +60,7 @@ public class SignInActivity extends BaseActivity {
                 } else {
                     DialogUtil.yesDialog(activity, "Login", "Login Successful", click -> {
                         startActivity(homeScreen);
+                        preference.putLoginWith("idPassword");
                     });
                 }
             }

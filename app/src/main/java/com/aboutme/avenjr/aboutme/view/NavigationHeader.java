@@ -118,10 +118,7 @@ public class NavigationHeader extends RelativeLayout {
             navigationHome.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("EXIT", true);
-                    context.startActivity(intent);
+                    activity.finishAffinity();
                 }
             });
         }

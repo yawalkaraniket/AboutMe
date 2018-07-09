@@ -1,6 +1,5 @@
 package com.aboutme.avenjr.aboutme.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -17,12 +16,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeScreen extends BaseActivity {
 
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+
+    @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
-    private NavigationView navigationView;
+
     private FirebaseDatabase mFirebase = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = mFirebase.getReference("UserInformation");
     private int backPressCount = 1;
@@ -31,12 +35,10 @@ public class HomeScreen extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
         setContentView(R.layout.activity_home_screen);
-        navigationView = findViewById(R.id.nav_view);
-        bottomNavigationView = findViewById(R.id.navigation);
+        ButterKnife.bind(this);
+
         this.preferences = new SharedPreferencesUtil(getApplicationContext());
-        String highScore = preferences.getName();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -70,14 +72,13 @@ public class HomeScreen extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if ((backPressCount == 2) && (getSupportFragmentManager().getBackStackEntryCount() == 0)) {
+        if ((backPressCount >= 2)) {
+            backPressCount = 0;
             DialogUtil.yesDialog(this, "Close Application", "you want to close application?", click -> {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("EXIT", true);
-                startActivity(intent);
+                this.finishAffinity();
             });
         } else {
+            bottomNavigationView.setSelectedItemId(R.id.home);
             backPressCount++;
         }
     }
