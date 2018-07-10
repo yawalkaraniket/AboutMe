@@ -29,7 +29,6 @@ public class HomeScreen extends BaseActivity {
 
     private FirebaseDatabase mFirebase = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = mFirebase.getReference("UserInformation");
-    private int backPressCount = 1;
     SharedPreferencesUtil preferences;
 
     @Override
@@ -72,14 +71,12 @@ public class HomeScreen extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if ((backPressCount >= 2)) {
-            backPressCount = 0;
+        if (bottomNavigationView.getSelectedItemId()==R.id.home) {
             DialogUtil.yesDialog(this, "Close Application", "you want to close application?", click -> {
                 this.finishAffinity();
             });
         } else {
             bottomNavigationView.setSelectedItemId(R.id.home);
-            backPressCount++;
         }
     }
 }

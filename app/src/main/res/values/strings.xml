@@ -40,4 +40,12 @@
     <string name="no_network">No Network</string>
     <string name="refresh">Refresh</string>
     <string name="loginFrom">noLogin</string>
+    <string name="reset_mpin">Reset Mpin</string>
+    <string name="blog_header_string">Blog</string>
+    <string name="documents_header_string">Documents</string>
+    <string name="events_header_string">Events</string>
+    <string name="feedback_header_string">Feedback</string>
+    <string name="home_header_string">Home</string>
+    <string name="profile_header_string">Profile</string>
+    <string name="work_header_string">Work</string>
 </resources>

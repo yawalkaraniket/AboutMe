@@ -30,7 +30,7 @@ public class DocumentsFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_documents, container, false);
           ButterKnife.bind(this,view);
         header.setUp(this.getActivity());
-        header.setView("Documents",this.getActivity());
+        header.setView(getString(R.string.documents_header_string),this.getActivity());
         return view;
     }
 

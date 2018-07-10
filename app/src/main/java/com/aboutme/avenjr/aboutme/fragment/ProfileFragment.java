@@ -43,7 +43,7 @@ public class ProfileFragment extends Fragment {
         data.add("second");
 
         header.setUp(this.getActivity());
-        header.setView("Profile",this.getActivity());
+        header.setView(getString(R.string.profile_header_string),this.getActivity());
         selectProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         ProfileAdapter adapter = new ProfileAdapter(data);

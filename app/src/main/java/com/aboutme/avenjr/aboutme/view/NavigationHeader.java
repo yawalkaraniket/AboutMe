@@ -113,7 +113,7 @@ public class NavigationHeader extends RelativeLayout {
         this.activity = activity;
         headerText.setText(screen);
         if (screen.equals("Login") || screen.equals("SignUp")) {
-            navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_arrow_back));
+            navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.arrow_left_back));
             headerRight.setVisibility(GONE);
         } else if (screen.equals("mPin")) {
             headerRight.setImageDrawable(getResources().getDrawable(R.drawable.baseline_more_vert_black_18));
@@ -126,7 +126,21 @@ public class NavigationHeader extends RelativeLayout {
                     activity.finishAffinity();
                 }
             });
+            headerRight.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showMpinPopup(headerRight);
+                }
+            });
         }
+    }
+
+    public void showMpinPopup(View v){
+        PopupMenu popup = new PopupMenu(activity, v);
+        setUpMenu(popup);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.mpin_popup_menu, popup.getMenu());
+        popup.show();
     }
 
     public void replaceFragment(Object object) {
@@ -173,6 +187,12 @@ public class NavigationHeader extends RelativeLayout {
                             });
                         });
                         break;
+                    case R.id.reset_mpin:
+                        DialogUtil.yesDialog(activity,"Success!","your mPin has been send to your registred email account...",
+                                click->{
+
+                                });
+                          break;
                     default:
                         return true;
                 }

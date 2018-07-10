@@ -29,7 +29,7 @@ public class WorkFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_work, container, false);
         ButterKnife.bind(this,view);
         header.setUp(this.getActivity());
-        header.setView("WORK", this.getActivity());
+        header.setView(getString(R.string.work_header_string), this.getActivity());
         return view;
     }
 

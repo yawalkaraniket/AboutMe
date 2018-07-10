@@ -11,9 +11,9 @@
         android:layout_width="70dp"
         android:layout_height="match_parent"
         android:clickable="true"
-        android:src="@drawable/ic_view_headline_black_24dp" />
+        android:src="@drawable/ic_view_headline_black_24dp"
+        android:contentDescription="navigation back header" />
     />
-
 
     <com.aboutme.avenjr.aboutme.view.FontEditText
         android:id="@+id/navigation_header_text"
@@ -22,11 +22,11 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:background="@color/white"
-        android:gravity="center"
-        android:textSize="20sp"
         android:clickable="false"
         android:focusable="false"
-        android:text="@string/submit_button"/>
+        android:gravity="center"
+        android:text="@string/submit_button"
+        android:textSize="20sp" />
 
     <ImageButton
         android:id="@+id/navigation_header_right"
