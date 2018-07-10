@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -21,6 +25,7 @@ import android.widget.TextView;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.activity.MainActivity;
+import com.aboutme.avenjr.aboutme.fragment.ProfileFragment;
 import com.aboutme.avenjr.aboutme.interfaces.NavigationHeaderInterface;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -106,7 +111,7 @@ public class NavigationHeader extends RelativeLayout {
 
     public void setView(final String screen, Activity activity) {
         this.activity = activity;
-        headerText.setText(screen.toUpperCase());
+        headerText.setText(screen);
         if (screen.equals("Login") || screen.equals("SignUp")) {
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_arrow_back));
             headerRight.setVisibility(GONE);
@@ -122,6 +127,16 @@ public class NavigationHeader extends RelativeLayout {
                 }
             });
         }
+    }
+
+    public void replaceFragment(Object object) {
+        Fragment fragment = (Fragment) object;
+        FragmentActivity activity = (FragmentActivity)this.activity;
+        FragmentManager manager = activity.getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.blank_fragment, fragment);
+        transaction.addToBackStack(object.getClass().getSimpleName());
+        transaction.commit();
     }
 
     public void openDrawer() {
@@ -143,9 +158,7 @@ public class NavigationHeader extends RelativeLayout {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.view_profile:
-                        DialogUtil.yesDialog(activity, "Success", "view profile...", click -> {
-
-                        });
+                            replaceFragment(new ProfileFragment());
                         break;
                     case R.id.logout:
                         DialogUtil.yesDialog(activity, "Success", "you are successfully logout from the application!...", click -> {

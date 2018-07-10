@@ -5,15 +5,17 @@
     android:paddingBottom="10dp">
 
     <ImageView
-                android:id="@+id/recycler_view_image"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@color/dark_black" />
+        android:id="@+id/recycler_view_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@color/dark_black" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/recycler_view_image"
-                android:id="@+id/recycler_view_text"/>
+    <TextView
+        android:id="@+id/recycler_view_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/recycler_view_image"
+        android:gravity="center"
+        android:textStyle="bold" />
 
 </RelativeLayout>

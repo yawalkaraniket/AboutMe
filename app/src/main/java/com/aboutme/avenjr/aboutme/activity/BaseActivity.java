@@ -34,6 +34,7 @@ import com.aboutme.avenjr.aboutme.Utils.ImageUtil;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.fragment.BlogFragment;
 import com.aboutme.avenjr.aboutme.fragment.DocumentsFragment;
+import com.aboutme.avenjr.aboutme.fragment.EventFragment;
 import com.aboutme.avenjr.aboutme.fragment.HomeFragment;
 import com.aboutme.avenjr.aboutme.fragment.WorkFragment;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
@@ -194,6 +195,11 @@ public abstract class BaseActivity extends FragmentActivity {
                         item.setChecked(true);
                         closeDrawer(activity);
                         replaceFragment(new DocumentsFragment());
+                        break;
+                    case R.id.events:
+                        item.setChecked(true);
+                        closeDrawer(activity);
+                        replaceFragment(new EventFragment());
                         break;
                 }
                 return false;

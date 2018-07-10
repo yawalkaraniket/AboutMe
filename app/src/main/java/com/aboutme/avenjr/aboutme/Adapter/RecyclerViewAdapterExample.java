@@ -26,9 +26,9 @@ import static com.aboutme.avenjr.aboutme.Utils.ImageUtil.setImage;
 public class RecyclerViewAdapterExample extends RecyclerView.Adapter<RecyclerViewAdapterExample.RecyclerViewHolderExample> {
 
     private RecyclerViewListener recyclerViewListener;
-    public static final String IMAGE_URL_BASE_PATH = "http://image.tmdb.org/t/p/w342";
+    private static final String IMAGE_URL_BASE_PATH = "http://image.tmdb.org/t/p/w342";
     private List<Movie> movies;
-    Context mContext;
+    private Context mContext;
 
     public static final String BASE_URL = "http://api.themoviedb.org/3/";
     private ArrayList<String> data;
@@ -65,12 +65,12 @@ public class RecyclerViewAdapterExample extends RecyclerView.Adapter<RecyclerVie
         return data.size();
     }
 
-    public class RecyclerViewHolderExample extends ViewHolder {
+    class RecyclerViewHolderExample extends ViewHolder {
         ImageView mImageView;
         TextView mTextView;
         int position = 0;
 
-        public RecyclerViewHolderExample(View itemView) {
+        RecyclerViewHolderExample(View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.recycler_view_image);
             mTextView = itemView.findViewById(R.id.recycler_view_text);
