@@ -61,8 +61,8 @@
         <activity
             android:name=".activity.ResetPassword"
             android:label="@string/title_activity_reset_password"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.ProfileActivity"></activity>
     </application>
 
 </manifest>

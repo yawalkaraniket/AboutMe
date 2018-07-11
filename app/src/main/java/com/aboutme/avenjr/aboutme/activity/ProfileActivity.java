@@ -1,12 +1,9 @@
-package com.aboutme.avenjr.aboutme.fragment;
+package com.aboutme.avenjr.aboutme.activity;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.aboutme.avenjr.aboutme.Adapter.ProfileAdapter;
@@ -19,7 +16,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProfileFragment extends Fragment {
+public class ProfileActivity extends AppCompatActivity {
+
 
     @BindView(R.id.navigation_header)
     NavigationHeader header;
@@ -33,27 +31,25 @@ public class ProfileFragment extends Fragment {
     ArrayList<String> data = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        ButterKnife.bind(this,view);
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+        ButterKnife.bind(this);
 
         data.add("first");
         data.add("second");
 
-        header.setUp(this.getActivity());
-        header.setView(getString(R.string.profile_header_string),this.getActivity());
-        selectProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        header.setUp(this);
+        header.setView(getString(R.string.profile_header_string), this);
+        selectProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ProfileAdapter adapter = new ProfileAdapter(data);
         selectProfileRecyclerView.setAdapter(adapter);
-
-        return view;
     }
 
     @OnClick(R.id.profile_parent_layout)
-    public void click(){
+    public void click() {
         //  do nothing
     }
 }

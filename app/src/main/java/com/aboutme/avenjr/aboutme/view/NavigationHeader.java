@@ -3,7 +3,6 @@ package com.aboutme.avenjr.aboutme.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -25,15 +24,13 @@ import android.widget.TextView;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.activity.MainActivity;
-import com.aboutme.avenjr.aboutme.fragment.ProfileFragment;
-import com.aboutme.avenjr.aboutme.interfaces.NavigationHeaderInterface;
+import com.aboutme.avenjr.aboutme.activity.ProfileActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.aboutme.avenjr.aboutme.activity.MainActivity.mAuth;
 import static com.aboutme.avenjr.aboutme.activity.MainActivity.mGoogleApiClient;
 
 /**
@@ -172,7 +169,8 @@ public class NavigationHeader extends RelativeLayout {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.view_profile:
-                            replaceFragment(new ProfileFragment());
+                            Intent intent = new Intent(activity, ProfileActivity.class);
+                            context.startActivity(intent);
                         break;
                     case R.id.logout:
                         DialogUtil.yesDialog(activity, "Success", "you are successfully logout from the application!...", click -> {

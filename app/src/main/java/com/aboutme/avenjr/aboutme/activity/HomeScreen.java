@@ -50,8 +50,6 @@ public class HomeScreen extends BaseActivity {
                         userInfo.add(programSnapshot);
                     }
                 }
-                Log.d("Token", token.get(0).getKey());
-                Log.d("UserInformation", userInfo.toString());
             }
 
             @Override
