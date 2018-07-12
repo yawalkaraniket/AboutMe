@@ -48,4 +48,5 @@
     <string name="home_header_string">Home</string>
     <string name="profile_header_string">Profile</string>
     <string name="work_header_string">Work</string>
+    <string name="profile_section">Add Profile Section</string>
 </resources>

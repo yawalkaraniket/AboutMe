@@ -25,6 +25,7 @@ import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.activity.MainActivity;
 import com.aboutme.avenjr.aboutme.activity.ProfileActivity;
+import com.aboutme.avenjr.aboutme.fragment.profile.ProfileSections;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -109,9 +110,16 @@ public class NavigationHeader extends RelativeLayout {
     public void setView(final String screen, Activity activity) {
         this.activity = activity;
         headerText.setText(screen);
-        if (screen.equals("Login") || screen.equals("SignUp")) {
+        if (screen.equals("Login") || screen.equals("SignUp") ||
+                screen.equals(getResources().getString(R.string.profile_section))) {
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.arrow_left_back));
             headerRight.setVisibility(GONE);
+            navigationHome.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.onBackPressed();
+                }
+            });
         } else if (screen.equals("mPin")) {
             headerRight.setImageDrawable(getResources().getDrawable(R.drawable.baseline_more_vert_black_18));
             separator.setVisibility(GONE);
@@ -129,10 +137,25 @@ public class NavigationHeader extends RelativeLayout {
                     showMpinPopup(headerRight);
                 }
             });
+        } else if (screen.equals(activity.getString(R.string.profile_header_string))) {
+            navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.arrow_left_back));
+            headerRight.setImageDrawable(getResources().getDrawable(R.drawable.add_circle_button));
+            navigationHome.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.onBackPressed();
+                }
+            });
+            headerRight.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        replaceFragment(new ProfileSections());
+                }
+            });
         }
     }
 
-    public void showMpinPopup(View v){
+    public void showMpinPopup(View v) {
         PopupMenu popup = new PopupMenu(activity, v);
         setUpMenu(popup);
         MenuInflater inflater = popup.getMenuInflater();
@@ -142,10 +165,10 @@ public class NavigationHeader extends RelativeLayout {
 
     public void replaceFragment(Object object) {
         Fragment fragment = (Fragment) object;
-        FragmentActivity activity = (FragmentActivity)this.activity;
+        FragmentActivity activity = (FragmentActivity) this.activity;
         FragmentManager manager = activity.getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.blank_fragment, fragment);
+        transaction.replace(R.id.profile_blank_fragment, fragment);
         transaction.addToBackStack(object.getClass().getSimpleName());
         transaction.commit();
     }
@@ -169,8 +192,8 @@ public class NavigationHeader extends RelativeLayout {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.view_profile:
-                            Intent intent = new Intent(activity, ProfileActivity.class);
-                            context.startActivity(intent);
+                        Intent intent = new Intent(activity, ProfileActivity.class);
+                        context.startActivity(intent);
                         break;
                     case R.id.logout:
                         DialogUtil.yesDialog(activity, "Success", "you are successfully logout from the application!...", click -> {
@@ -178,19 +201,19 @@ public class NavigationHeader extends RelativeLayout {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Intent intent = new Intent(activity, MainActivity.class);
-                                     context.startActivity(intent);
-                                     activity.finish();
-                                     preferences.clearPreferences();
+                                    context.startActivity(intent);
+                                    activity.finish();
+                                    preferences.clearPreferences();
                                 }
                             });
                         });
                         break;
                     case R.id.reset_mpin:
-                        DialogUtil.yesDialog(activity,"Success!","your mPin has been send to your registred email account...",
-                                click->{
+                        DialogUtil.yesDialog(activity, "Success!", "your mPin has been send to your registred email account...",
+                                click -> {
 
                                 });
-                          break;
+                        break;
                     default:
                         return true;
                 }

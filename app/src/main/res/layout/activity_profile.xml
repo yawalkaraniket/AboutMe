@@ -4,43 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ProfileActivity">
-    <RelativeLayout
-        android:id="@+id/profile_parent_layout"
+
+    <fragment
+        android:id="@+id/profile_blank_fragment"
+        class="com.aboutme.avenjr.aboutme.fragment.profile.ProfileHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"></fragment>
 
-        <com.aboutme.avenjr.aboutme.view.NavigationHeader
-            android:id="@+id/navigation_header"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-        </com.aboutme.avenjr.aboutme.view.NavigationHeader>
-
-        <RelativeLayout
-            android:id="@+id/layout_parent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/navigation_header"
-            android:background="@color/white"
-            android:clickable="false">
-
-            <RelativeLayout
-                android:id="@+id/profile_header"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@color/black_transparent">
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/profile_header">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/select_profile_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </android.support.v7.widget.RecyclerView>
-            </RelativeLayout>
-        </RelativeLayout>
-    </RelativeLayout>
 </RelativeLayout>

@@ -11,7 +11,7 @@
         android:layout_width="70dp"
         android:layout_height="match_parent"
         android:clickable="true"
-        android:src="@drawable/ic_view_headline_black_24dp"
+        android:src="@drawable/menu_icon"
         android:contentDescription="navigation back header" />
     />
 
