@@ -3,8 +3,9 @@ package com.aboutme.avenjr.aboutme.model;
 import com.aboutme.avenjr.aboutme.R;
 
 public enum ProfileSelectionPagerModel {
-    RED(R.color.blue, R.layout.EducationalPager),
-    BLUE(R.color.pink, R.layout.HobbyPager);
+    educational(R.string.education, R.layout.educational_pager),
+    hobbies(R.string.hobby, R.layout.hobby_pager),
+    otherActivities(R.string.other_activities, R.layout.other_activities);
 
     private int mTitleResId;
     private int mLayoutResId;

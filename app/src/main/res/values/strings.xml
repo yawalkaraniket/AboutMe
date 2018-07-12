@@ -49,4 +49,7 @@
     <string name="profile_header_string">Profile</string>
     <string name="work_header_string">Work</string>
     <string name="profile_section">Add Profile Section</string>
+    <string name="education">Educational</string>
+    <string name="hobby">Hobbies</string>
+    <string name="other_activities">Other Acctivities</string>
 </resources>
