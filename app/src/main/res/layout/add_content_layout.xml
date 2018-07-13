@@ -109,7 +109,7 @@
                     android:layout_below="@+id/id_heading"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/input_textview_layout"
+                    android:background="@drawable/input_text_view_layout"
                     android:imeOptions="actionDone"
                     android:maxLines="1"
                     android:minLines="1"
@@ -143,7 +143,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/input_textview_layout"
+                    android:background="@drawable/input_text_view_layout"
                     android:inputType="textNoSuggestions"
                     android:paddingLeft="10dp"
                     android:singleLine="true" />

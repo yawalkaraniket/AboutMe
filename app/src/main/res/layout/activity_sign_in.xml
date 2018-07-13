@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:design="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_signin"
+    android:id="@+id/layout_sign_in"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.aboutme.avenjr.aboutme.activity.SignInActivity">
@@ -28,97 +28,96 @@
             android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_below="@+id/have_an_account_button"
             android:background="@color/green"
             android:text="@string/submit_button"
             android:textColor="@color/white" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/input_credentials"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/navigation_header"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/input_background"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp">
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/grey"
+        android:padding="20dp">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/input_credentials"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/registration_heading"
-            android:layout_marginBottom="5dp">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/id_heading"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:clickable="false"
-                android:fontFamily="sans-serif"
-                android:padding="4dp"
-                android:text="@string/request_user_id"
-                android:textColor="@color/dark_black" />
+                android:layout_marginBottom="5dp">
 
-            <com.aboutme.avenjr.aboutme.view.FontEditText
-                android:id="@+id/input_id"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@+id/id_heading"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/input_textview_layout"
-                android:imeOptions="actionDone"
-                android:maxLines="1"
-                android:minLines="1"
-                android:padding="5dp"
-                android:singleLine="true" />
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/id_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:fontFamily="sans-serif"
+                    android:padding="4dp"
+                    android:text="@string/request_user_id"
+                    android:textColor="@color/dark_black"
+                    android:textStyle="bold" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/registration_heading"
-            android:layout_marginBottom="5dp">
+                <com.aboutme.avenjr.aboutme.view.FontEditText
+                    android:id="@+id/input_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_below="@+id/id_heading"
+                    android:background="@drawable/input_text_view_layout"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:padding="5dp"
+                    android:singleLine="true" />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/password_heading"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:clickable="false"
-                android:fontFamily="sans-serif"
-                android:padding="4dp"
-                android:text="@string/request_user_password"
-                android:textColor="@color/dark_black" />
+                android:layout_marginBottom="5dp">
 
-            <com.aboutme.avenjr.aboutme.view.FontEditText
-                android:id="@+id/request_user_password"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@+id/password_heading"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/input_textview_layout"
-                android:imeOptions="actionDone"
-                android:maxLines="1"
-                android:minLines="1"
-                android:padding="5dp"
-                android:singleLine="true" />
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/password_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:fontFamily="sans-serif"
+                    android:padding="4dp"
+                    android:text="@string/request_user_password"
+                    android:textColor="@color/dark_black"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="@string/forgot_password"
-            android:textColor="@color/blue"
-            android:textSize="17dp"
-            android:textStyle="bold" />
-    </LinearLayout>
+                <com.aboutme.avenjr.aboutme.view.FontEditText
+                    android:id="@+id/request_user_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_below="@+id/password_heading"
+                    android:background="@drawable/input_text_view_layout"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:padding="5dp"
+                    android:singleLine="true" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:text="@string/forgot_password"
+                android:textColor="@color/blue"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

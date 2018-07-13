@@ -29,7 +29,8 @@
         </activity>
         <activity android:name=".activity.SignUpActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    android:windowSoftInputMode="stateVisible|adjustResize" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

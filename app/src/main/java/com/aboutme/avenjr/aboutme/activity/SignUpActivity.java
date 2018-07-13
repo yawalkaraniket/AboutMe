@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
+import com.aboutme.avenjr.aboutme.view.FontEditText;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,18 +28,38 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SignUpActivity extends BaseActivity {
 
-    private RelativeLayout signUpView;
-    private EditText emailId, password, passwordAgain, name, lastName, mobileNo;
-    private Button signUp;
-    private String userId, userPassword, userPasswordAgain, userName, userLastName, userMobileNo;
+    @BindView(R.id.request_user_id)
+    FontEditText emailId;
+
+    @BindView(R.id.input_password)
+    FontEditText password;
+
+    @BindView(R.id.request_user_repassword)
+    FontEditText passwordAgain;
+
+    @BindView(R.id.request_user_name)
+    FontEditText name;
+
+    @BindView(R.id.request_user_mobile_number)
+    FontEditText mobileNo;
+
+    @BindView(R.id.button_sign_up)
+    Button signUp;
+
+    @BindView(R.id.navigation_header)
+    NavigationHeader header;
+
+    private String userId, userPassword, userPasswordAgain, userName, userMobileNo;
     DatabaseReference mDatabaseReference;
     Context mContext;
     CharSequence success, fail;
     FirebaseAuth mFirebaseAuth;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mOnVerificationStateChangedCallbacks;
-    NavigationHeader backHeader;
     Activity activity = this;
     public static boolean setMpin;
 
@@ -46,25 +67,17 @@ public class SignUpActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        ButterKnife.bind(this);
 
         //  Adding a views
-        signUpView = findViewById(R.id.signup_view);
-        emailId = findViewById(R.id.request_user_id);
-        password = findViewById(R.id.request_user_password);
-        passwordAgain = findViewById(R.id.request_user_repassword);
-        name = findViewById(R.id.request_user_name);
-        lastName = findViewById(R.id.request_user_lastName);
-        signUp = findViewById(R.id.button_sign_up);
-        mobileNo = findViewById(R.id.request_user_mobile_number);
-        backHeader = findViewById(R.id.back_header);
 
         mDatabaseReference = FireBaseUtil.getFireBaseReference("UserInformation");
         mContext = getApplicationContext();
         success = "success";
         fail = "Please enter correct credentials....";
         mFirebaseAuth = FirebaseAuth.getInstance();
-        backHeader.setUp(this, "SignUp");
-        backHeader.setView("SignUp", this);
+        header.setUp(this, "SignUp");
+        header.setView("SignUp", this);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,11 +86,10 @@ public class SignUpActivity extends BaseActivity {
                 userPassword = password.getText().toString().trim();
                 userPasswordAgain = passwordAgain.getText().toString().trim();
                 userName = name.getText().toString().trim();
-                userLastName = lastName.getText().toString().trim();
                 userMobileNo = mobileNo.getText().toString().trim();
 
-                if (verifyRenterPassword(userPassword, userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userLastName.isEmpty() && !userMobileNo.isEmpty()) {
-                    UserInformation userInformation = new UserInformation(userId, userPassword, userName, userLastName, userMobileNo);
+                if (verifyRenterPassword(userPassword, userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userMobileNo.isEmpty()) {
+                    UserInformation userInformation = new UserInformation(userId, userPassword, userName, userMobileNo);
 
                     mOnVerificationStateChangedCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                         @Override

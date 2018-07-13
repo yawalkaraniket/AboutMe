@@ -1,15 +1,10 @@
 package com.aboutme.avenjr.aboutme.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,16 +13,11 @@ import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.FontEditText;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
-import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
@@ -52,7 +42,7 @@ public class SignInActivity extends BaseActivity {
         userPassword = findViewById(R.id.request_user_password);
         buttonSubmit = findViewById(R.id.submit_button);
         buttonForgotPassword = findViewById(R.id.forgot_password);
-        layoutSignIn = findViewById(R.id.layout_signin);
+        layoutSignIn = findViewById(R.id.layout_sign_in);
         header = findViewById(R.id.navigation_header);
         header.setView("Login", this);
         preference = new SharedPreferencesUtil(getApplicationContext());

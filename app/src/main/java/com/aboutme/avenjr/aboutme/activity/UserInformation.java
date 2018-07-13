@@ -55,11 +55,10 @@ public class UserInformation {
         return password;
     }
 
-    UserInformation(String email, String password, String name, String lastName, String mobileNo) {
+    UserInformation(String email, String password, String name,String mobileNo) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.lastName = lastName;
         this.mobileNo = mobileNo;
     }
 }
