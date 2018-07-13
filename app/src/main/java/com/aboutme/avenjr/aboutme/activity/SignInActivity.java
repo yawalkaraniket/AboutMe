@@ -38,7 +38,7 @@ public class SignInActivity extends BaseActivity {
     Button buttonSubmit;
     TextView buttonForgotPassword;
     RelativeLayout layoutSignIn;
-    NavigationHeader mBackHeader;
+    NavigationHeader header;
     SharedPreferencesUtil preference;
     String token;
     HashMap<String, String> userInfo = new HashMap<>();
@@ -53,14 +53,12 @@ public class SignInActivity extends BaseActivity {
         buttonSubmit = findViewById(R.id.submit_button);
         buttonForgotPassword = findViewById(R.id.forgot_password);
         layoutSignIn = findViewById(R.id.layout_signin);
-        mBackHeader = findViewById(R.id.back_header);
-        mBackHeader.setUp(this, "Login");
-        mBackHeader.setView("Login", this);
+        header = findViewById(R.id.navigation_header);
+        header.setView("Login", this);
         preference = new SharedPreferencesUtil(getApplicationContext());
 
         // Creating toast messages.
         CharSequence failText = "Sorry please enter right information...";
-        CharSequence sendEmail = "Your password has been send on your registered mail id...";
         final Activity activity = this;
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +70,7 @@ public class SignInActivity extends BaseActivity {
                 if ((id.isEmpty()) && (password.isEmpty())) {
                     displayToast(getApplicationContext(), failText);
                 } else {
-                    getFireBaseReference("UserInformation").orderByChild("name").equalTo(id).addValueEventListener(new ValueEventListener() {
+                    getFireBaseReference("UserInformation").orderByChild("email").equalTo(id).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
@@ -86,12 +84,12 @@ public class SignInActivity extends BaseActivity {
                                     DialogUtil.yesDialog(activity, "Login", "Login Successful", click -> {
                                         startActivity(homeScreen);
                                         preference.putLoginWith("email");
-                                        preference.setName(userInfo.get("name"));
+                                        preference.setName(userInfo.get("name")+" "+userInfo.get("lastName"));
                                         preference.setEmail(userInfo.get("email"));
                                         preference.setProfileImageUrl("null");
                                     });
                                 } else {
-                                    displayToast(getBaseContext(), "Please check your password..");
+                                    displayToast(getBaseContext(), "please check your password..");
                                 }
                             } else {
                                 displayToast(getBaseContext(), "please check your id...");
@@ -119,7 +117,7 @@ public class SignInActivity extends BaseActivity {
     protected void onResume() {
         verifyNetwork();
         super.onResume();
-        mBackHeader.setView("Login", this);
-        mBackHeader.setUp(this, "Login");
+        header.setView("Login", this);
+        header.setUp(this, "Login");
     }
 }

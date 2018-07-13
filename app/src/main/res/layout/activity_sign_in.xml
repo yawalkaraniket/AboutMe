@@ -6,17 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.aboutme.avenjr.aboutme.activity.SignInActivity">
-    <!--</com.aboutme.avenjr.aboutme.view.BackHeader>-->
+
     <com.aboutme.avenjr.aboutme.view.NavigationHeader
-        android:id="@+id/back_header"
+        android:id="@+id/navigation_header"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-    </com.aboutme.avenjr.aboutme.view.NavigationHeader>
+        android:layout_height="50dp"></com.aboutme.avenjr.aboutme.view.NavigationHeader>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/back_header"
+        android:layout_below="@+id/navigation_header"
         android:background="@drawable/sign_in_new" />
 
     <RelativeLayout
@@ -39,7 +38,7 @@
         android:id="@+id/input_credentials"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/back_header"
+        android:layout_below="@id/navigation_header"
         android:layout_marginTop="30dp"
         android:background="@drawable/input_background"
         android:gravity="center_horizontal"
