@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,9 +27,6 @@ public class HomeScreen extends BaseActivity {
 
     @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
-
-    private FirebaseDatabase mFirebase = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef = mFirebase.getReference("UserInformation");
     SharedPreferencesUtil preferences;
 
     @Override
@@ -38,25 +36,6 @@ public class HomeScreen extends BaseActivity {
         ButterKnife.bind(this);
 
         this.preferences = new SharedPreferencesUtil(getApplicationContext());
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<DataSnapshot> userInfo = new ArrayList<>();
-                ArrayList<DataSnapshot> token = new ArrayList<>();
-
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    token.add(userSnapshot);
-                    for (DataSnapshot programSnapshot : userSnapshot.getChildren()) {
-                        userInfo.add(programSnapshot);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         bottomNavigationSetUp(bottomNavigationView, this);
         navigationViewSetUp(navigationView, this);
@@ -69,7 +48,7 @@ public class HomeScreen extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (bottomNavigationView.getSelectedItemId()==R.id.home) {
+        if (bottomNavigationView.getSelectedItemId() == R.id.home) {
             DialogUtil.yesDialog(this, "Close Application", "you want to close application?", click -> {
                 this.finishAffinity();
             });

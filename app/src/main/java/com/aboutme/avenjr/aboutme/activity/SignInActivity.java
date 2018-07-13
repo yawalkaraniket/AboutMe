@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +18,16 @@ import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.FontEditText;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
+import com.firebase.ui.auth.data.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
@@ -28,6 +40,8 @@ public class SignInActivity extends BaseActivity {
     RelativeLayout layoutSignIn;
     NavigationHeader mBackHeader;
     SharedPreferencesUtil preference;
+    String token;
+    HashMap<String, String> userInfo = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +72,36 @@ public class SignInActivity extends BaseActivity {
                 if ((id.isEmpty()) && (password.isEmpty())) {
                     displayToast(getApplicationContext(), failText);
                 } else {
-                    DialogUtil.yesDialog(activity, "Login", "Login Successful", click -> {
-                        startActivity(homeScreen);
-                        preference.putLoginWith("idPassword");
+                    getFireBaseReference("UserInformation").orderByChild("name").equalTo(id).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                    token = userSnapshot.getKey().toString();
+                                    for (DataSnapshot programSnapshot : userSnapshot.getChildren()) {
+                                        userInfo.put(programSnapshot.getKey().toString(), programSnapshot.getValue().toString());
+                                    }
+                                }
+                                if (userInfo.get("password").equals(password)) {
+                                    DialogUtil.yesDialog(activity, "Login", "Login Successful", click -> {
+                                        startActivity(homeScreen);
+                                        preference.putLoginWith("email");
+                                        preference.setName(userInfo.get("name"));
+                                        preference.setEmail(userInfo.get("email"));
+                                        preference.setProfileImageUrl("null");
+                                    });
+                                } else {
+                                    displayToast(getBaseContext(), "Please check your password..");
+                                }
+                            } else {
+                                displayToast(getBaseContext(), "please check your id...");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
                     });
                 }
             }
@@ -68,7 +109,7 @@ public class SignInActivity extends BaseActivity {
         buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity,ResetPassword.class);
+                Intent intent = new Intent(activity, ResetPassword.class);
                 startActivity(intent);
             }
         });
