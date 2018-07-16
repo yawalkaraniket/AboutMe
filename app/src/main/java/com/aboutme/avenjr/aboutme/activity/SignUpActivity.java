@@ -5,12 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
@@ -59,7 +55,6 @@ public class SignUpActivity extends BaseActivity {
     Context mContext;
     CharSequence success, fail;
     FirebaseAuth mFirebaseAuth;
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks mOnVerificationStateChangedCallbacks;
     Activity activity = this;
     public static boolean setMpin;
 
@@ -91,26 +86,9 @@ public class SignUpActivity extends BaseActivity {
                 if (verifyRenterPassword(userPassword, userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userMobileNo.isEmpty()) {
                     UserInformation userInformation = new UserInformation(userId, userPassword, userName, userMobileNo);
 
-                    mOnVerificationStateChangedCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                        @Override
-                        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-
-                        }
-
-                        @Override
-                        public void onVerificationFailed(FirebaseException e) {
-
-                        }
-
-                        @Override
-                        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                            send_code();
-                            super.onCodeSent(s, forceResendingToken);
-                        }
-                    };
                     FireBaseUtil.saveInformation(userInformation, mDatabaseReference);
-                    DialogUtil.yesDialog(activity, "Success!", "you are registered please \n conform your pin..", click -> {
-                        Intent intent = new Intent(getBaseContext(), MpinActivity.class);
+                    DialogUtil.yesDialog(activity, "SignUp", "you are registered please \n conform your mobile number..", click -> {
+                        Intent intent = new Intent(getBaseContext(), MobileAuthenticationActivity.class);
                         startActivity(intent);
                         setMpin = true;
                     });
@@ -119,23 +97,6 @@ public class SignUpActivity extends BaseActivity {
                 }
             }
         });
-    }
-
-    public void send_code() {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(userMobileNo, 60, TimeUnit.SECONDS, this,
-                mOnVerificationStateChangedCallbacks);
-    }
-
-    public void sign_in_withMobileNo(PhoneAuthCredential credential) {
-        mFirebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            displayToast(getApplicationContext(), success);
-                        }
-                    }
-                });
     }
 
     public boolean verifyRenterPassword(String userPassword, String userPasswordAgain) {

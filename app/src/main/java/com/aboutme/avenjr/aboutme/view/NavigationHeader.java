@@ -111,7 +111,7 @@ public class NavigationHeader extends RelativeLayout {
         this.activity = activity;
         headerText.setText(screen);
         if (screen.equals("Login") || screen.equals("SignUp") ||
-                screen.equals(getResources().getString(R.string.profile_section))) {
+                screen.equals(getResources().getString(R.string.profile_section)) || screen.equals(getResources().getString(R.string.mobile_verification))){
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.arrow_left_back));
             headerRight.setVisibility(GONE);
             navigationHome.setOnClickListener(new OnClickListener() {

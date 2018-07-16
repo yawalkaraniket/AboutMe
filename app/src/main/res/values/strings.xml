@@ -52,4 +52,13 @@
     <string name="education">Educational</string>
     <string name="hobby">Hobbies</string>
     <string name="other_activities">Other Acctivities</string>
+    <string name="mobile_verification">MobileVerification</string>
+    <string name="resend_code">Resend code</string>
+    <string name="verify_code">verify_code</string>
+    <string name="request_verification_code">please enter verification code</string>
+    <string name="enter_correct_otp">please enter correct verification code...</string>
+    <string name="mobile_number_registration_successful">your mobile number is successfuly registered...</string>
+    <string name="mobile_verification_failed">mobile verification failed</string>
+    <string name="success_message">Success</string>
+    <string name="confirm_message">Confirm!</string>
 </resources>
