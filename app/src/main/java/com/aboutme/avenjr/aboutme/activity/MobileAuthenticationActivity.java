@@ -1,5 +1,6 @@
 package com.aboutme.avenjr.aboutme.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.FontEditText;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
@@ -38,6 +40,9 @@ public class MobileAuthenticationActivity extends BaseActivity {
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mOnVerificationStateChangedCallbacks;
     String mobileNumber, inputVerificationCode, authCredentials;
+    UserInformation userInfo = new UserInformation();
+    Activity activity = this;
+    SharedPreferencesUtil preferences = new SharedPreferencesUtil(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,13 @@ public class MobileAuthenticationActivity extends BaseActivity {
                 inputVerificationCode = verificationCode.getText().toString();
                 if (inputVerificationCode.equals(phoneAuthCredential.getSmsCode())) {
                     displayToast(getApplicationContext(), getString(R.string.success_message));
+                    DialogUtil.yesDialog(activity, getString(R.string.confirm_message), getString(R.string.mobile_number_registration_successful), click -> {
+                        Intent intent = new Intent(getApplicationContext(), MpinActivity.class);
+                        startActivity(intent);
+                        preferences.putLoginWith("SignUp");
+                        preferences.setName(userInfo.getName());
+                        preferences.setEmail(userInfo.getEmail());
+                    });
                 }
                 hideProgress();
             }
@@ -79,7 +91,7 @@ public class MobileAuthenticationActivity extends BaseActivity {
     }
 
     public void send_code() {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(mobileNumber, 60, TimeUnit.SECONDS, this,
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(userInfo.getCountryCode() + mobileNumber, 60, TimeUnit.SECONDS, this,
                 mOnVerificationStateChangedCallbacks);
     }
 

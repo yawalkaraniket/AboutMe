@@ -4,25 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.FontEditText;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
-
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,8 +35,8 @@ public class SignUpActivity extends BaseActivity {
     @BindView(R.id.request_user_name)
     FontEditText name;
 
-    @BindView(R.id.request_user_mobile_number)
-    FontEditText mobileNo;
+    @BindView(R.id.select_country)
+    Spinner selectCountry;
 
     @BindView(R.id.button_sign_up)
     Button signUp;
@@ -50,13 +44,14 @@ public class SignUpActivity extends BaseActivity {
     @BindView(R.id.navigation_header)
     NavigationHeader header;
 
-    private String userId, userPassword, userPasswordAgain, userName, userMobileNo;
+    private String userId, userPassword, userPasswordAgain, userName;
     DatabaseReference mDatabaseReference;
     Context mContext;
     CharSequence success, fail;
     FirebaseAuth mFirebaseAuth;
     Activity activity = this;
     public static boolean setMpin;
+    UserInformation mUserInformation = new UserInformation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +68,7 @@ public class SignUpActivity extends BaseActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         header.setUp(this, "SignUp");
         header.setView("SignUp", this);
+        selectSpinnerSetUp();
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,10 +77,9 @@ public class SignUpActivity extends BaseActivity {
                 userPassword = password.getText().toString().trim();
                 userPasswordAgain = passwordAgain.getText().toString().trim();
                 userName = name.getText().toString().trim();
-                userMobileNo = mobileNo.getText().toString().trim();
 
-                if (verifyRenterPassword(userPassword, userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty() && !userMobileNo.isEmpty()) {
-                    UserInformation userInformation = new UserInformation(userId, userPassword, userName, userMobileNo);
+                if (verifyRenterPassword(userPassword, userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty()) {
+                    UserInformation userInformation = new UserInformation(userId, userPassword, userName);
 
                     FireBaseUtil.saveInformation(userInformation, mDatabaseReference);
                     DialogUtil.yesDialog(activity, "SignUp", "you are registered please \n conform your mobile number..", click -> {
@@ -97,13 +92,32 @@ public class SignUpActivity extends BaseActivity {
                 }
             }
         });
+
+        selectCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                displayToast(getApplicationContext(),String.valueOf(position));
+                switch (position){
+                    case 0:
+                        mUserInformation.setCountry("India");
+                        mUserInformation.setCountryCode("+91");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void selectSpinnerSetUp() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.select_country,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectCountry.setAdapter(adapter);
     }
 
     public boolean verifyRenterPassword(String userPassword, String userPasswordAgain) {
-        if (userPassword.equals(userPasswordAgain) && !userPassword.isEmpty() && !userPasswordAgain.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return userPassword.equals(userPasswordAgain) && !userPassword.isEmpty() && !userPasswordAgain.isEmpty();
     }
 }

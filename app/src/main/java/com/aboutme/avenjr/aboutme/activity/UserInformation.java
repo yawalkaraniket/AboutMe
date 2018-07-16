@@ -6,11 +6,33 @@ package com.aboutme.avenjr.aboutme.activity;
 
 public class UserInformation {
 
-    private String name;
-    private String lastName;
-    private String email;
-    private String password;
-    private String mobileNo;
+    public static String name;
+    public static String email;
+    public static String password;
+    public static String mobileNo;
+    public static String country;
+    public static String countryCode;
+
+    public UserInformation() {
+
+    }
+
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        UserInformation.country = country;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        UserInformation.countryCode = countryCode;
+    }
 
     public String getMobileNo() {
         return mobileNo;
@@ -39,14 +61,6 @@ public class UserInformation {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -55,10 +69,9 @@ public class UserInformation {
         return password;
     }
 
-    UserInformation(String email, String password, String name,String mobileNo) {
+    UserInformation(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.mobileNo = mobileNo;
     }
 }

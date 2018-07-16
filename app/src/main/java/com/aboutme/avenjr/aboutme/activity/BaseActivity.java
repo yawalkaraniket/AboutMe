@@ -209,7 +209,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public void navigationViewSetUp(NavigationView navigationView, Activity activity) {
         preferences = new SharedPreferencesUtil(activity.getApplicationContext());
-        if (preferences.getLoginWith().equals("google") || preferences.getLoginWith().equals("email")) {
+        if (preferences.getLoginWith().equals("google") || preferences.getLoginWith().equals("email")|| preferences.getLoginWith().equals("SignUp")) {
 
             CircleImageView profileImge = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
             TextView name = navigationView.getHeaderView(0).findViewById(R.id.profile_name);
