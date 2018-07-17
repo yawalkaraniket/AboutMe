@@ -1,7 +1,5 @@
 package com.aboutme.avenjr.aboutme.fragment.profile;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.aboutme.avenjr.aboutme.Adapter.ProfileAdapter;
 import com.aboutme.avenjr.aboutme.R;
@@ -19,7 +16,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ProfileHome extends Fragment {
 
@@ -30,7 +26,6 @@ public class ProfileHome extends Fragment {
     RecyclerView selectProfileRecyclerView;
 
     ArrayList<String> data = new ArrayList<>();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

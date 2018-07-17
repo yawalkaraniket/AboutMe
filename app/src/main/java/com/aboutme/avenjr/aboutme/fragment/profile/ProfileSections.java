@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 
 import com.aboutme.avenjr.aboutme.Adapter.Profile.ProfileSelectorPagerAdapter;
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.fragment.BaseFragment;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProfileSections extends Fragment {
+public class ProfileSections extends BaseFragment {
 
     @BindView(R.id.navigation_header)
     NavigationHeader header;
@@ -30,7 +31,7 @@ public class ProfileSections extends Fragment {
                 container, false);
         ButterKnife.bind(this,view);
 
-        pager.setAdapter(new ProfileSelectorPagerAdapter(this.getContext()));
+        pager.setAdapter(new ProfileSelectorPagerAdapter(getChildFragmentManager(),getContext()));
         header.setView(getString(R.string.profile_section),this.getActivity());
 
         return view;

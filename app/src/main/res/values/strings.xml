@@ -51,7 +51,7 @@
     <string name="profile_section">Add Profile Section</string>
     <string name="education">Educational</string>
     <string name="hobby">Hobbies</string>
-    <string name="other_activities">Other Acctivities</string>
+    <string name="other_activities">Other Activities</string>
     <string name="mobile_verification">MobileVerification</string>
     <string name="resend_code">Resend code</string>
     <string name="verify_code">verify_code</string>
@@ -62,6 +62,7 @@
     <string name="success_message">Success</string>
     <string name="confirm_message">Confirm!</string>
     <string name="select_country">please select country…</string>
+    <string name="entertainment_section">Entertainment</string>
     <string-array name="select_country">
         <item>india</item>
         <item>America</item>

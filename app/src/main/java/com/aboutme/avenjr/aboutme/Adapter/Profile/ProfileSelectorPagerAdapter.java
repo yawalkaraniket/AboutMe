@@ -1,49 +1,58 @@
 package com.aboutme.avenjr.aboutme.Adapter.Profile;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 
-import com.aboutme.avenjr.aboutme.model.ProfileSelectionPagerModel;
+import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.fragment.profile.EducationSection;
+import com.aboutme.avenjr.aboutme.fragment.profile.HobbySection;
+import com.aboutme.avenjr.aboutme.fragment.profile.OtherActivitySection;
 
-public class ProfileSelectorPagerAdapter extends PagerAdapter{
+public class ProfileSelectorPagerAdapter extends FragmentPagerAdapter {
 
-    Context context;
+    Context mContext;
 
-    public ProfileSelectorPagerAdapter(Context context) {
-        this.context = context;
-    }
-
-    @NonNull
-    @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        ProfileSelectionPagerModel model = ProfileSelectionPagerModel.values()[position];
-        LayoutInflater inflater = LayoutInflater.from(context);
-        ViewGroup layout = (ViewGroup) inflater.inflate(model.getLayoutResId(), container, false);
-        container.addView(layout);
-        return layout;
+    public ProfileSelectorPagerAdapter(FragmentManager fm, Context context) {
+        super(fm);
+        this.mContext = context;
     }
 
     @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View) object);
+    public Fragment getItem(int position) {
+        switch (position) {
+            case 0:
+                return new EducationSection();
+            case 1:
+                return new HobbySection();
+            case 2:
+                return new OtherActivitySection();
+            case 3:
+                return new EducationSection();
+        }
+        return null;
     }
 
     @Override
     public int getCount() {
-        return ProfileSelectionPagerModel.values().length;
+        return 4;
     }
 
-    @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view==object;
-    }
+    @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        ProfileSelectionPagerModel customPagerEnum = ProfileSelectionPagerModel.values()[position];
-        return context.getString(customPagerEnum.getTitleResId());
+        switch (position) {
+            case 0:
+                return mContext.getString(R.string.education);
+            case 1:
+                return mContext.getString(R.string.hobby);
+            case 2:
+                return mContext.getString(R.string.other_activities);
+            case 3:
+                return mContext.getString(R.string.entertainment_section);
+        }
+        return null;
     }
 }
