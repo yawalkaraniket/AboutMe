@@ -63,6 +63,9 @@
     <string name="confirm_message">Confirm!</string>
     <string name="select_country">please select country…</string>
     <string name="entertainment_section">Entertainment</string>
+    <string name="select_category">Select Category</string>
+    <string name="section_description">Section Description</string>
+    <string name="section_image">section image</string>
     <string-array name="select_country">
         <item>india</item>
         <item>America</item>

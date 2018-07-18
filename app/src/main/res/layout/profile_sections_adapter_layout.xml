@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="170dp"
-    android:layout_height="190dp"
-    android:layout_margin="20dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:background="@color/grey">
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="150dp"
+        android:layout_height="140dp"
         android:id="@+id/profile_section_image"
-        android:src="@color/grey"/>
-    <TextView
-        android:id="@+id/profile_section_name"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/black_transparent"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="Select Category"
-        android:layout_below="@+id/profile_section_image"/>
-    <RelativeLayout
-        android:id="@+id/selected_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@color/black_transparent"/>
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_centerHorizontal="true"
+        android:src="@color/grey"
+        android:contentDescription="@string/section_image" />
+    <LinearLayout
         android:layout_centerVertical="true"
-        android:src="@color/white"/>
-    </RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_toRightOf="@id/profile_section_image"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:layout_toEndOf="@id/profile_section_image">
+        <TextView
+            android:padding="2dp"
+            android:id="@+id/section_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/white"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="@string/section_description"/>
+        <TextView
+            android:layout_margin="20dp"
+            android:id="@+id/profile_section_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/black_transparent"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="@string/select_category"/>
+    </LinearLayout>
 </RelativeLayout>

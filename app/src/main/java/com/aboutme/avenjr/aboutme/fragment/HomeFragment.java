@@ -23,14 +23,13 @@ import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.firebase.ui.auth.ui.phone.SubmitConfirmationCodeFragment.TAG;
 
 public class HomeFragment extends BaseFragment {
 
@@ -41,7 +40,7 @@ public class HomeFragment extends BaseFragment {
     RecyclerView mRecyclerView;
 
     ArrayList<String> data = new ArrayList<>();
-    ArrayList<String> Imagedata = new ArrayList<>();
+    ArrayList<String> imageData = new ArrayList<>();
 
 
     @Override
@@ -99,9 +98,9 @@ public class HomeFragment extends BaseFragment {
                 List<Movie> movies = response.body().getResults();
                 for (int i = 0; i < movies.size(); i++) {
                     data.add(movies.get(i).getOriginalTitle());
-                    Imagedata.add(movies.get(i).getPosterPath());
+                    imageData.add(movies.get(i).getPosterPath());
                 }
-                RecyclerViewAdapterExample adapter = new RecyclerViewAdapterExample(data, Imagedata, getContext());
+                RecyclerViewAdapterExample adapter = new RecyclerViewAdapterExample(data, imageData, getContext());
                 mRecyclerView.setAdapter(adapter);
                 hideProgress();
                 adapter.setItemClickListener(new RecyclerViewListener() {
@@ -116,5 +115,11 @@ public class HomeFragment extends BaseFragment {
                 Log.e("Response fail", throwable.toString());
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        Objects.requireNonNull(getActivity()).unregisterReceiver(mBroadcastReceiver);
+        super.onDestroy();
     }
 }
