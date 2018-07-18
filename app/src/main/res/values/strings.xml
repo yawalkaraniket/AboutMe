@@ -66,6 +66,8 @@
     <string name="select_category">Select Category</string>
     <string name="section_description">Section Description</string>
     <string name="section_image">section image</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string-array name="select_country">
         <item>india</item>
         <item>America</item>

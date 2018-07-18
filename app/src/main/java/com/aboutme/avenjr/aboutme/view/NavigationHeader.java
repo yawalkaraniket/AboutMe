@@ -111,7 +111,9 @@ public class NavigationHeader extends RelativeLayout {
         this.activity = activity;
         headerText.setText(screen);
         if (screen.equals("Login") || screen.equals("SignUp") ||
-                screen.equals(getResources().getString(R.string.profile_section)) || screen.equals(getResources().getString(R.string.mobile_verification))){
+                screen.equals(getResources().getString(R.string.profile_section)) || screen.equals(getResources().getString(R.string.mobile_verification)) ||
+                screen.equals(getResources().getString(R.string.privacy_policy)) ||
+                screen.equals(getResources().getString(R.string.terms_of_service))) {
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.arrow_left_back));
             headerRight.setVisibility(GONE);
             navigationHome.setOnClickListener(new OnClickListener() {
@@ -149,7 +151,7 @@ public class NavigationHeader extends RelativeLayout {
             headerRight.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        replaceFragment(new ProfileSections());
+                    replaceFragment(new ProfileSections());
                 }
             });
         }

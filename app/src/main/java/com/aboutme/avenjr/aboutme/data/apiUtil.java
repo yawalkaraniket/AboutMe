@@ -11,7 +11,7 @@ public class apiUtil {
     private static Retrofit retrofit = null;
     private final static String API_KEY = "3f2700414c5e5e2a5fef77bb92707835";
 
-    public static AboutMeApi retrofit() {
+    private static AboutMeApi retrofit() {
         if (retrofit == null) {
 
             retrofit = new Retrofit.Builder()

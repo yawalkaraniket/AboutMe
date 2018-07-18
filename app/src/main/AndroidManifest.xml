@@ -65,7 +65,8 @@
             android:label="@string/title_activity_reset_password"
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.ProfileActivity" />
-        <activity android:name=".activity.MobileAuthenticationActivity"></activity>
+        <activity android:name=".activity.MobileAuthenticationActivity" />
+        <activity android:name=".activity.WebviewActivity"></activity>
     </application>
 
 </manifest>

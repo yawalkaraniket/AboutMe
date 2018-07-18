@@ -19,9 +19,9 @@
         android:background="@drawable/sign_up" />
 
     <RelativeLayout
+        android:id="@+id/input_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/submit_button"
+        android:layout_height="wrap_content"
         android:layout_below="@id/navigation_header"
         android:layout_margin="10dp">
 
@@ -29,9 +29,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
+            android:background="@color/grey"
             android:orientation="vertical"
             android:padding="20sp"
-            android:background="@color/grey">
+            tools:ignore="UselessParent">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -136,8 +137,15 @@
             <Spinner
                 android:id="@+id/select_country"
                 android:layout_width="130dp"
-                android:layout_height="30dp">
-            </Spinner>
+                android:layout_height="30dp"></Spinner>
+            <TextView
+                android:paddingTop="10dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:id="@+id/agree_terms_and_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </RelativeLayout>
 

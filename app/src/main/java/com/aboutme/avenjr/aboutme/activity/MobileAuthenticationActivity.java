@@ -3,6 +3,7 @@ package com.aboutme.avenjr.aboutme.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -38,22 +39,27 @@ public class MobileAuthenticationActivity extends BaseActivity {
     @BindView(R.id.mobile_verification_parent)
     RelativeLayout mobileVerificationParent;
 
+    @BindView(R.id.otp_verification_layout)
+    RelativeLayout verificationLayout;
+
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mOnVerificationStateChangedCallbacks;
     String mobileNumber, inputVerificationCode, authCredentials;
     UserInformation userInfo = new UserInformation();
     Activity activity = this;
-    SharedPreferencesUtil preferences = new SharedPreferencesUtil(getApplicationContext());
+    SharedPreferencesUtil preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_authentication);
         ButterKnife.bind(this);
+        preferences = new SharedPreferencesUtil(getApplicationContext());
         header.setView(getString(R.string.mobile_verification), this);
         setupProgress(mobileVerificationParent);
         mOnVerificationStateChangedCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                verificationLayout.setVisibility(View.VISIBLE);
                 verificationCode.setText(phoneAuthCredential.getSmsCode());
                 authCredentials = phoneAuthCredential.getSmsCode();
                 inputVerificationCode = verificationCode.getText().toString();

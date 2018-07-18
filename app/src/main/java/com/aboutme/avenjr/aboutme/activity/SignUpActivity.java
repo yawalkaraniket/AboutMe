@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
@@ -43,6 +48,9 @@ public class SignUpActivity extends BaseActivity {
 
     @BindView(R.id.navigation_header)
     NavigationHeader header;
+    
+    @BindView(R.id.agree_terms_and_condition)
+    TextView termsAndCondition;
 
     private String userId, userPassword, userPasswordAgain, userName;
     DatabaseReference mDatabaseReference;
@@ -60,7 +68,8 @@ public class SignUpActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         //  Adding a views
-
+        termsAndCondition.setMovementMethod(LinkMovementMethod.getInstance());
+        termsAndCondition.setText(addSpannableText(),TextView.BufferType.SPANNABLE);
         mDatabaseReference = FireBaseUtil.getFireBaseReference("UserInformation");
         mContext = getApplicationContext();
         success = "success";
@@ -69,6 +78,7 @@ public class SignUpActivity extends BaseActivity {
         header.setUp(this, "SignUp");
         header.setView("SignUp", this);
         selectSpinnerSetUp();
+        addSpannableText();
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +106,6 @@ public class SignUpActivity extends BaseActivity {
         selectCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                displayToast(getApplicationContext(),String.valueOf(position));
                 switch (position){
                     case 0:
                         mUserInformation.setCountry("India");
@@ -109,6 +118,30 @@ public class SignUpActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private SpannableStringBuilder addSpannableText() {
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("After submit, you are agree ");
+        spannableStringBuilder.append(getString(R.string.terms_of_service));
+        spannableStringBuilder.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                Intent intent = new Intent(activity,WebviewActivity.class);
+                intent.putExtra("header",getString(R.string.terms_of_service));
+                startActivity(intent);
+            }
+        },spannableStringBuilder.length()-getString(R.string.terms_of_service).length(),spannableStringBuilder.length(),0);
+        spannableStringBuilder.append(" and ");
+        spannableStringBuilder.append(getString(R.string.privacy_policy));
+        spannableStringBuilder.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                Intent intent = new Intent(activity,WebviewActivity.class);
+                intent.putExtra("header",getString(R.string.privacy_policy));
+                startActivity(intent);
+            }
+        },spannableStringBuilder.length()-getString(R.string.privacy_policy).length(),spannableStringBuilder.length(),0);
+        return spannableStringBuilder;
     }
 
     private void selectSpinnerSetUp() {

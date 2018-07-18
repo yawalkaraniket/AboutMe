@@ -66,13 +66,15 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/otp_verification_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/input_mobile_number"
             android:layout_margin="10dp"
             android:background="@color/grey"
             android:gravity="center"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/input_code_title"

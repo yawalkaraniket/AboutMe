@@ -31,6 +31,7 @@ public class ResetPassword extends BaseActivity {
         setContentView(R.layout.activity_reset_password);
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
+        this.activity = this;
     }
 
     @OnClick(R.id.send_button)
