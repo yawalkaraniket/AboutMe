@@ -107,13 +107,10 @@ public class NavigationHeader extends RelativeLayout {
         });
     }
 
-    public void setView(final String screen, Activity activity) {
+    public void setView(final String screen, Activity activity,Boolean forBackHeader) {
         this.activity = activity;
         headerText.setText(screen);
-        if (screen.equals("Login") || screen.equals("SignUp") ||
-                screen.equals(getResources().getString(R.string.profile_section)) || screen.equals(getResources().getString(R.string.mobile_verification)) ||
-                screen.equals(getResources().getString(R.string.privacy_policy)) ||
-                screen.equals(getResources().getString(R.string.terms_of_service))) {
+        if (forBackHeader) {
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.arrow_left_back));
             headerRight.setVisibility(GONE);
             navigationHome.setOnClickListener(new OnClickListener() {

@@ -29,7 +29,7 @@ public class FeedbackFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_feedback, container, false);
         ButterKnife.bind(this,view);
         header.setUp(this.getActivity());
-        header.setView(getString(R.string.feedback_header_string), this.getActivity());
+        header.setView(getString(R.string.feedback_header_string), this.getActivity(),false);
         return view;
     }
 

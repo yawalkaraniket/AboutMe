@@ -42,7 +42,7 @@ public class MpinActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         header.setUp(this);
-        header.setView("mPin", this);
+        header.setView("mPin", this,false);
 
         if (setMpin) {
             setMpinText.setVisibility(View.VISIBLE);

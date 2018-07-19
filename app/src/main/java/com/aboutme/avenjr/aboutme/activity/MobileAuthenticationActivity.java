@@ -54,7 +54,7 @@ public class MobileAuthenticationActivity extends BaseActivity {
         setContentView(R.layout.activity_mobile_authentication);
         ButterKnife.bind(this);
         preferences = new SharedPreferencesUtil(getApplicationContext());
-        header.setView(getString(R.string.mobile_verification), this);
+        header.setView(getString(R.string.mobile_verification), this,true);
         setupProgress(mobileVerificationParent);
         mOnVerificationStateChangedCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override

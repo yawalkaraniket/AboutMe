@@ -19,6 +19,6 @@ public class WebviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
-        header.setView(getIntent().getStringExtra("header"),this);
+        header.setView(getIntent().getStringExtra("header"),this,true);
     }
 }

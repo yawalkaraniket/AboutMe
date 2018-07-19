@@ -51,7 +51,7 @@ public class HomeFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         header.setUp(this.getActivity());
         setupProgress((RelativeLayout) view);
-        header.setView(getString(R.string.home_header_string), this.getActivity());
+        header.setView(getString(R.string.home_header_string), this.getActivity(),false);
         showProgress();
         connectAndGetApiData();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));

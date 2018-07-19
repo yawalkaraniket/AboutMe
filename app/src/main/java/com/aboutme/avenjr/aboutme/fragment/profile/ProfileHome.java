@@ -40,7 +40,7 @@ public class ProfileHome extends Fragment {
 
         setSectionData();
 
-        header.setView(getString(R.string.profile_header_string),this.getActivity());
+        header.setView(getString(R.string.profile_header_string),this.getActivity(),false);
         selectProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         ProfileAdapter adapter = new ProfileAdapter(data);

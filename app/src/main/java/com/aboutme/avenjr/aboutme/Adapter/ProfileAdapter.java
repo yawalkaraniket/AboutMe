@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileAdapterViewHolder> {
 
-    RecyclerViewListener mRecyclerViewListener;
+    private RecyclerViewListener mRecyclerViewListener;
     private ArrayList<String> data = new ArrayList<>();
 
     public ProfileAdapter(ArrayList data){

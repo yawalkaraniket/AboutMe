@@ -44,7 +44,7 @@ public class SignInActivity extends BaseActivity {
         buttonForgotPassword = findViewById(R.id.forgot_password);
         layoutSignIn = findViewById(R.id.layout_sign_in);
         header = findViewById(R.id.navigation_header);
-        header.setView("Login", this);
+        header.setView("Login", this,true);
         preference = new SharedPreferencesUtil(getApplicationContext());
 
         // Creating toast messages.
@@ -107,7 +107,7 @@ public class SignInActivity extends BaseActivity {
     protected void onResume() {
         verifyNetwork();
         super.onResume();
-        header.setView("Login", this);
+        header.setView("Login", this,true);
         header.setUp(this, "Login");
     }
 }

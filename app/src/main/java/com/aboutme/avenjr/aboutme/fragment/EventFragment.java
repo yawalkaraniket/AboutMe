@@ -31,7 +31,7 @@ public class EventFragment extends Fragment {
 
     private void init() {
         header.setUp(this.getActivity());
-        header.setView(getString(R.string.events_header_string),this.getActivity());
+        header.setView(getString(R.string.events_header_string),this.getActivity(),false);
     }
 
 }

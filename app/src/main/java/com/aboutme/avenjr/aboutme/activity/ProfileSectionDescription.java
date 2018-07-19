@@ -19,6 +19,6 @@ public class ProfileSectionDescription extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_section_description);
         ButterKnife.bind(this);
-        header.setView(getIntent().getStringExtra("header"),this);
+        header.setView(getIntent().getStringExtra("header"),this,true);
     }
 }

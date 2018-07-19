@@ -32,7 +32,7 @@ public class ProfileSections extends BaseFragment {
         ButterKnife.bind(this,view);
 
         pager.setAdapter(new ProfileSelectorPagerAdapter(getChildFragmentManager(),getContext()));
-        header.setView(getString(R.string.profile_section),this.getActivity());
+        header.setView(getString(R.string.profile_section),this.getActivity(),true);
 
         return view;
     }

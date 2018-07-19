@@ -76,7 +76,7 @@ public class SignUpActivity extends BaseActivity {
         fail = "Please enter correct credentials....";
         mFirebaseAuth = FirebaseAuth.getInstance();
         header.setUp(this, "SignUp");
-        header.setView("SignUp", this);
+        header.setView(getString(R.string.sign_up), this,true);
         selectSpinnerSetUp();
         addSpannableText();
 
