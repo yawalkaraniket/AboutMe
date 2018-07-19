@@ -19,6 +19,7 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
     RecyclerViewListener mRecyclerViewListener;
     private ArrayList<String> section_name = new ArrayList<>();
     ProfileInfo mProfileInfo = new ProfileInfo();
+    Boolean click = true;
 
     public ProfileSectionAdapter(ArrayList<String> data) {
         this.section_name = data;
@@ -56,12 +57,18 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
             super(itemView);
             sectionName = itemView.findViewById(R.id.profile_section_name);
             sectionDescription = itemView.findViewById(R.id.section_description);
-
             sectionName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mRecyclerViewListener.onItemClick(sectionName, position);
                     mProfileInfo.setAllUserProfileSections(section_name.get(position));
+                    if(click){
+                        itemView.setAlpha(0.5f);
+                        click = false;
+                    }else {
+                        itemView.setAlpha(1f);
+                        click = true;
+                    }
                 }
             });
         }

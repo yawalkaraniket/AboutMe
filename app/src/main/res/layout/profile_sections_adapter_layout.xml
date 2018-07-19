@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:padding="10dp"
+    android:animateLayoutChanges="true"
     android:background="@color/grey">
     <ImageView
         android:layout_width="150dp"
