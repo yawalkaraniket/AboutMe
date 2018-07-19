@@ -25,7 +25,7 @@ public class EducationSection extends Fragment {
     @BindView(R.id.education_section)
     RecyclerView sectionRecyclerView;
 
-    ArrayList<String> name = new ArrayList<>();
+    ArrayList<String> name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,8 +33,9 @@ public class EducationSection extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_education_section, container, false);
         ButterKnife.bind(this,view);
+        name = new ArrayList<>();
         name.add("first");
-        name.add("rff");
+        name.add("Second");
 
         sectionRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         ProfileSectionAdapter adapter = new ProfileSectionAdapter(name);

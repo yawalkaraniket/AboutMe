@@ -9,14 +9,11 @@ public class UserInformation {
     public static String name;
     public static String email;
     public static String password;
-    public static String mobileNo;
-    public static String country;
-    public static String countryCode;
+    private static String mobileNo;
+    private static String country;
+    private static String countryCode;
 
-    public UserInformation() {
-
-    }
-
+    UserInformation() { }
 
     public String getCountry() {
         return country;
@@ -39,26 +36,23 @@ public class UserInformation {
     }
 
     public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
+        UserInformation.mobileNo = mobileNo;
     }
-
-
 
     public String getName() {
         return name;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        UserInformation.email = email;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        UserInformation.password = password;
     }
 
-
     public void setName(String name) {
-        this.name = name;
+        UserInformation.name = name;
     }
 
     public String getEmail() {
@@ -70,8 +64,8 @@ public class UserInformation {
     }
 
     UserInformation(String email, String password, String name) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
+        UserInformation.email = email;
+        UserInformation.password = password;
+        UserInformation.name = name;
     }
 }

@@ -24,7 +24,7 @@ public class OtherActivitySection extends Fragment {
     @BindView(R.id.other_activity_recycler_view)
     RecyclerView sectionRecyclerView;
 
-    ArrayList<String> name = new ArrayList<>();
+    ArrayList<String> name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +32,7 @@ public class OtherActivitySection extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_other_activity_section, container, false);
         ButterKnife.bind(this,view);
+        name = new ArrayList<>();
         name.add("first");
         name.add("rff");
 
@@ -39,7 +40,12 @@ public class OtherActivitySection extends Fragment {
         sectionRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         ProfileSectionAdapter adapter = new ProfileSectionAdapter(name);
         sectionRecyclerView.setAdapter(adapter);
-
+        adapter.setItemClickListener(new com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+//                Add click on the button.
+            }
+        });
         return view;
     }
 }

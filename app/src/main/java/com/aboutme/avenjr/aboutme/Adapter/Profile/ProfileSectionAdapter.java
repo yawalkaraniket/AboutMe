@@ -1,5 +1,6 @@
 package com.aboutme.avenjr.aboutme.Adapter.Profile;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.data.ProfileInfo;
 import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
 
     RecyclerViewListener mRecyclerViewListener;
     private ArrayList<String> section_name = new ArrayList<>();
+    ProfileInfo mProfileInfo = new ProfileInfo();
 
     public ProfileSectionAdapter(ArrayList<String> data) {
         this.section_name = data;
@@ -29,9 +32,12 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
         return new ProfileSectionAdapterViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ProfileSectionAdapterViewHolder holder, int position) {
         holder.sectionName.setText(section_name.get(position));
+        holder.sectionDescription.setText(holder.sectionDescription.getText() + " " +
+                section_name.get(position).toLowerCase());
         holder.position = position;
     }
 
@@ -43,20 +49,25 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
 
     class ProfileSectionAdapterViewHolder extends RecyclerView.ViewHolder {
         TextView sectionName;
+        TextView sectionDescription;
         int position = 0;
 
         ProfileSectionAdapterViewHolder(View itemView) {
             super(itemView);
             sectionName = itemView.findViewById(R.id.profile_section_name);
+            sectionDescription = itemView.findViewById(R.id.section_description);
+
             sectionName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mRecyclerViewListener.onItemClick(sectionName,position);
+                    mRecyclerViewListener.onItemClick(sectionName, position);
+                    mProfileInfo.setAllUserProfileSections(section_name.get(position));
                 }
             });
         }
     }
+
     public void setItemClickListener(RecyclerViewListener recyclerViewListener) {
-        this.mRecyclerViewListener= recyclerViewListener;
+        this.mRecyclerViewListener = recyclerViewListener;
     }
 }

@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.data.ProfileInfo;
+import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
 
 import java.util.ArrayList;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileAdapterViewHolder> {
 
-    ArrayList<String> data = new ArrayList<>();
+    RecyclerViewListener mRecyclerViewListener;
+    private ArrayList<String> data = new ArrayList<>();
 
     public ProfileAdapter(ArrayList data){
         this.data = data;
@@ -45,6 +48,16 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileA
         ProfileAdapterViewHolder(View view) {
             super(view);
             text = view.findViewById(R.id.select_profile_text);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mRecyclerViewListener.onItemClick(v,position);
+
+                }
+            });
         }
+    }
+    public void setItemClickListener(RecyclerViewListener recyclerViewListener) {
+        this.mRecyclerViewListener= recyclerViewListener;
     }
 }
