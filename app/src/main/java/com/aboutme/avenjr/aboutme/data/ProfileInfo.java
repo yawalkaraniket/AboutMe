@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ProfileInfo {
 
     private static ArrayList<String> allUserProfileSections= new ArrayList<>();
-    private static ArrayList<String> hobbies = new ArrayList<>();
+    private ArrayList<String> hobbies = new ArrayList<>();
     private static ArrayList<String> otherActivities = new ArrayList<>();
     private static ArrayList<String> educational = new ArrayList<>();
     private static ArrayList<String> entertainment = new ArrayList<>();
@@ -25,12 +25,12 @@ public class ProfileInfo {
     }
 
     public void setHobbies() {
-        ProfileInfo.hobbies.add("Cricket");
-        ProfileInfo.hobbies.add("Poetry");
-        ProfileInfo.hobbies.add("Coins Collection");
-        ProfileInfo.hobbies.add("Writing Dramas");
-        ProfileInfo.hobbies.add("Reading Books");
-        ProfileInfo.hobbies.add("Playing HolyBoll");
+        this.hobbies.add("Cricket");
+        this.hobbies.add("Poetry");
+        this.hobbies.add("Coins Collection");
+        this.hobbies.add("Dramas");
+        this.hobbies.add("Books Reading");
+        this.hobbies.add("HolyBoll");
     }
 
     public ArrayList<String> getOtherActivities() {

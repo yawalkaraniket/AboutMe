@@ -50,7 +50,6 @@ public class HobbySection extends Fragment {
     }
 
     private void setHobbies() {
-
         name = new ArrayList<>();
         profileInfo = new ProfileInfo();
         profileInfo.setHobbies();

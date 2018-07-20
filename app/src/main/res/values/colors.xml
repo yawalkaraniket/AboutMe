@@ -16,4 +16,6 @@
     <color name="colorBlack">#555555</color>
     <color name="home_button_background">#677084</color>
     <color name="pink_dark">#602268</color>
+    <color name="light_blue">#41f49b</color>
+    <color name="dark_gray">#9db2a8</color>
 </resources>
