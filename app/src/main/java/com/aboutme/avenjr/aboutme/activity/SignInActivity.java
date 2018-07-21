@@ -76,7 +76,7 @@ public class SignInActivity extends BaseActivity {
                                     DialogUtil.yesDialog(activity, "Login", "Login Successful", click -> {
                                         startActivity(homeScreen);
                                         preference.putLoginWith("email");
-                                        preference.setName(userInfo.get("name")+" "+userInfo.get("lastName"));
+                                        preference.setName(userInfo.get("name"));
                                         preference.setEmail(userInfo.get("email"));
                                         preference.setMPin(userInfo.get("mpin"));
                                         preference.setProfileImageUrl("null");
