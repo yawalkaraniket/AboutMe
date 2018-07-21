@@ -3,6 +3,7 @@ package com.aboutme.avenjr.aboutme.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
@@ -62,12 +64,12 @@ public class SignInActivity extends BaseActivity {
                 } else {
                     getFireBaseReference("UserInformation").orderByChild("email").equalTo(id).addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                                    token = userSnapshot.getKey().toString();
+                                    token = userSnapshot.getKey();
                                     for (DataSnapshot programSnapshot : userSnapshot.getChildren()) {
-                                        userInfo.put(programSnapshot.getKey().toString(), programSnapshot.getValue().toString());
+                                        userInfo.put(programSnapshot.getKey(), Objects.requireNonNull(programSnapshot.getValue()).toString());
                                     }
                                 }
                                 if (userInfo.get("password").equals(password)) {
@@ -76,6 +78,7 @@ public class SignInActivity extends BaseActivity {
                                         preference.putLoginWith("email");
                                         preference.setName(userInfo.get("name")+" "+userInfo.get("lastName"));
                                         preference.setEmail(userInfo.get("email"));
+                                        preference.setMPin(userInfo.get("mpin"));
                                         preference.setProfileImageUrl("null");
                                     });
                                 } else {
@@ -87,7 +90,7 @@ public class SignInActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
                     });

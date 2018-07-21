@@ -1,5 +1,6 @@
 package com.aboutme.avenjr.aboutme.Utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -11,6 +12,7 @@ public class SharedPreferencesUtil {
     private SharedPreferences.Editor editor;
     private Context context;
 
+    @SuppressLint("CommitPrefEdits")
     public SharedPreferencesUtil(Context context) {
         this.context = context;
         sharedPref = context.getSharedPreferences(
@@ -23,7 +25,7 @@ public class SharedPreferencesUtil {
     }
 
     public String getName() {
-        String defaultValue = context.getResources().getString(R.string.user_name).toString();
+        String defaultValue = context.getResources().getString(R.string.user_name);
         return sharedPref.getString(context.getString(R.string.user_name), defaultValue);
     }
 
@@ -32,7 +34,7 @@ public class SharedPreferencesUtil {
     }
 
     public String getEmail() {
-        String defaultValue = context.getResources().getString(R.string.email).toString();
+        String defaultValue = context.getResources().getString(R.string.email);
         return sharedPref.getString(context.getString(R.string.email), defaultValue);
     }
 
@@ -41,7 +43,7 @@ public class SharedPreferencesUtil {
     }
 
     public String getProfileImageUrl(){
-        String defaultValue = context.getResources().getString(R.string.photo_url).toString();
+        String defaultValue = context.getResources().getString(R.string.photo_url);
         return sharedPref.getString(context.getString(R.string.photo_url), defaultValue);
     }
 
@@ -50,12 +52,21 @@ public class SharedPreferencesUtil {
     }
 
     public String getLoginWith(){
-        String defaultValue = context.getResources().getString(R.string.loginFrom).toString();
+        String defaultValue = context.getResources().getString(R.string.loginFrom);
         return sharedPref.getString(context.getString(R.string.loginFrom), defaultValue);
     }
 
     public void clearPreferences(){
         editor.clear().apply();
+    }
+
+    public void setMPin(String mPin){
+        editor.putString(context.getString(R.string.mpin),mPin).apply();
+    }
+
+    public String getMPin(){
+        String defaultValue = context.getResources().getString(R.string.mpin);
+        return sharedPref.getString(context.getString(R.string.mpin), defaultValue);
     }
 
 }

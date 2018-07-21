@@ -7,13 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.view.Mpin;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.aboutme.avenjr.aboutme.activity.SignUpActivity.setMpin;
 
 public class MpinActivity extends BaseActivity {
 
@@ -34,6 +33,7 @@ public class MpinActivity extends BaseActivity {
 
     @BindView(R.id.set_mpin)
     TextView setMpinText;
+    SharedPreferencesUtil preferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,9 @@ public class MpinActivity extends BaseActivity {
 
         header.setUp(this);
         header.setView("mPin", this,false);
+        preferences = new SharedPreferencesUtil(getApplicationContext());
 
-        if (setMpin) {
+        if (preferences.getMPin().equals(getResources().getString(R.string.mpin))) {
             setMpinText.setVisibility(View.VISIBLE);
             mPinTitle.setVisibility(View.GONE);
             mPinEmail.setVisibility(View.GONE);

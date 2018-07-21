@@ -1,5 +1,7 @@
 package com.aboutme.avenjr.aboutme.activity;
 
+import java.util.ArrayList;
+
 /**
  * Created by tudip on 11/4/18.
  */
@@ -12,8 +14,27 @@ public class UserInformation {
     private static String mobileNo;
     private static String country;
     private static String countryCode;
+    private static String mPin;
 
-    UserInformation() { }
+    public String getDatabaseKey() {
+        return databaseKey;
+    }
+
+    public void setDatabaseKey(String databaseKey) {
+        UserInformation.databaseKey = databaseKey;
+    }
+
+    private static String databaseKey;
+
+    public void setMPin(String mPin) {
+        UserInformation.mPin = mPin;
+    }
+
+    public String getMPin() {
+        return mPin;
+    }
+
+    public UserInformation() { }
 
     public String getCountry() {
         return country;

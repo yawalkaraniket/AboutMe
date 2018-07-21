@@ -71,6 +71,7 @@ public class MobileAuthenticationActivity extends BaseActivity {
                         preferences.putLoginWith("SignUp");
                         preferences.setName(userInfo.getName());
                         preferences.setEmail(userInfo.getEmail());
+                        userInfo.setMobileNo(mobileNumber);
                     });
                 }
                 hideProgress();

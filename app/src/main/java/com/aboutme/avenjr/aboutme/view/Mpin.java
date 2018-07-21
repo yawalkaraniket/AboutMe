@@ -2,7 +2,6 @@ package com.aboutme.avenjr.aboutme.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +10,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.activity.HomeScreen;
+import com.aboutme.avenjr.aboutme.activity.UserInformation;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 
-import static com.aboutme.avenjr.aboutme.activity.SignUpActivity.setMpin;
-
+import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
 /**
  * Created by AvenjR on 26/5/18.
@@ -34,7 +36,10 @@ public class Mpin extends RelativeLayout {
     ArrayList<Integer> mPinConform = new ArrayList<>();
     Context context;
     private boolean wantToConfirm = false;
-    private long mLastClickTime = 0;
+    DatabaseReference mDatabaseReference = getFireBaseReference("UserInformation");
+    ;
+    UserInformation mUserInformation = new UserInformation();
+    SharedPreferencesUtil preferences;
 
     public void setPinVerify(ArrayList<Integer> pinVerify) {
         mPinVerify = pinVerify;
@@ -51,6 +56,7 @@ public class Mpin extends RelativeLayout {
         addView(view);
         this.context = context;
 
+        preferences = new SharedPreferencesUtil(context);
         zero = findViewById(R.id.zero);
         one = findViewById(R.id.one);
         two = findViewById(R.id.two);
@@ -102,21 +108,23 @@ public class Mpin extends RelativeLayout {
                     removeSelectionView(imageView);
                 } else {
                     setSelectionView(imageView, number);
-                    if (setMpin) {
+                    if (preferences.getMPin().equals(getResources().getString(R.string.mpin))) {
                         if (getSelectedCount() == 4) {
                             if (wantToConfirm && mPin.equals(mPinConform)) {
                                 wantToConfirm = false;
+                                mUserInformation.setMPin(mPin.toString());
+                                FireBaseUtil.saveInformation(mUserInformation, mDatabaseReference);
                                 Intent intent = new Intent(context, HomeScreen.class);
-                                intent.putExtra("login_with","signIn");
+                                intent.putExtra("login_with", "signIn");
                                 context.startActivity(intent);
                             }
                             clearAllSelectedView();
                             wantToConfirm = true;
                         }
                     }
-                    if (getSelectedCount() == 4 && mPin.equals(mPinVerify) && !setMpin) {
+                    if (getSelectedCount() == 4 && mPin.toString().equals(preferences.getMPin()) && !preferences.getMPin().equals(getResources().getString(R.string.mpin))) {
                         Intent intent = new Intent(context, HomeScreen.class);
-                        intent.putExtra("login_with","signIn");
+                        intent.putExtra("login_with", "signIn");
                         context.startActivity(intent);
                     } else if (getSelectedCount() == 4) {
                         clearAllSelectedView();
@@ -157,19 +165,10 @@ public class Mpin extends RelativeLayout {
         imageView.setImageDrawable(getResources().getDrawable(R.drawable.circle));
         imageView.setSelected(false);
         selectedCount--;
-        mPin.remove(mPin.size() - 1);
         if (wantToConfirm) {
             mPinConform.remove(mPinConform.size() - 1);
         } else {
             mPin.remove(mPin.size() - 1);
         }
-    }
-
-    protected boolean restrictDoubleTap() {
-        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-            return true;
-        }
-        mLastClickTime = SystemClock.elapsedRealtime();
-        return false;
     }
 }

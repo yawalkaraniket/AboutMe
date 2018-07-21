@@ -19,7 +19,7 @@
     <string name="set_mPin">please set your mPin....</string>
     <string name="oops_blank">Opps!....</string>
     <string name="add_content">please get first registered </string>
-    <string name="loading_generic_message">Loading...</string>
+    <string name="loading_generic_message">Loading…</string>
     <string name="hi_aboutme">Hi AboutMe, \nHere\'s what I think:\n\n\n\n\nPlease don\'t alter
         the lines below\n==============================\nProduct: AboutMe\n\nVersion @version
         Build @build\n\nPlatform Type: Android\n\nDevice Type: @device_type\n\nOS version:
@@ -33,13 +33,14 @@
     <string name="photo_url">url</string>
     <string name="email">email</string>
     <string name="preference_file_key">com.aboutme.avenjr.aboutme</string>
+    <string name="loginFrom">noLogin</string>
+    <string name="mpin">mpin</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_reset_password">ResetPassword</string>
     <string name="no_network">No Network</string>
     <string name="refresh">Refresh</string>
-    <string name="loginFrom">noLogin</string>
     <string name="reset_mpin">Reset Mpin</string>
     <string name="blog_header_string">Blog</string>
     <string name="documents_header_string">Documents</string>

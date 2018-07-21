@@ -27,23 +27,23 @@
             android:layout_toRightOf="@+id/profile_image">
 
             <TextView
-                android:id="@+id/profile_name"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_below="@+id/profile_email"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
-                android:gravity="center"
-                android:text="aboutme"
-                android:textColor="@color/white" />
-
-            <TextView
                 android:id="@+id/profile_email"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
+                android:layout_below="@+id/profile_name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/about_me_user_id"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
-                android:text="user@aboutme.com"
+                android:text="@string/app_name"
                 android:textColor="@color/white" />
         </RelativeLayout>
     </RelativeLayout>

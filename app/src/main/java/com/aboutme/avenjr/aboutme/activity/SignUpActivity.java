@@ -53,12 +53,10 @@ public class SignUpActivity extends BaseActivity {
     TextView termsAndCondition;
 
     private String userId, userPassword, userPasswordAgain, userName;
-    DatabaseReference mDatabaseReference;
     Context mContext;
     CharSequence success, fail;
     FirebaseAuth mFirebaseAuth;
     Activity activity = this;
-    public static boolean setMpin;
     UserInformation mUserInformation = new UserInformation();
 
     @Override
@@ -70,7 +68,6 @@ public class SignUpActivity extends BaseActivity {
         //  Adding a views
         termsAndCondition.setMovementMethod(LinkMovementMethod.getInstance());
         termsAndCondition.setText(addSpannableText(),TextView.BufferType.SPANNABLE);
-        mDatabaseReference = FireBaseUtil.getFireBaseReference("UserInformation");
         mContext = getApplicationContext();
         success = "success";
         fail = "Please enter correct credentials....";
@@ -90,12 +87,9 @@ public class SignUpActivity extends BaseActivity {
 
                 if (verifyRenterPassword(userPassword, userPasswordAgain) && !userId.isEmpty() && !userName.isEmpty()) {
                     UserInformation userInformation = new UserInformation(userId, userPassword, userName);
-
-                    FireBaseUtil.saveInformation(userInformation, mDatabaseReference);
                     DialogUtil.yesDialog(activity, "SignUp", "you are registered please \n conform your mobile number..", click -> {
                         Intent intent = new Intent(getBaseContext(), MobileAuthenticationActivity.class);
                         startActivity(intent);
-                        setMpin = true;
                     });
                 } else {
                     displayToast(getApplicationContext(), fail);
