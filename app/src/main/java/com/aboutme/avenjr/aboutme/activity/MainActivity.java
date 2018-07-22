@@ -34,10 +34,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
 public class MainActivity extends BaseActivity {
 
@@ -48,7 +55,7 @@ public class MainActivity extends BaseActivity {
     Button continueWithFacebook;
 
     @BindView(R.id.continue_with_google)
-    Button getContinueWithGoogle;
+    Button continueWithGoogle;
 
     @BindView(R.id.sign_up_with_mail)
     Button continueWithMail;
@@ -151,7 +158,7 @@ public class MainActivity extends BaseActivity {
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed, update UI appropriately
-                removeAnimation(getContinueWithGoogle);
+                removeAnimation(continueWithGoogle);
                 hideProgress();
                 Toast.makeText(getBaseContext(), "Sign-in failed.",
                         Toast.LENGTH_SHORT).show();
@@ -161,7 +168,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.continue_with_google)
     public void googleSignIn() {
-        startButtonAnimation(getContinueWithGoogle);
+        startButtonAnimation(continueWithGoogle);
         //                https://developers.google.com/identity/sign-in/android/
         showProgress();
         signIn();
@@ -185,21 +192,12 @@ public class MainActivity extends BaseActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Success", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            hideProgress();
-                            DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
-                                    + user.getEmail() + " Success.", click -> {
-                                Intent intent = new Intent(getApplicationContext(), MpinActivity.class);
-                                preference.setName(user.getDisplayName());
-                                preference.setEmail(user.getEmail());
-                                preference.setProfileImageUrl(user.getPhotoUrl().toString());
-                                preference.putLoginWith("google");
-                                startActivity(intent);
-                                activity.finish();
-                                removeAnimation(continueWithFacebook);
-                            });
+                            isAlreadyRegister(user.getEmail(),user);
                         } else {
                             hideProgress();
                         }
+                        removeAnimation(continueWithGoogle);
+                        hideProgress();
                     }
                 });
     }
@@ -258,5 +256,33 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         stopService(service);
         super.onDestroy();
+    }
+    public void isAlreadyRegister(String email,FirebaseUser user){
+        getFireBaseReference("UserInformation").orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                     DialogUtil.yesDialog(activity,"Fail","your id "+email+" is already registerd...",click->{
+
+                     });
+                }else{
+                    DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
+                            + user.getEmail() + " Success.", click -> {
+                        Intent intent = new Intent(getApplicationContext(), MpinActivity.class);
+                        preference.setName(user.getDisplayName());
+                        preference.setEmail(user.getEmail());
+                        preference.setProfileImageUrl(user.getPhotoUrl().toString());
+                        preference.putLoginWith("google");
+                        startActivity(intent);
+                        activity.finish();
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
