@@ -71,6 +71,7 @@ public class SetApplicationPasswordActivity extends AppCompatActivity {
         if (password.getText().toString().equals(rePassword.getText().toString())) {
             DialogUtil.yesDialog(this, getString(R.string.success_message),
                     "click yes button to save your password...", click -> {
+                        preferences.putLoginWith("SignUp");
                         preferences.setPassword(password.getText().toString());
                         userInfo.setPassword(password.getText().toString());
                         Intent intent = new Intent(this, MobileAuthenticationActivity.class);

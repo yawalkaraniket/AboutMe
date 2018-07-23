@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity {
         this.activity = this;
         this.preference = new SharedPreferencesUtil(getApplicationContext());
 
-        if(!preference.getLoginWith().equals("noLogin")){
+        if (!preference.getLoginWith().equals("noLogin")) {
             verifyAlreadyLogin();
         }
 
@@ -135,15 +135,21 @@ public class MainActivity extends BaseActivity {
     }
 
     private void verifyAlreadyLogin() {
-        if (preference.getPassword().equals(getResources().getString(R.string.password))) {
-            Intent intent = new Intent(activity, SetApplicationPasswordActivity.class);
-            activity.finish();
-            startActivity(intent);
-        } else if (preference.getMobileNumber().equals(getResources().getString(R.string.mobile_number))) {
-            Intent intent = new Intent(activity, MobileAuthenticationActivity.class);
-            activity.finish();
-            startActivity(intent);
-        } else if (preference.getMPin().equals(getResources().getString(R.string.mpin))) {
+        if (preference.getLoginWith().equals("SignUp")) {
+            if (preference.getPassword().equals(getResources().getString(R.string.password))) {
+                Intent intent = new Intent(activity, SetApplicationPasswordActivity.class);
+                activity.finish();
+                startActivity(intent);
+            } else if (preference.getMobileNumber().equals(getResources().getString(R.string.mobile_number))) {
+                Intent intent = new Intent(activity, MobileAuthenticationActivity.class);
+                activity.finish();
+                startActivity(intent);
+            } else if (preference.getMPin().equals(getResources().getString(R.string.mpin))) {
+                Intent intent = new Intent(activity, MpinActivity.class);
+                activity.finish();
+                startActivity(intent);
+            }
+        } else {
             Intent intent = new Intent(activity, MpinActivity.class);
             activity.finish();
             startActivity(intent);
