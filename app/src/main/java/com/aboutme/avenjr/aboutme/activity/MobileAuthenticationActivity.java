@@ -106,6 +106,7 @@ public class MobileAuthenticationActivity extends BaseActivity {
     public void verifyCode() {
         if (authCredentials.equals(inputVerificationCode)) {
             DialogUtil.yesDialog(this, getString(R.string.confirm_message), getString(R.string.mobile_number_registration_successful), click -> {
+                preferences.setMobileNumber(mobileNumber);
                 Intent intent = new Intent(this, MpinActivity.class);
                 startActivity(intent);
             });

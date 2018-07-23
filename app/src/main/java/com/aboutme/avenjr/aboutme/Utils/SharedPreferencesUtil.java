@@ -69,4 +69,21 @@ public class SharedPreferencesUtil {
         return sharedPref.getString(context.getString(R.string.mpin), defaultValue);
     }
 
+    public void setPassword(String password){
+        editor.putString(context.getString(R.string.password),password).apply();
+    }
+
+    public String getPassword(){
+        String defaultValue = context.getResources().getString(R.string.password);
+        return sharedPref.getString(context.getString(R.string.password), defaultValue);
+    }
+
+    public void setMobileNumber(String mobileNumber){
+        editor.putString(context.getString(R.string.mobile_number),mobileNumber).apply();
+    }
+
+    public String getMobileNumber(){
+        String defaultValue = context.getResources().getString(R.string.mobile_number);
+        return sharedPref.getString(context.getString(R.string.mobile_number), defaultValue);
+    }
 }

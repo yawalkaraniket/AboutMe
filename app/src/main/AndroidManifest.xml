@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/project_icon"
+        android:icon="@drawable/mpin_logo"
         android:label="@string/app_name"
         android:noHistory="true"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -67,7 +67,8 @@
         <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.MobileAuthenticationActivity" />
         <activity android:name=".activity.WebviewActivity" />
-        <activity android:name=".activity.ProfileSectionDescription"></activity>
+        <activity android:name=".activity.ProfileSectionDescription" />
+        <activity android:name=".activity.SetApplicationPasswordActivity"></activity>
     </application>
 
 </manifest>

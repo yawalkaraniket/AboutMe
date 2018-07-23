@@ -3,7 +3,7 @@ package com.aboutme.avenjr.aboutme.activity;
 import java.util.ArrayList;
 
 /**
- * Created by tudip on 11/4/18.
+ * Created by AvenjR on 11/4/18.
  */
 
 public class UserInformation {

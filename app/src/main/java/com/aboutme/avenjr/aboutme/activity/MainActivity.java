@@ -80,7 +80,9 @@ public class MainActivity extends BaseActivity {
         this.activity = this;
         this.preference = new SharedPreferencesUtil(getApplicationContext());
 
-        verifyAlreadyLogin();
+        if(!preference.getLoginWith().equals("noLogin")){
+            verifyAlreadyLogin();
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -133,8 +135,16 @@ public class MainActivity extends BaseActivity {
     }
 
     private void verifyAlreadyLogin() {
-        if(!preference.getLoginWith().equals("noLogin")){
-            Intent intent = new Intent(activity,MpinActivity.class);
+        if (preference.getPassword().equals(getResources().getString(R.string.password))) {
+            Intent intent = new Intent(activity, SetApplicationPasswordActivity.class);
+            activity.finish();
+            startActivity(intent);
+        } else if (preference.getMobileNumber().equals(getResources().getString(R.string.mobile_number))) {
+            Intent intent = new Intent(activity, MobileAuthenticationActivity.class);
+            activity.finish();
+            startActivity(intent);
+        } else if (preference.getMPin().equals(getResources().getString(R.string.mpin))) {
+            Intent intent = new Intent(activity, MpinActivity.class);
             activity.finish();
             startActivity(intent);
         }
@@ -189,10 +199,8 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("Success", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            isAlreadyRegister(user.getEmail(),user);
+                            isAlreadyRegister(user.getEmail(), user);
                         } else {
                             hideProgress();
                         }
@@ -204,8 +212,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-            verifyNetwork();
-            super.onResume();
+        verifyNetwork();
+        super.onResume();
     }
 
     @Override
@@ -257,18 +265,20 @@ public class MainActivity extends BaseActivity {
         stopService(service);
         super.onDestroy();
     }
-    public void isAlreadyRegister(String email,FirebaseUser user){
+
+    public void isAlreadyRegister(String email, FirebaseUser user) {
         getFireBaseReference("UserInformation").orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                     DialogUtil.yesDialog(activity,"Fail","your id "+email+" is already registerd...",click->{
-
-                     });
-                }else{
+//                    DialogUtil.yesDialog(activity, "Fail", "your id " + email + " is already registerd...", click -> {
+//
+//                    });
+                } else {
                     DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
                             + user.getEmail() + " Success.", click -> {
-                        Intent intent = new Intent(getApplicationContext(), MpinActivity.class);
+                        new UserInformation(user.getEmail(), null, user.getDisplayName());
+                        Intent intent = new Intent(getApplicationContext(), SetApplicationPasswordActivity.class);
                         preference.setName(user.getDisplayName());
                         preference.setEmail(user.getEmail());
                         preference.setProfileImageUrl(user.getPhotoUrl().toString());
