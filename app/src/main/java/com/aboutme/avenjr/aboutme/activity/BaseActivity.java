@@ -320,8 +320,8 @@ public abstract class BaseActivity extends FragmentActivity {
     private void shareApplication() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        String shareBodyText = "Check it out. Your message goes here";
-        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject here");
+        String shareBodyText = "Now, share your profile to the words.\n Click on the below link";
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "About Me");
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
         startActivity(Intent.createChooser(shareIntent, "Shearing Option"));
     }
