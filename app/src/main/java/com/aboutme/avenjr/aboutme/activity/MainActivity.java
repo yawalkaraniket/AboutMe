@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.GMailSender;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.services.NetworkService;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
@@ -82,6 +83,16 @@ public class MainActivity extends BaseActivity {
 
         if (!preference.getLoginWith().equals("noLogin")) {
             verifyAlreadyLogin();
+        }
+
+        GMailSender sender = new GMailSender("aboutme106@gmail.com","123@AvenjR.com");
+        try {
+            sender.sendMail("Testing","Gmail Sending","aboutme106@gmail.com",
+                    "aboutme106@gmail.com");
+            displayToast(activity,"success sms sending");
+        } catch (Exception e) {
+            e.printStackTrace();
+            displayToast(activity," sms sending fail");
         }
 
         super.onCreate(savedInstanceState);

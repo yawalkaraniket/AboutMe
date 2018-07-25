@@ -61,6 +61,11 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+    //  Send email in a background
+    compile files('libs/additionnal.jar')
+    compile files('libs/mail.jar')
+    compile files('libs/activation.jar')
 }
 repositories {
     mavenCentral()
