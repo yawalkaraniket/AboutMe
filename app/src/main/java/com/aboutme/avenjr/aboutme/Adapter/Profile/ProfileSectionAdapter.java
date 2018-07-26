@@ -16,10 +16,10 @@ import java.util.ArrayList;
 
 public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAdapter.ProfileSectionAdapterViewHolder> {
 
-    RecyclerViewListener mRecyclerViewListener;
+    private RecyclerViewListener mRecyclerViewListener;
     private ArrayList<String> section_name = new ArrayList<>();
-    ProfileInfo mProfileInfo = new ProfileInfo();
-    Boolean click = true;
+    private ProfileInfo mProfileInfo = new ProfileInfo();
+    private Boolean click = true;
 
     public ProfileSectionAdapter(ArrayList<String> data) {
         this.section_name = data;

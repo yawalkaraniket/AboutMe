@@ -42,14 +42,14 @@ public class MpinActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         header.setUp(this);
-        header.setView("mPin", this,false);
+        header.setView("mPin", this, false);
         preferences = new SharedPreferencesUtil(getApplicationContext());
 
         if (preferences.getMPin().equals(getResources().getString(R.string.mpin))) {
             setMpinText.setVisibility(View.VISIBLE);
             mPinTitle.setVisibility(View.GONE);
             mPinEmail.setVisibility(View.GONE);
-        }else{
+        } else {
             mPinTitle.setVisibility(View.VISIBLE);
             mPinEmail.setVisibility(View.VISIBLE);
             setMpinText.setVisibility(View.GONE);

@@ -116,6 +116,8 @@ public class Mpin extends RelativeLayout {
                                 FireBaseUtil.saveInformation(mUserInformation, mDatabaseReference);
                                 Intent intent = new Intent(context, HomeScreen.class);
                                 intent.putExtra("login_with", "signIn");
+                                preferences.setMPin(mPin.toString());
+                                preferences.putLoginWith("signIn");
                                 context.startActivity(intent);
                             }
                             clearAllSelectedView();
@@ -125,6 +127,8 @@ public class Mpin extends RelativeLayout {
                     if (getSelectedCount() == 4 && mPin.toString().equals(preferences.getMPin()) && !preferences.getMPin().equals(getResources().getString(R.string.mpin))) {
                         Intent intent = new Intent(context, HomeScreen.class);
                         intent.putExtra("login_with", "signIn");
+                        preferences.putLoginWith("signIn");
+                        preferences.setMPin(mPin.toString());
                         context.startActivity(intent);
                     } else if (getSelectedCount() == 4) {
                         clearAllSelectedView();
