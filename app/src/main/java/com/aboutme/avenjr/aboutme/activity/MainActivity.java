@@ -277,9 +277,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-//                    DialogUtil.yesDialog(activity, "Fail", "your id " + email + " is already registerd...", click -> {
-//
-//                    });
+                    if(preference.getMobileNumber().equals(getResources().getString(R.string.mobile_number))){
+                        displayToast(context,"user already exists. \nplease login...");
+                    }
                 } else {
                     DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
                             + user.getEmail() + " Success.", click -> {

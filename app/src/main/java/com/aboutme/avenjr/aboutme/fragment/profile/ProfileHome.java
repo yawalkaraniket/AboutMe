@@ -1,5 +1,6 @@
 package com.aboutme.avenjr.aboutme.fragment.profile;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,9 @@ public class ProfileHome extends Fragment {
     @BindView(R.id.profile_header)
     RelativeLayout profileHeader;
 
+    @BindView(R.id.profile_info_layout)
+    RelativeLayout profileInfoParent;
+
     ArrayList<String> data;
     ProfileInfo profileInfo;
     SharedPreferencesUtil preferences;
@@ -56,14 +60,14 @@ public class ProfileHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_profile_home, container, false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_profile_home, container, false);
+        ButterKnife.bind(this, view);
         preferences = new SharedPreferencesUtil(Objects.requireNonNull(getActivity()).getApplicationContext());
 
         setSectionData();
         setProfileHeader();
 
-        header.setView(getString(R.string.profile_header_string),this.getActivity(),false);
+        header.setView(getString(R.string.profile_header_string), this.getActivity(), false);
         selectProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         ProfileAdapter adapter = new ProfileAdapter(data);
@@ -72,26 +76,30 @@ public class ProfileHome extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getContext(), ProfileSectionDescription.class);
-                intent.putExtra("header",data.get(position));
+                intent.putExtra("header", data.get(position));
                 startActivity(intent);
             }
         });
-        return  view;
+        return view;
     }
 
     @OnClick(R.id.profile_header)
-    public void headerClick(){
-        if(click){
+    public void headerClick() {
+        if (click) {
             click = false;
             header.animate().translationY(-header.getHeight());
-        }else {
+            startProfileImageAnimation(profileImage);
+            startButtonAnimation(profileInfoParent);
+        } else {
             click = true;
+            stopAnimation(profileImage);
+            stopAnimation(profileInfoParent);
             header.animate().translationY(0);
         }
     }
 
     private void setProfileHeader() {
-        ImageUtil.setImage(getContext(),preferences.getProfileImageUrl(),profileImage);
+        ImageUtil.setImage(getContext(), preferences.getProfileImageUrl(), profileImage);
         profileEmail.setText(preferences.getEmail());
         profileName.setText(preferences.getName());
     }
@@ -111,4 +119,32 @@ public class ProfileHome extends Fragment {
         profileInfo = new ProfileInfo();
         data.addAll(profileInfo.getAllUserProfileSections());
     }
+
+    public void startProfileImageAnimation(View view) {
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationY", -120f);
+        animation.setDuration(500);
+        animation.start();
+        ObjectAnimator animation2 = ObjectAnimator.ofFloat(view, "translationX", 220f);
+        animation2.setDuration(500);
+        animation2.start();
+    }
+
+    public void startButtonAnimation(View view) {
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationY", 80f);
+        animation.setDuration(500);
+        animation.start();
+        ObjectAnimator animation2 = ObjectAnimator.ofFloat(view, "translationX", -120f);
+        animation2.setDuration(500);
+        animation2.start();
+    }
+
+    public void stopAnimation(View view) {
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationY", 0f);
+        animation.setDuration(500);
+        animation.start();
+        ObjectAnimator animation2 = ObjectAnimator.ofFloat(view, "translationX", 0f);
+        animation2.setDuration(500);
+        animation2.start();
+    }
 }
+

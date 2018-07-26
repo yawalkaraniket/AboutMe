@@ -18,4 +18,5 @@
     <color name="pink_dark">#602268</color>
     <color name="light_blue">#41f49b</color>
     <color name="dark_gray">#9db2a8</color>
+    <color name="selector_border">#bf42f4</color>
 </resources>

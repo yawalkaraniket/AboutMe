@@ -61,14 +61,17 @@ public abstract class BaseActivity extends FragmentActivity {
     protected FontEditText loading;
     Activity activity;
     private SharedPreferencesUtil preferences;
+    BottomNavigationView bottomNavigationView;
 
     public void setupProgress(RelativeLayout layout) {
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         progressBar = new ProgressBar(layout.getContext());
-        progressBar.setLayoutParams(new LinearLayout.LayoutParams((int) (60 * dp()), (int) (60 * dp())));
+        progressBar.setLayoutParams(new LinearLayout.LayoutParams((int) (60 * dp()),
+                (int) (60 * dp())));
         RelativeLayout.LayoutParams params;
-        linearLayout.setLayoutParams(params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        linearLayout.setLayoutParams(params = new RelativeLayout.LayoutParams(ViewGroup.
+                LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         linearLayout.setGravity(Gravity.CENTER);
         params.addRule(RelativeLayout.CENTER_IN_PARENT);
         loading = new FontEditText(this);
@@ -78,7 +81,8 @@ public abstract class BaseActivity extends FragmentActivity {
         linearLayout.addView(progressBar);
         linearLayout.addView(loading);
         blockLayout = new RelativeLayout(this);
-        blockLayout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        blockLayout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
         layout.addView(blockLayout);
         blockLayout.setBackgroundColor(getResources().getColor(R.color.black_transparent));
         blockLayout.setOnClickListener(click -> {
@@ -139,12 +143,14 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public boolean isConnectedToInternet() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
         return connectivityManager.getActiveNetworkInfo() != null;
     }
 
     public void netWorkErrorDialog(Boolean back) {
-        DialogUtil.yesDialog(this, "Network Error", "please check your network....", click -> {
+        DialogUtil.yesDialog(this, "Network Error",
+                "please check your network....", click -> {
             onBackPressed();
         });
     }
@@ -171,6 +177,7 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void bottomNavigationSetUp(BottomNavigationView navigationView, Activity activity) {
+        this.bottomNavigationView = navigationView;
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -209,7 +216,8 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public void navigationViewSetUp(NavigationView navigationView, Activity activity) {
         preferences = new SharedPreferencesUtil(activity.getApplicationContext());
-        if (preferences.getLoginWith().equals("google") || preferences.getLoginWith().equals("email")|| preferences.getLoginWith().equals("SignUp")) {
+        if (preferences.getLoginWith().equals("google") || preferences.getLoginWith().equals("email")
+                || preferences.getLoginWith().equals("SignUp")) {
 
             CircleImageView profileImge = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
             TextView name = navigationView.getHeaderView(0).findViewById(R.id.profile_name);
@@ -253,8 +261,10 @@ public abstract class BaseActivity extends FragmentActivity {
 
     private void deselectAllMenus(NavigationView navigationView) {
         for (int index = 0; index < navigationView.getMenu().size(); index++) {
-            for (int subIndex = index; subIndex < navigationView.getMenu().getItem(index).getSubMenu().size(); subIndex++) {
-                navigationView.getMenu().getItem(index).getSubMenu().getItem(subIndex).setChecked(false);
+            for (int subIndex = index; subIndex < navigationView.getMenu().getItem(index).
+                    getSubMenu().size(); subIndex++) {
+                navigationView.getMenu().getItem(index).getSubMenu().getItem(subIndex).
+                        setChecked(false);
             }
         }
         navigationView.getMenu().getItem(1).getSubMenu().getItem(0).setChecked(false);
@@ -320,7 +330,8 @@ public abstract class BaseActivity extends FragmentActivity {
     private void shareApplication() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        String shareBodyText = "Now, share your profile to the words.\n Click on the below link";
+        String shareBodyText = "Now, connect your profile to the world \n and " +
+                "\n help to manage your activities.\n Click on the below link";
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "About Me");
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
         startActivity(Intent.createChooser(shareIntent, "Shearing Option"));

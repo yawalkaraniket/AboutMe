@@ -65,12 +65,14 @@ public class MobileAuthenticationActivity extends BaseActivity {
                 inputVerificationCode = verificationCode.getText().toString();
                 if (inputVerificationCode.equals(phoneAuthCredential.getSmsCode())) {
                     displayToast(getApplicationContext(), getString(R.string.success_message));
-                    DialogUtil.yesDialog(activity, getString(R.string.confirm_message), getString(R.string.mobile_number_registration_successful), click -> {
+                    DialogUtil.yesDialog(activity, getString(R.string.confirm_message), getString(R.string.mobile_number_registration_successful),
+                            click -> {
                         Intent intent = new Intent(getApplicationContext(), MpinActivity.class);
                         startActivity(intent);
                         preferences.putLoginWith("SignUp");
                         preferences.setName(userInfo.getName());
                         preferences.setEmail(userInfo.getEmail());
+                        preferences.setMobileNumber(mobileNumber);
                         userInfo.setMobileNo(mobileNumber);
                     });
                 }
@@ -98,7 +100,8 @@ public class MobileAuthenticationActivity extends BaseActivity {
     }
 
     public void send_code() {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(userInfo.getCountryCode() + mobileNumber, 60, TimeUnit.SECONDS, this,
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(userInfo.getCountryCode() +
+                        mobileNumber, 60, TimeUnit.SECONDS, this,
                 mOnVerificationStateChangedCallbacks);
     }
 
