@@ -84,10 +84,9 @@ public class ProfileHome extends Fragment {
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                data.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    if(!data.contains(snapshot.getKey())){
                         data.add(snapshot.getKey());
-                    }
                 }
                 ProfileAdapter adapter = new ProfileAdapter(data);
                 selectProfileRecyclerView.setAdapter(adapter);
@@ -99,7 +98,6 @@ public class ProfileHome extends Fragment {
                         startActivity(intent);
                     }
                 });
-
             }
 
             @Override
