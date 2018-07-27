@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.aboutme.avenjr.aboutme.Adapter.Profile.ProfileSectionAdapter;
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class OtherActivitySection extends Fragment {
     RecyclerView sectionRecyclerView;
 
     ArrayList<String> name;
+    SharedPreferencesUtil preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,9 +38,9 @@ public class OtherActivitySection extends Fragment {
         name.add("first");
         name.add("rff");
 
-
+        preferences = new SharedPreferencesUtil(getActivity().getApplicationContext());
         sectionRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name);
+        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name,preferences);
         sectionRecyclerView.setAdapter(adapter);
         adapter.setItemClickListener(new com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener() {
             @Override

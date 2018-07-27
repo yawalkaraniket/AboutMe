@@ -86,4 +86,13 @@ public class SharedPreferencesUtil {
         String defaultValue = context.getResources().getString(R.string.mobile_number);
         return sharedPref.getString(context.getString(R.string.mobile_number), defaultValue);
     }
+
+    public void setToken(String token) {
+        editor.putString(context.getString(R.string.user_token),token).apply();
+    }
+    public String getToken() {
+        String defaultValue = context.getResources().getString(R.string.user_token);
+        return sharedPref.getString(context.getString(R.string.user_token), defaultValue);
+    }
+
 }

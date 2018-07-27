@@ -3,6 +3,7 @@ package com.aboutme.avenjr.aboutme.fragment.profile;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,10 @@ import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.activity.ProfileSectionDescription;
 import com.aboutme.avenjr.aboutme.data.ProfileInfo;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -27,6 +32,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
 public class ProfileHome extends Fragment {
 
@@ -51,10 +58,11 @@ public class ProfileHome extends Fragment {
     @BindView(R.id.profile_info_layout)
     RelativeLayout profileInfoParent;
 
-    ArrayList<String> data;
+    ArrayList<String> data = new ArrayList<>();
     ProfileInfo profileInfo;
     SharedPreferencesUtil preferences;
     Boolean click = true;
+    DatabaseReference mDatabaseReference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,23 +72,41 @@ public class ProfileHome extends Fragment {
         ButterKnife.bind(this, view);
         preferences = new SharedPreferencesUtil(Objects.requireNonNull(getActivity()).getApplicationContext());
 
-        setSectionData();
         setProfileHeader();
-
+        mDatabaseReference = getFireBaseReference("UserInformation/"+preferences.getToken()+"/Profile");
+        setProfileData();
         header.setView(getString(R.string.profile_header_string), this.getActivity(), false);
         selectProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        return view;
+    }
 
-        ProfileAdapter adapter = new ProfileAdapter(data);
-        selectProfileRecyclerView.setAdapter(adapter);
-        adapter.setItemClickListener(new com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener() {
+    private void setProfileData() {
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getContext(), ProfileSectionDescription.class);
-                intent.putExtra("header", data.get(position));
-                startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    if(!data.contains(snapshot.getKey())){
+                        data.add(snapshot.getKey());
+                    }
+                }
+                ProfileAdapter adapter = new ProfileAdapter(data);
+                selectProfileRecyclerView.setAdapter(adapter);
+                adapter.setItemClickListener(new com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(getContext(), ProfileSectionDescription.class);
+                        intent.putExtra("header", data.get(position));
+                        startActivity(intent);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
-        return view;
     }
 
     @OnClick(R.id.profile_header)
@@ -112,12 +138,6 @@ public class ProfileHome extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-    }
-
-    private void setSectionData() {
-        data = new ArrayList<>();
-        profileInfo = new ProfileInfo();
-        data.addAll(profileInfo.getAllUserProfileSections());
     }
 
     public void startProfileImageAnimation(View view) {

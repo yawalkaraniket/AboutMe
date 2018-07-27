@@ -80,6 +80,7 @@ public class SignInActivity extends BaseActivity {
                                         preference.setEmail(userInfo.get("email"));
                                         preference.setMPin(userInfo.get("mpin"));
                                         preference.setProfileImageUrl("null");
+                                        preference.setToken(userInfo.get("databaseKey"));
                                     });
                                 } else {
                                     displayToast(getBaseContext(), "please check your password..");

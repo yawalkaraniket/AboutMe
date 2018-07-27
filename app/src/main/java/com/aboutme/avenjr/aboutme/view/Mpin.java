@@ -37,7 +37,6 @@ public class Mpin extends RelativeLayout {
     Context context;
     private boolean wantToConfirm = false;
     DatabaseReference mDatabaseReference = getFireBaseReference("UserInformation");
-    ;
     UserInformation mUserInformation = new UserInformation();
     SharedPreferencesUtil preferences;
 

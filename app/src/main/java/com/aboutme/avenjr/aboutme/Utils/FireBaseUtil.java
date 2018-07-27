@@ -12,18 +12,15 @@ import java.util.ArrayList;
 
 public class FireBaseUtil {
 
-    public static DatabaseReference  getFireBaseReference(String info){
-        return  FirebaseDatabase.getInstance().getReference(info);
+    public static DatabaseReference getFireBaseReference(String info) {
+        return FirebaseDatabase.getInstance().getReference(info);
     }
-    public static void saveInformation(UserInformation userInformation, DatabaseReference mDatabaseReference){
+
+    public static void saveInformation(UserInformation userInformation, DatabaseReference mDatabaseReference) {
         String UID;
         UserInformation mUserInformation = new UserInformation();
-        UID = mDatabaseReference.push().getKey() ;
+        UID = mDatabaseReference.push().getKey();
         mUserInformation.setDatabaseKey(UID);
         mDatabaseReference.child(UID).setValue(userInformation);
-    }
-    public static void saveInformationToUser(ArrayList list, DatabaseReference databaseReference){
-        UserInformation mUserInformation = new UserInformation();
-        databaseReference.child(mUserInformation.getDatabaseKey()).setValue(list.toString());
     }
 }

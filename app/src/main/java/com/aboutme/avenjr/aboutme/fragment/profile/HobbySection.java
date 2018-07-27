@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.aboutme.avenjr.aboutme.Adapter.Profile.ProfileSectionAdapter;
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.data.ProfileInfo;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class HobbySection extends Fragment {
 
     ArrayList<String> name;
     ProfileInfo profileInfo;
+    SharedPreferencesUtil preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,8 +39,9 @@ public class HobbySection extends Fragment {
         ButterKnife.bind(this,view);
         setHobbies();
 
+        preferences = new SharedPreferencesUtil(getActivity().getApplicationContext());
         sectionRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name);
+        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name,preferences);
         sectionRecyclerView.setAdapter(adapter);
         adapter.setItemClickListener(new com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener() {
             @Override

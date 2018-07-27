@@ -9,10 +9,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
+import com.aboutme.avenjr.aboutme.activity.UserInformation;
 import com.aboutme.avenjr.aboutme.data.ProfileInfo;
 import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
+
+import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
 public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAdapter.ProfileSectionAdapterViewHolder> {
 
@@ -20,9 +26,13 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
     private ArrayList<String> section_name = new ArrayList<>();
     private ProfileInfo mProfileInfo = new ProfileInfo();
     private Boolean click = true;
+    private DatabaseReference mDatabaseReference;
+    private UserInformation userInfo;
+    private SharedPreferencesUtil preferences;
 
-    public ProfileSectionAdapter(ArrayList<String> data) {
+    public ProfileSectionAdapter(ArrayList<String> data,SharedPreferencesUtil preferences) {
         this.section_name = data;
+        this.preferences = preferences;
     }
 
     @NonNull
@@ -30,6 +40,8 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
     public ProfileSectionAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.profile_sections_adapter_layout, parent, false);
+        this.mDatabaseReference = getFireBaseReference("UserInformation/"+preferences.getToken()+"/Profile");
+        this.userInfo = new UserInformation();
         return new ProfileSectionAdapterViewHolder(view);
     }
 
@@ -62,16 +74,26 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
                 public void onClick(View v) {
                     mRecyclerViewListener.onItemClick(sectionName, position);
                     mProfileInfo.setAllUserProfileSections(section_name.get(position));
-                    if(click){
+                    if (click) {
                         itemView.setAlpha(0.5f);
                         click = false;
-                    }else {
+                        saveSectionName(section_name.get(position));
+                    } else {
                         itemView.setAlpha(1f);
                         click = true;
+                        removeSectionName(section_name.get(position));
                     }
                 }
             });
         }
+    }
+
+    private void saveSectionName(String section) {
+        mDatabaseReference.child(section).setValue("");
+    }
+
+    private void removeSectionName(String section) {
+        mDatabaseReference.child(section).removeValue();
     }
 
     public void setItemClickListener(RecyclerViewListener recyclerViewListener) {

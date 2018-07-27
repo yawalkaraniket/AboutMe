@@ -74,7 +74,7 @@ public class SetApplicationPasswordActivity extends AppCompatActivity {
                         preferences.putLoginWith("SignUp");
                         preferences.setPassword(password.getText().toString());
                         userInfo.setPassword(password.getText().toString());
-                        Intent intent = new Intent(this, MobileAuthenticationActivity.class);
+                        Intent intent = new Intent(this, MpinActivity.class);
                         startActivity(intent);
                     });
         }
