@@ -27,7 +27,6 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
     private ProfileInfo mProfileInfo = new ProfileInfo();
     private Boolean click = true;
     private DatabaseReference mDatabaseReference;
-    private UserInformation userInfo;
     private SharedPreferencesUtil preferences;
 
     public ProfileSectionAdapter(ArrayList<String> data,SharedPreferencesUtil preferences) {
@@ -41,7 +40,6 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.profile_sections_adapter_layout, parent, false);
         this.mDatabaseReference = getFireBaseReference("UserInformation/"+preferences.getToken()+"/Profile");
-        this.userInfo = new UserInformation();
         return new ProfileSectionAdapterViewHolder(view);
     }
 

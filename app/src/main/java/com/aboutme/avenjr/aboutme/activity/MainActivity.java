@@ -38,6 +38,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import butterknife.BindView;
@@ -72,6 +74,8 @@ public class MainActivity extends BaseActivity {
     Context context;
     SharedPreferencesUtil preference;
     Intent service;
+    String token;
+    HashMap<String, String> userInfo = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,32 +277,50 @@ public class MainActivity extends BaseActivity {
     }
 
     public void isAlreadyRegister(String email, FirebaseUser user) {
-        getFireBaseReference("UserInformation").orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    if(preference.getMobileNumber().equals(getResources().getString(R.string.mobile_number))){
-                        displayToast(context,"user already exists. \nplease login...");
+        getFireBaseReference("UserInformation").orderByChild("email").equalTo(email).
+                addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            if (preference.getMobileNumber().equals(getResources().getString(R.string.mobile_number))) {
+                                DialogUtil.yesDialog(activity, getString(R.string.success_message),
+                                        "you are already registered! \n click yes to login to the application...",
+                                        click -> {
+                                            for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                                token = userSnapshot.getKey();
+                                                for (DataSnapshot programSnapshot : userSnapshot.getChildren()) {
+                                                    userInfo.put(programSnapshot.getKey(), Objects.requireNonNull(programSnapshot.getValue()).toString());
+                                                }
+                                            }
+                                            Intent homeScreen = new Intent(getBaseContext(), MpinActivity.class);
+                                            preference.putLoginWith("email");
+                                            preference.setName(userInfo.get("name"));
+                                            preference.setEmail(userInfo.get("email"));
+                                            preference.setMPin(userInfo.get("mpin"));
+                                            preference.setProfileImageUrl("null");
+                                            preference.setToken(userInfo.get("databaseKey"));
+                                            startActivity(homeScreen);
+                                        });
+                            }
+                        } else {
+                            DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
+                                    + user.getEmail() + " Success.", click -> {
+                                new UserInformation(user.getEmail(), null, user.getDisplayName());
+                                Intent intent = new Intent(getApplicationContext(), SetApplicationPasswordActivity.class);
+                                preference.setName(user.getDisplayName());
+                                preference.setEmail(user.getEmail());
+                                preference.setProfileImageUrl(user.getPhotoUrl().toString());
+                                preference.putLoginWith("google");
+                                startActivity(intent);
+                                activity.finish();
+                            });
+                        }
                     }
-                } else {
-                    DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
-                            + user.getEmail() + " Success.", click -> {
-                        new UserInformation(user.getEmail(), null, user.getDisplayName());
-                        Intent intent = new Intent(getApplicationContext(), SetApplicationPasswordActivity.class);
-                        preference.setName(user.getDisplayName());
-                        preference.setEmail(user.getEmail());
-                        preference.setProfileImageUrl(user.getPhotoUrl().toString());
-                        preference.putLoginWith("google");
-                        startActivity(intent);
-                        activity.finish();
-                    });
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                    }
+                });
     }
 }
