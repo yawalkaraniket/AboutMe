@@ -61,13 +61,15 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
     class ProfileSectionAdapterViewHolder extends RecyclerView.ViewHolder {
         TextView sectionName;
         TextView sectionDescription;
+        TextView addSectionButton;
         int position = 0;
 
         ProfileSectionAdapterViewHolder(View itemView) {
             super(itemView);
+            addSectionButton = itemView.findViewById(R.id.add_category_button);
             sectionName = itemView.findViewById(R.id.profile_section_name);
             sectionDescription = itemView.findViewById(R.id.section_description);
-            sectionName.setOnClickListener(new View.OnClickListener() {
+            addSectionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mRecyclerViewListener.onItemClick(sectionName, position);

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.aboutme.avenjr.aboutme.Adapter.Profile.ProfileSectionAdapter;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
+import com.aboutme.avenjr.aboutme.data.ProfileInfo;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class OtherActivitySection extends Fragment {
 
     ArrayList<String> name;
     SharedPreferencesUtil preferences;
+    ProfileInfo profileInfo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,9 +36,7 @@ public class OtherActivitySection extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_other_activity_section, container, false);
         ButterKnife.bind(this,view);
-        name = new ArrayList<>();
-        name.add("first");
-        name.add("rff");
+        setOtherActivities();
 
         preferences = new SharedPreferencesUtil(getActivity().getApplicationContext());
         sectionRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -49,5 +49,13 @@ public class OtherActivitySection extends Fragment {
             }
         });
         return view;
+    }
+
+    private void setOtherActivities() {
+        name = new ArrayList<>();
+        profileInfo = new ProfileInfo();
+        profileInfo.setOtherActivities();
+
+        name.addAll(profileInfo.getOtherActivities());
     }
 }

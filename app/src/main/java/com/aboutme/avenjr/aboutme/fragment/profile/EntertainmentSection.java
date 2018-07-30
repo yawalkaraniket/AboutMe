@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.aboutme.avenjr.aboutme.Adapter.Profile.ProfileSectionAdapter;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
+import com.aboutme.avenjr.aboutme.data.ProfileInfo;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class EntertainmentSection extends Fragment {
     RecyclerView sectionRecyclerView;
 
     ArrayList<String> name;
+    ProfileInfo profileInfo;
     SharedPreferencesUtil preferences;
 
     @Override
@@ -35,9 +37,7 @@ public class EntertainmentSection extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_entertainment_section, container, false);
         ButterKnife.bind(this,view);
-        name = new ArrayList<>();
-        name.add("first");
-        name.add("rff");
+        setEntertainmentSection();
 
         preferences = new SharedPreferencesUtil(getActivity().getApplicationContext());
         sectionRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -50,6 +50,14 @@ public class EntertainmentSection extends Fragment {
             }
         });
         return view;
+    }
+
+    private void setEntertainmentSection() {
+        name = new ArrayList<>();
+        profileInfo  = new ProfileInfo();
+        profileInfo.setEntertainmentSection();
+
+        name.addAll(profileInfo.getEntertainmentSection());
     }
 
 }

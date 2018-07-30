@@ -66,7 +66,7 @@
     <string name="confirm_message">Confirm!</string>
     <string name="select_country">please select country…</string>
     <string name="entertainment_section">Entertainment</string>
-    <string name="select_category">Select Category</string>
+    <string name="select_category">Add Category</string>
     <string name="section_description">Add contribution related to your</string>
     <string name="section_image">section image</string>
     <string name="terms_of_service">Terms of Service</string>

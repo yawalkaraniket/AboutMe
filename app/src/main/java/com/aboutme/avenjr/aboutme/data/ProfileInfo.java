@@ -6,9 +6,9 @@ public class ProfileInfo {
 
     private static ArrayList<String> allUserProfileSections= new ArrayList<>();
     private ArrayList<String> hobbies = new ArrayList<>();
-    private static ArrayList<String> otherActivities = new ArrayList<>();
-    private static ArrayList<String> educational = new ArrayList<>();
-    private static ArrayList<String> entertainment = new ArrayList<>();
+    private ArrayList<String> otherActivities = new ArrayList<>();
+    private ArrayList<String> educationalCategories = new ArrayList<>();
+    private ArrayList<String> entertainment = new ArrayList<>();
 
     public ArrayList<String> getAllUserProfileSections() {
         return allUserProfileSections;
@@ -25,35 +25,42 @@ public class ProfileInfo {
     }
 
     public void setHobbies() {
-        this.hobbies.add("Cricket");
         this.hobbies.add("Poetry");
         this.hobbies.add("Coins Collection");
-        this.hobbies.add("Dramas");
         this.hobbies.add("Books Reading");
-        this.hobbies.add("HolyBoll");
     }
 
     public ArrayList<String> getOtherActivities() {
         return otherActivities;
     }
 
-    public void setOtherActivities(ArrayList<String> otherActivities) {
-        ProfileInfo.otherActivities = otherActivities;
+    public void setOtherActivities() {
+        this.otherActivities.add("Cricket");
+        this.otherActivities.add("Dramas");
+        this.otherActivities.add("HolyBoll");
     }
 
-    public ArrayList<String> getEducational() {
-        return educational;
+    public ArrayList<String> getEducationalCategories() {
+        return educationalCategories;
     }
 
-    public void setEducational(ArrayList<String> educational) {
-        ProfileInfo.educational = educational;
+    public void setEducationalCategories() {
+        this.educationalCategories.add("Pre-Primary");
+        this.educationalCategories.add("Primary");
+        this.educationalCategories.add("Secondary");
+        this.educationalCategories.add("Higher Secondary");
+        this.educationalCategories.add("Diploma");
+        this.educationalCategories.add("Graduation");
+        this.educationalCategories.add("Post Graduation");
+        this.educationalCategories.add("Projects");
     }
 
-    public ArrayList<String> getEntertainment() {
+    public ArrayList<String> getEntertainmentSection() {
         return entertainment;
     }
 
-    public void setEntertainment(ArrayList<String> entertainment) {
-        ProfileInfo.entertainment = entertainment;
+    public void setEntertainmentSection() {
+        this.entertainment.add("Movies");
+        this.entertainment.add("Songs");
     }
 }
