@@ -81,6 +81,7 @@ public class SignInActivity extends BaseActivity {
                                         preference.setMPin(userInfo.get("mpin"));
                                         preference.setProfileImageUrl("null");
                                         preference.setToken(userInfo.get("databaseKey"));
+                                        preference.setAppRating(Float.valueOf(userInfo.get("rate")));
                                     });
                                 } else {
                                     displayToast(getBaseContext(), "please check your password..");
