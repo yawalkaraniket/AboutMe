@@ -112,7 +112,7 @@ public class Mpin extends RelativeLayout {
                             if (wantToConfirm && mPin.equals(mPinConform)) {
                                 wantToConfirm = false;
                                 mUserInformation.setMPin(mPin.toString());
-                                FireBaseUtil.saveInformation(mUserInformation, mDatabaseReference);
+                                FireBaseUtil.saveInformation(mUserInformation, mDatabaseReference,preferences);
                                 Intent intent = new Intent(context, HomeScreen.class);
                                 intent.putExtra("login_with", "signIn");
                                 preferences.setMPin(mPin.toString());

@@ -3,11 +3,18 @@ package com.aboutme.avenjr.aboutme.view;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
+import com.google.firebase.database.DatabaseReference;
+
+import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
 /**
  * Created by tudip on 1/5/18.
@@ -67,7 +74,6 @@ public class DialogUtil {
                 }
             }
         });
-
         return dialog;
     }
 
@@ -90,6 +96,33 @@ public class DialogUtil {
 
         return dialog;
     }
+
+    public static Dialog rateMe(Activity activity, String titleText, final View.OnClickListener yesButtonclick) {
+        View view = activity.getLayoutInflater().inflate(R.layout.rate_me,null);
+
+        SharedPreferencesUtil preferences = new SharedPreferencesUtil(activity.getApplicationContext());
+        DatabaseReference databaseReference = getFireBaseReference("UserInformation/"+preferences.getToken()+"/rate");
+        TextView dialogHeaderText  =  view.findViewById(R.id.dialog_header);
+        RatingBar rating = view.findViewById(R.id.rate_me);
+        rating.setRating(Float.parseFloat(preferences.getAppRating()));
+        View yesButton = view.findViewById(R.id.layout_dialog_yes);
+        final android.app.Dialog dialog = new android.app.Dialog(activity, R.style.dialog_style);
+        dialog.setContentView(view);
+        dialog.show();
+        dialogHeaderText.setText(titleText);
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                preferences.setAppRating(rating.getRating());
+                if(yesButtonclick!=null) {
+                    yesButtonclick.onClick(v);
+                }
+            }
+        });
+        return dialog;
+    }
+
 
     private static boolean isConnectedToInternet(Activity activity) {
         ConnectivityManager connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);

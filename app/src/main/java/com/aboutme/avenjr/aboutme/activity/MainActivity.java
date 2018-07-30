@@ -299,12 +299,21 @@ public class MainActivity extends BaseActivity {
                                             preference.setMPin(userInfo.get("mpin"));
                                             preference.setProfileImageUrl("null");
                                             preference.setToken(userInfo.get("databaseKey"));
+                                            preference.putLoginWith("google");
+                                            preference.setAppRating(Float.valueOf(userInfo.get("rate")));
                                             startActivity(homeScreen);
                                         });
                             }
                         } else {
                             DialogUtil.yesDialog(activity, "Success", "Sign in with email id "
                                     + user.getEmail() + " Success.", click -> {
+
+                                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                    token = userSnapshot.getKey();
+                                    for (DataSnapshot programSnapshot : userSnapshot.getChildren()) {
+                                        userInfo.put(programSnapshot.getKey(), Objects.requireNonNull(programSnapshot.getValue()).toString());
+                                    }
+                                }
                                 new UserInformation(user.getEmail(), null, user.getDisplayName());
                                 Intent intent = new Intent(getApplicationContext(), SetApplicationPasswordActivity.class);
                                 preference.setName(user.getDisplayName());

@@ -16,10 +16,11 @@ public class FireBaseUtil {
         return FirebaseDatabase.getInstance().getReference(info);
     }
 
-    public static void saveInformation(UserInformation userInformation, DatabaseReference mDatabaseReference) {
+    public static void saveInformation(UserInformation userInformation, DatabaseReference mDatabaseReference,SharedPreferencesUtil preferencesUtil) {
         String UID;
         UserInformation mUserInformation = new UserInformation();
         UID = mDatabaseReference.push().getKey();
+        preferencesUtil.setToken(UID);
         mUserInformation.setDatabaseKey(UID);
         mDatabaseReference.child(UID).setValue(userInformation);
     }

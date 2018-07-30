@@ -39,10 +39,13 @@ import com.aboutme.avenjr.aboutme.fragment.HomeFragment;
 import com.aboutme.avenjr.aboutme.fragment.WorkFragment;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.FontEditText;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
 /**
  * Created by AvenjR on 11/5/18.
@@ -62,6 +65,7 @@ public abstract class BaseActivity extends FragmentActivity {
     Activity activity;
     private SharedPreferencesUtil preferences;
     BottomNavigationView bottomNavigationView;
+    DatabaseReference databaseReference;
 
     public void setupProgress(RelativeLayout layout) {
         LinearLayout linearLayout = new LinearLayout(this);
@@ -216,6 +220,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public void navigationViewSetUp(NavigationView navigationView, Activity activity) {
         preferences = new SharedPreferencesUtil(activity.getApplicationContext());
+        databaseReference = getFireBaseReference("UserInformation/"+preferences.getToken()+"/rate");
         if (preferences.getLoginWith().equals("google") || preferences.getLoginWith().equals("email")
                 || preferences.getLoginWith().equals("SignUp")) {
 
@@ -247,6 +252,9 @@ public abstract class BaseActivity extends FragmentActivity {
                     case R.id.app_rate:
                         item.setChecked(true);
                         closeDrawer(activity);
+                        DialogUtil.rateMe(activity,"Rate Me",click->{
+                            databaseReference.setValue(preferences.getAppRating());
+                        });
                         break;
                     case R.id.app_feedback:
                         item.setChecked(true);

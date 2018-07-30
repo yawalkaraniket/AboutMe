@@ -38,61 +38,71 @@ public class SharedPreferencesUtil {
         return sharedPref.getString(context.getString(R.string.email), defaultValue);
     }
 
-    public void setProfileImageUrl(String url){
-        editor.putString(context.getString(R.string.photo_url),url).apply();
+    public void setProfileImageUrl(String url) {
+        editor.putString(context.getString(R.string.photo_url), url).apply();
     }
 
-    public String getProfileImageUrl(){
+    public String getProfileImageUrl() {
         String defaultValue = context.getResources().getString(R.string.photo_url);
         return sharedPref.getString(context.getString(R.string.photo_url), defaultValue);
     }
 
-    public void putLoginWith(String loginFrom){
-        editor.putString(context.getString(R.string.loginFrom),loginFrom).apply();
+    public void putLoginWith(String loginFrom) {
+        editor.putString(context.getString(R.string.loginFrom), loginFrom).apply();
     }
 
-    public String getLoginWith(){
+    public String getLoginWith() {
         String defaultValue = context.getResources().getString(R.string.loginFrom);
         return sharedPref.getString(context.getString(R.string.loginFrom), defaultValue);
     }
 
-    public void clearPreferences(){
+    public void clearPreferences() {
         editor.clear().apply();
     }
 
-    public void setMPin(String mPin){
-        editor.putString(context.getString(R.string.mpin),mPin).apply();
+    public void setMPin(String mPin) {
+        editor.putString(context.getString(R.string.mpin), mPin).apply();
     }
 
-    public String getMPin(){
+    public String getMPin() {
         String defaultValue = context.getResources().getString(R.string.mpin);
         return sharedPref.getString(context.getString(R.string.mpin), defaultValue);
     }
 
-    public void setPassword(String password){
-        editor.putString(context.getString(R.string.password),password).apply();
+    public void setPassword(String password) {
+        editor.putString(context.getString(R.string.password), password).apply();
     }
 
-    public String getPassword(){
+    public String getPassword() {
         String defaultValue = context.getResources().getString(R.string.password);
         return sharedPref.getString(context.getString(R.string.password), defaultValue);
     }
 
-    public void setMobileNumber(String mobileNumber){
-        editor.putString(context.getString(R.string.mobile_number),mobileNumber).apply();
+    public void setMobileNumber(String mobileNumber) {
+        editor.putString(context.getString(R.string.mobile_number), mobileNumber).apply();
     }
 
-    public String getMobileNumber(){
+    public String getMobileNumber() {
         String defaultValue = context.getResources().getString(R.string.mobile_number);
         return sharedPref.getString(context.getString(R.string.mobile_number), defaultValue);
     }
 
     public void setToken(String token) {
-        editor.putString(context.getString(R.string.user_token),token).apply();
+        editor.putString(context.getString(R.string.user_token), token).apply();
     }
+
     public String getToken() {
         String defaultValue = context.getResources().getString(R.string.user_token);
         return sharedPref.getString(context.getString(R.string.user_token), defaultValue);
+    }
+
+    public void setAppRating(Float rate) {
+        editor.putString(context.getString(R.string.app_rate), rate.toString()).apply();
+    }
+
+    public String getAppRating() {
+        String defaultValue = context.getResources().getString(R.string.app_rate);
+        return sharedPref.getString(context.getString(R.string.app_rate), defaultValue);
     }
 
 }
