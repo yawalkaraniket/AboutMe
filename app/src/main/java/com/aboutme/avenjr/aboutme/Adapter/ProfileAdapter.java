@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
@@ -18,7 +19,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileA
     private RecyclerViewListener mRecyclerViewListener;
     private ArrayList<String> data = new ArrayList<>();
 
-    public ProfileAdapter(ArrayList data){
+    public ProfileAdapter(ArrayList data) {
         this.data = data;
     }
 
@@ -43,21 +44,23 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileA
 
     class ProfileAdapterViewHolder extends RecyclerView.ViewHolder {
         TextView text;
+        ImageView profileSelectionButton;
         int position = 0;
 
         ProfileAdapterViewHolder(View view) {
             super(view);
             text = view.findViewById(R.id.select_profile_text);
-            view.setOnClickListener(new View.OnClickListener() {
+            profileSelectionButton = view.findViewById(R.id.select_profile_button);
+            profileSelectionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mRecyclerViewListener.onItemClick(v,position);
-
+                    mRecyclerViewListener.onItemClick(profileSelectionButton, position);
                 }
             });
         }
     }
+
     public void setItemClickListener(RecyclerViewListener recyclerViewListener) {
-        this.mRecyclerViewListener= recyclerViewListener;
+        this.mRecyclerViewListener = recyclerViewListener;
     }
 }

@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.aboutme.avenjr.aboutme.fragment.profile.ProfileHome.profileSections;
+
 public class EducationSection extends Fragment {
 
     @BindView(R.id.education_section)
@@ -34,12 +36,12 @@ public class EducationSection extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_education_section, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         setEducationalInfo();
 
         preferences = new SharedPreferencesUtil(getActivity().getApplicationContext());
         sectionRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name,preferences);
+        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name, preferences);
         sectionRecyclerView.setAdapter(adapter);
         adapter.setItemClickListener(new RecyclerViewListener() {
             @Override
@@ -56,5 +58,10 @@ public class EducationSection extends Fragment {
         profileInfo.setEducationalCategories();
 
         name.addAll(profileInfo.getEducationalCategories());
+        for (String section : profileSections) {
+            if(name.contains(section)){
+                name.remove(section);
+            }
+        }
     }
 }

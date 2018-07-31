@@ -58,7 +58,7 @@ public class ProfileHome extends Fragment {
     @BindView(R.id.profile_info_layout)
     RelativeLayout profileInfoParent;
 
-    ArrayList<String> data = new ArrayList<>();
+    public static ArrayList<String> profileSections = new ArrayList<>();
     ProfileInfo profileInfo;
     SharedPreferencesUtil preferences;
     Boolean click = true;
@@ -84,17 +84,17 @@ public class ProfileHome extends Fragment {
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                data.clear();
+                profileSections.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        data.add(snapshot.getKey());
+                        profileSections.add(snapshot.getKey());
                 }
-                ProfileAdapter adapter = new ProfileAdapter(data);
+                ProfileAdapter adapter = new ProfileAdapter(profileSections);
                 selectProfileRecyclerView.setAdapter(adapter);
                 adapter.setItemClickListener(new com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(getContext(), ProfileSectionDescription.class);
-                        intent.putExtra("header", data.get(position));
+                        intent.putExtra("header", profileSections.get(position));
                         startActivity(intent);
                     }
                 });

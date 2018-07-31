@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.aboutme.avenjr.aboutme.fragment.profile.ProfileHome.profileSections;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -58,6 +60,12 @@ public class HobbySection extends Fragment {
         profileInfo.setHobbies();
 
         name.addAll(profileInfo.getHobbies());
+        for (String section : profileSections) {
+            if(name.contains(section)){
+                name.remove(section);
+            }
+        }
+
     }
 
 }

@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.aboutme.avenjr.aboutme.fragment.profile.ProfileHome.profileSections;
+
 public class OtherActivitySection extends Fragment {
 
 
@@ -57,5 +59,12 @@ public class OtherActivitySection extends Fragment {
         profileInfo.setOtherActivities();
 
         name.addAll(profileInfo.getOtherActivities());
+
+        for (String section : profileSections) {
+            if(name.contains(section)){
+                name.remove(section);
+            }
+        }
+
     }
 }

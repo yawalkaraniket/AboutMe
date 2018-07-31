@@ -19,12 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 
 import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
+import static com.aboutme.avenjr.aboutme.fragment.profile.ProfileHome.profileSections;
 
 public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAdapter.ProfileSectionAdapterViewHolder> {
 
     private RecyclerViewListener mRecyclerViewListener;
     private ArrayList<String> section_name = new ArrayList<>();
-    private ProfileInfo mProfileInfo = new ProfileInfo();
     private Boolean click = true;
     private DatabaseReference mDatabaseReference;
     private SharedPreferencesUtil preferences;
@@ -73,7 +73,6 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
                 @Override
                 public void onClick(View v) {
                     mRecyclerViewListener.onItemClick(sectionName, position);
-                    mProfileInfo.setAllUserProfileSections(section_name.get(position));
                     if (click) {
                         itemView.setAlpha(0.5f);
                         click = false;
