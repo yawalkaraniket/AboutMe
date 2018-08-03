@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.view.DataRegistration;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 import butterknife.BindView;
@@ -22,9 +21,6 @@ public class BlogFragment extends BaseFragment {
     @BindView(R.id.blog_body)
     RelativeLayout body;
 
-    @BindView(R.id.registration_layout)
-    DataRegistration registrationLayout;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,7 +29,6 @@ public class BlogFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         header.setUp(this.getActivity());
         header.setView(getString(R.string.blog_header_string), this.getActivity(),false);
-        registrationLayout.setUp(this.getActivity());
         setupProgress((RelativeLayout) view);
 
         return view;

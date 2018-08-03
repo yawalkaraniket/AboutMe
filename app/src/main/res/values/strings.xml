@@ -76,6 +76,7 @@
     <string name="user_token">token</string>
     <string name="app_rate">0.0f</string>
     <string name="category_selection">select and deselect the category</string>
+    <string name="back_click">back_header_click</string>
     <string-array name="select_country">
         <item>india</item>
         <item>America</item>
