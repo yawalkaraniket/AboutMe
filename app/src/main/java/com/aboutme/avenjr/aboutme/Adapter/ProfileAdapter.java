@@ -21,7 +21,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileA
 
     private RecyclerViewListener mRecyclerViewListener;
     private ArrayList<String> data = new ArrayList<>();
-    SharedPreferencesUtil preferences;
+    private SharedPreferencesUtil preferences;
 
     public ProfileAdapter(ArrayList data, Context context) {
         this.data = data;
@@ -67,8 +67,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileA
             removeSelection.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    view.setVisibility(View.GONE);
                     FireBaseUtil.removeSectionName(text.getText().toString(),preferences);
+                    notifyItemRemoved(position);
                 }
             });
         }

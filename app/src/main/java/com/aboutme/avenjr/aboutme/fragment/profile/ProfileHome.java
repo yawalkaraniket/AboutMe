@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -73,7 +74,7 @@ public class ProfileHome extends Fragment {
         preferences = new SharedPreferencesUtil(Objects.requireNonNull(getActivity()).getApplicationContext());
 
         setProfileHeader();
-        mDatabaseReference = getFireBaseReference("UserInformation/"+preferences.getToken()+"/Profile");
+        mDatabaseReference = getFireBaseReference("UserInformation/" + preferences.getToken() + "/Profile");
         setProfileData();
         header.setView(getString(R.string.profile_header_string), this.getActivity(), false);
         selectProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -85,11 +86,13 @@ public class ProfileHome extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 profileSections.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        profileSections.add(snapshot.getKey());
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    profileSections.add(snapshot.getKey());
                 }
-                ProfileAdapter adapter = new ProfileAdapter(profileSections,getActivity().getApplicationContext());
+                ProfileAdapter adapter = new ProfileAdapter(profileSections,
+                        Objects.requireNonNull(getActivity()).getApplicationContext());
                 selectProfileRecyclerView.setAdapter(adapter);
+                selectProfileRecyclerView.setItemAnimator(new DefaultItemAnimator());
                 adapter.setItemClickListener(new com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener() {
                     @Override
                     public void onItemClick(View view, int position) {
