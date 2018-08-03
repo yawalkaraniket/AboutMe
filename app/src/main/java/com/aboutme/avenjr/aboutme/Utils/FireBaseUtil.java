@@ -24,4 +24,8 @@ public class FireBaseUtil {
         mUserInformation.setDatabaseKey(UID);
         mDatabaseReference.child(UID).setValue(userInformation);
     }
+    public static void removeSectionName(String section, SharedPreferencesUtil preferencesUtil) {
+        DatabaseReference databaseReference = getFireBaseReference("UserInformation/"+preferencesUtil.getToken()+"/Profile");
+        databaseReference.child(section).removeValue();
+    }
 }

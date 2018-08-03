@@ -41,7 +41,7 @@ public class EducationSection extends Fragment {
 
         preferences = new SharedPreferencesUtil(getActivity().getApplicationContext());
         sectionRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name, preferences);
+        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name, preferences,getActivity());
         sectionRecyclerView.setAdapter(adapter);
         adapter.setItemClickListener(new RecyclerViewListener() {
             @Override

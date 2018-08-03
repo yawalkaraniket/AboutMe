@@ -88,7 +88,7 @@ public class ProfileHome extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                         profileSections.add(snapshot.getKey());
                 }
-                ProfileAdapter adapter = new ProfileAdapter(profileSections);
+                ProfileAdapter adapter = new ProfileAdapter(profileSections,getActivity().getApplicationContext());
                 selectProfileRecyclerView.setAdapter(adapter);
                 adapter.setItemClickListener(new com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener() {
                     @Override

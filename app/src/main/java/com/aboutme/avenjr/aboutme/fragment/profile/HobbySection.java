@@ -43,7 +43,7 @@ public class HobbySection extends Fragment {
 
         preferences = new SharedPreferencesUtil(getActivity().getApplicationContext());
         sectionRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name,preferences);
+        ProfileSectionAdapter adapter = new ProfileSectionAdapter(name,preferences,getActivity());
         sectionRecyclerView.setAdapter(adapter);
         adapter.setItemClickListener(new com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener() {
             @Override

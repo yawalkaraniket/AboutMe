@@ -76,12 +76,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/profile_header">
+            android:layout_below="@id/profile_header"
+            android:background="@color/grey">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/select_profile_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.aboutme.avenjr.aboutme.Adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
+import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.data.ProfileInfo;
 import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
 
@@ -18,9 +21,11 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileA
 
     private RecyclerViewListener mRecyclerViewListener;
     private ArrayList<String> data = new ArrayList<>();
+    SharedPreferencesUtil preferences;
 
-    public ProfileAdapter(ArrayList data) {
+    public ProfileAdapter(ArrayList data, Context context) {
         this.data = data;
+        this.preferences = new SharedPreferencesUtil(context);
     }
 
     @NonNull
@@ -45,16 +50,25 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileA
     class ProfileAdapterViewHolder extends RecyclerView.ViewHolder {
         TextView text;
         ImageView profileSelectionButton;
+        ImageView removeSelection;
         int position = 0;
 
         ProfileAdapterViewHolder(View view) {
             super(view);
             text = view.findViewById(R.id.select_profile_text);
+            removeSelection = view.findViewById(R.id.remove_button);
             profileSelectionButton = view.findViewById(R.id.select_profile_button);
             profileSelectionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mRecyclerViewListener.onItemClick(profileSelectionButton, position);
+                }
+            });
+            removeSelection.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    view.setVisibility(View.GONE);
+                    FireBaseUtil.removeSectionName(text.getText().toString(),preferences);
                 }
             });
         }

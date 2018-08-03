@@ -1,11 +1,15 @@
 package com.aboutme.avenjr.aboutme.Adapter.Profile;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.aboutme.avenjr.aboutme.R;
@@ -28,8 +32,10 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
     private Boolean click = true;
     private DatabaseReference mDatabaseReference;
     private SharedPreferencesUtil preferences;
+    private Activity mActivity;
 
-    public ProfileSectionAdapter(ArrayList<String> data,SharedPreferencesUtil preferences) {
+    public ProfileSectionAdapter(ArrayList<String> data, SharedPreferencesUtil preferences, Activity activity) {
+        this.mActivity = activity;
         this.section_name = data;
         this.preferences = preferences;
     }
@@ -61,11 +67,13 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
     class ProfileSectionAdapterViewHolder extends RecyclerView.ViewHolder {
         TextView sectionName;
         TextView sectionDescription;
-        TextView addSectionButton;
+        ImageView addSectionButton;
+        RelativeLayout parentLayout;
         int position = 0;
 
         ProfileSectionAdapterViewHolder(View itemView) {
             super(itemView);
+            parentLayout = itemView.findViewById(R.id.layout_parent);
             addSectionButton = itemView.findViewById(R.id.add_category_button);
             sectionName = itemView.findViewById(R.id.profile_section_name);
             sectionDescription = itemView.findViewById(R.id.section_description);
@@ -74,13 +82,15 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
                 public void onClick(View v) {
                     mRecyclerViewListener.onItemClick(sectionName, position);
                     if (click) {
-                        itemView.setAlpha(0.5f);
+                        parentLayout.setAlpha(0.5f);
                         click = false;
                         saveSectionName(section_name.get(position));
+                        addSectionButton.setImageDrawable(mActivity.getResources().getDrawable(R.drawable.deselect_button));
                     } else {
-                        itemView.setAlpha(1f);
+                        parentLayout.setAlpha(1f);
                         click = true;
                         removeSectionName(section_name.get(position));
+                        addSectionButton.setImageDrawable(mActivity.getResources().getDrawable(R.drawable.select_button));
                     }
                 }
             });

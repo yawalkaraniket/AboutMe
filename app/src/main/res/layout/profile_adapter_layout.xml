@@ -1,33 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="52dp"
-    android:background="@color/white">
+    android:layout_height="52dp">
 
-    <TextView
-        android:id="@+id/select_profile_text"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:paddingLeft="20dp"
-        android:text="Select Profile"
-        android:textColor="@color/dark_black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/select_profile_text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:text="Select Profile"
+            android:textColor="@color/dark_black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/select_profile_button"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dp"
+            android:src="@drawable/right_black" />
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorGreyLight"></View>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorGreyLight"></View>
+    </RelativeLayout>
 
     <ImageView
-        android:id="@+id/select_profile_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:paddingRight="10dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
+        android:id="@+id/remove_button"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/deselect_button" />
 
-        android:src="@drawable/right_black" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorGreyLight"></View>
 </RelativeLayout>

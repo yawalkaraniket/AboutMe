@@ -75,6 +75,7 @@
     <string name="about_me_user_id">user@aboutme.com</string>
     <string name="user_token">token</string>
     <string name="app_rate">0.0f</string>
+    <string name="category_selection">select and deselect the category</string>
     <string-array name="select_country">
         <item>india</item>
         <item>America</item>
