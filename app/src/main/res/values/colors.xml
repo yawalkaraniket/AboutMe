@@ -19,4 +19,5 @@
     <color name="light_blue">#41f49b</color>
     <color name="dark_gray">#9db2a8</color>
     <color name="selector_border">#bf42f4</color>
+    <color name="app_background">#ddd5e8</color>
 </resources>

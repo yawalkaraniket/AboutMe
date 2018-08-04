@@ -100,7 +100,7 @@ public class HomeFragment extends BaseFragment {
                     data.add(movies.get(i).getOriginalTitle());
                     imageData.add(movies.get(i).getPosterPath());
                 }
-                RecyclerViewAdapterExample adapter = new RecyclerViewAdapterExample(data, imageData, getContext());
+                RecyclerViewAdapterExample adapter = new RecyclerViewAdapterExample(data, imageData);
                 mRecyclerView.setAdapter(adapter);
                 hideProgress();
                 adapter.setItemClickListener(new RecyclerViewListener() {

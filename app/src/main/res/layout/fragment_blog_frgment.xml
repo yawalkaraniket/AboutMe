@@ -18,6 +18,6 @@
         android:id="@+id/blog_body"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:background="@color/grey">
+        android:background="@color/app_background">
     </RelativeLayout>
 </RelativeLayout>

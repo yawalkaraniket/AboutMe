@@ -81,16 +81,18 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
                 @Override
                 public void onClick(View v) {
                     mRecyclerViewListener.onItemClick(sectionName, position);
-                    if (click) {
+                    if (!addSectionButton.isSelected()) {
                         parentLayout.setAlpha(0.5f);
                         click = false;
                         saveSectionName(section_name.get(position));
                         addSectionButton.setImageDrawable(mActivity.getResources().getDrawable(R.drawable.deselect_button));
+                        addSectionButton.setSelected(true);
                     } else {
                         parentLayout.setAlpha(1f);
                         click = true;
                         removeSectionName(section_name.get(position));
                         addSectionButton.setImageDrawable(mActivity.getResources().getDrawable(R.drawable.select_button));
+                        addSectionButton.setSelected(false);
                     }
                 }
             });

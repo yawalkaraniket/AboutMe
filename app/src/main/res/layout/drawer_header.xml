@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/cardview_dark_background">
+        android:background="@drawable/profile_background">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
@@ -37,7 +37,8 @@
                 android:text="@string/about_me_user_id"
                 android:textColor="@color/white" />
 
-            <TextView
+            <com.aboutme.avenjr.aboutme.view.AppTextView
+                android:textSize="15dp"
                 android:id="@+id/profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"

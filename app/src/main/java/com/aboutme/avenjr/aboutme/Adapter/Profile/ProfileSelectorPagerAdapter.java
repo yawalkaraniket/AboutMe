@@ -14,7 +14,7 @@ import com.aboutme.avenjr.aboutme.fragment.profile.OtherActivitySection;
 
 public class ProfileSelectorPagerAdapter extends FragmentPagerAdapter {
 
-    Context mContext;
+    private Context mContext;
 
     public ProfileSelectorPagerAdapter(FragmentManager fm, Context context) {
         super(fm);

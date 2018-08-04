@@ -20,7 +20,7 @@
 
             <fragment
                 android:id="@+id/blank_fragment"
-                class="com.aboutme.avenjr.aboutme.fragment.HomeFragment"
+                class="com.aboutme.avenjr.aboutme.fragment.BlankFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"></fragment>
@@ -51,10 +51,12 @@
 
             <android.support.design.widget.BottomNavigationView
                 android:id="@+id/navigation"
+                app:itemBackground="@color/selector_border"
+                app:itemIconTint="@color/botton_navigation_selection_color"
+                app:itemTextColor="@color/botton_navigation_selection_color"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_alignParentBottom="true"
-                android:background="@color/white"
                 android:animateLayoutChanges="false"
                 android:animationCache="false"
                 app:menu="@menu/bottom_menu" />
@@ -62,8 +64,9 @@
     </RelativeLayout>
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <android.support.design.widget.NavigationView
+        android:background="@color/app_background"
         android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"

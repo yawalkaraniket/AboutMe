@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.aboutme.avenjr.aboutme.fragment.DocumentsFragment"
     android:id="@+id/documents_layout"
-    android:background="@color/white">
+    android:background="@color/app_background">
 
     <com.aboutme.avenjr.aboutme.view.NavigationHeader
         android:layout_width="match_parent"

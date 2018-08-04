@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/navigation_header"
         android:clickable="false"
-        android:background="@color/white">
+        android:background="@color/app_background">
     </RelativeLayout>
 
 </RelativeLayout>

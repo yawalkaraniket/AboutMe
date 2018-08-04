@@ -47,10 +47,13 @@ public class NavigationHeader extends RelativeLayout {
     TextView headerText;
 
     @BindView(R.id.navigation_header_right)
-    ImageButton headerRight;
+    ImageView headerRight;
 
     @BindView(R.id.navigation_header_separator)
     View separator;
+
+    @BindView(R.id.navigation_header)
+    RelativeLayout parentLayout;
 
     Context context;
     Activity activity;
@@ -123,6 +126,7 @@ public class NavigationHeader extends RelativeLayout {
             headerRight.setImageDrawable(getResources().getDrawable(R.drawable.baseline_more_vert_black_18));
             separator.setVisibility(GONE);
             headerText.setVisibility(GONE);
+            parentLayout.setBackground(getResources().getDrawable(R.color.white));
             navigationHome.setImageDrawable(getResources().getDrawable(R.drawable.baseline_chevron_left_black_18));
             navigationHome.setOnClickListener(new OnClickListener() {
                 @Override
@@ -167,6 +171,7 @@ public class NavigationHeader extends RelativeLayout {
         FragmentActivity activity = (FragmentActivity) this.activity;
         FragmentManager manager = activity.getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         transaction.replace(R.id.profile_blank_fragment, fragment);
         transaction.addToBackStack(object.getClass().getSimpleName());
         transaction.commit();

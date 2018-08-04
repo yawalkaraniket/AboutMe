@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:background="@color/white">
 
         <TextView
@@ -18,10 +18,11 @@
             android:layout_height="50dp"
             android:gravity="center"
             android:paddingLeft="20dp"
-            android:text="Select Profile"
+            android:text="@string/select_profile"
             android:textColor="@color/dark_black"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingStart="20dp" />
 
         <ImageView
             android:id="@+id/select_profile_button"
@@ -30,9 +31,13 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:paddingEnd="10dp"
-            android:paddingRight="10dp"
             android:src="@drawable/right_black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorGreyLight"></View>
 
         <View
             android:layout_width="3dp"
@@ -48,12 +53,12 @@
     </RelativeLayout>
 
     <ImageView
+        android:padding="6dp"
+        android:background="@drawable/shadow_circle"
         android:id="@+id/remove_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
-        android:src="@drawable/deselect_button" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/deselect_button"
+        android:contentDescription="@string/remove_selection" />
 
 </RelativeLayout>

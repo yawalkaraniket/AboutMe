@@ -35,10 +35,9 @@ public class RecyclerViewAdapterExample extends RecyclerView.Adapter<RecyclerVie
     private ArrayList<String> imageData;
 
 
-    public RecyclerViewAdapterExample(ArrayList<String> data, ArrayList<String> imagedata, Context context) {
+    public RecyclerViewAdapterExample(ArrayList<String> data, ArrayList<String> imagedata) {
         this.data = data;
         this.imageData = imagedata;
-        this.mContext = context;
     }
 
     @NonNull
@@ -46,6 +45,7 @@ public class RecyclerViewAdapterExample extends RecyclerView.Adapter<RecyclerVie
     public RecyclerViewHolderExample onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.home_recycler_view, parent, false);
+        this.mContext = view.getContext();
         return new RecyclerViewHolderExample(view);
     }
 

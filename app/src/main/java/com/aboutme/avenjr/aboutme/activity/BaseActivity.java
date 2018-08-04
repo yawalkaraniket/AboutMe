@@ -286,7 +286,12 @@ public abstract class BaseActivity extends FragmentActivity {
     public void replaceFragment(Object object) {
         Fragment fragment = (Fragment) object;
         FragmentManager manager = getSupportFragmentManager();
+        if(manager.getFragments().get(manager.getFragments().size()-1).getClass().
+                equals(object.getClass())){
+            return;
+        }
         FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         transaction.replace(R.id.blank_fragment, fragment);
         transaction.addToBackStack(object.getClass().getSimpleName());
         transaction.commit();

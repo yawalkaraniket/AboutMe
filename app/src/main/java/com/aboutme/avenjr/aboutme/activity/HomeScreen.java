@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
+import com.aboutme.avenjr.aboutme.fragment.HomeFragment;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +35,7 @@ public class HomeScreen extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         ButterKnife.bind(this);
+        replaceFragment(new HomeFragment());
 
         this.preferences = new SharedPreferencesUtil(getApplicationContext());
 
