@@ -23,9 +23,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileA
     private ArrayList<String> data = new ArrayList<>();
     private SharedPreferencesUtil preferences;
 
-    public ProfileAdapter(ArrayList data, Context context) {
+    public ProfileAdapter(ArrayList data) {
         this.data = data;
-        this.preferences = new SharedPreferencesUtil(context);
     }
 
     @NonNull
@@ -33,6 +32,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileA
     public ProfileAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.profile_adapter_layout, parent, false);
+        Context context = parent.getContext();
+        this.preferences = new SharedPreferencesUtil(context);
         return new ProfileAdapterViewHolder(view);
     }
 
