@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +69,7 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
         TextView sectionName;
         TextView sectionDescription;
         ImageView addSectionButton;
-        RelativeLayout parentLayout;
+        CardView parentLayout;
         int position = 0;
 
         ProfileSectionAdapterViewHolder(View itemView) {
@@ -77,6 +78,7 @@ public class ProfileSectionAdapter extends RecyclerView.Adapter<ProfileSectionAd
             addSectionButton = itemView.findViewById(R.id.add_category_button);
             sectionName = itemView.findViewById(R.id.profile_section_name);
             sectionDescription = itemView.findViewById(R.id.section_description);
+//            parentLayout.setBackgroundResource(R.drawable.profile_background);
             addSectionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
