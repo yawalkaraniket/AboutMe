@@ -87,7 +87,7 @@ public class SignInActivity extends BaseActivity {
                                     displayToast(getBaseContext(), "please check your password..");
                                 }
                             } else {
-                                displayToast(getBaseContext(), "please check your id...");
+                                DialogUtil.errorDialog(activity,"please check your id...");
                             }
                         }
 

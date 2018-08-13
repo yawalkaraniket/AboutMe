@@ -3,14 +3,16 @@ package com.aboutme.avenjr.aboutme.view;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.google.firebase.database.DatabaseReference;
 
@@ -26,8 +28,8 @@ public class DialogUtil {
 
     public Dialog yesCancelDialog(Activity activity, String titleText, String descriptionText,
                                   final View.OnClickListener positiveClick,
-                                  final View.OnClickListener negativeClick){
-        View view = activity.getLayoutInflater().inflate(R.layout.dialog,null);
+                                  final View.OnClickListener negativeClick) {
+        View view = activity.getLayoutInflater().inflate(R.layout.dialog, null);
 
         TextView dialogHeader = view.findViewById(R.id.dialog_header);
         TextView dialogDescription = view.findViewById(R.id.dialog_description);
@@ -54,10 +56,11 @@ public class DialogUtil {
 
         return dialog;
     }
-    public static Dialog yesDialog(Activity activity, String titleText, String descriptionText, final View.OnClickListener yesButtonclick) {
-        View view = activity.getLayoutInflater().inflate(R.layout.yes_dialog,null);
 
-        TextView dialogHeaderText  =  view.findViewById(R.id.dialog_header);
+    public static Dialog yesDialog(Activity activity, String titleText, String descriptionText, final View.OnClickListener yesButtonclick) {
+        View view = activity.getLayoutInflater().inflate(R.layout.yes_dialog, null);
+
+        TextView dialogHeaderText = view.findViewById(R.id.dialog_header);
         TextView dialogDescritionText = view.findViewById(R.id.dialog_description);
         View yesButton = view.findViewById(R.id.layout_dialog_yes);
         final android.app.Dialog dialog = new android.app.Dialog(activity, R.style.dialog_style);
@@ -69,7 +72,7 @@ public class DialogUtil {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                if(yesButtonclick!=null) {
+                if (yesButtonclick != null) {
                     yesButtonclick.onClick(v);
                 }
             }
@@ -79,7 +82,7 @@ public class DialogUtil {
 
     public static Dialog noNetworkDialog(Activity activity) {
 
-        View view = activity.getLayoutInflater().inflate(R.layout.no_network,null);
+        View view = activity.getLayoutInflater().inflate(R.layout.no_network, null);
 
         View refreshButton = view.findViewById(R.id.button_refresh);
         final android.app.Dialog dialog = new android.app.Dialog(activity, R.style.dialog_style);
@@ -88,7 +91,7 @@ public class DialogUtil {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isConnectedToInternet(activity)){
+                if (isConnectedToInternet(activity)) {
                     dialog.dismiss();
                 }
             }
@@ -97,12 +100,28 @@ public class DialogUtil {
         return dialog;
     }
 
+    public static void errorDialog(Activity activity,String message) {
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View layout = inflater.inflate(R.layout.error_dialog, null);
+
+        AppTextView text = layout.findViewById(R.id.error_string);
+        text.setText(message);
+
+        Toast toast = new Toast(activity.getApplicationContext());
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
+
     public static Dialog rateMe(Activity activity, String titleText, final View.OnClickListener yesButtonclick) {
-        View view = activity.getLayoutInflater().inflate(R.layout.rate_me,null);
+        View view = activity.getLayoutInflater().inflate(R.layout.rate_me, null);
 
         SharedPreferencesUtil preferences = new SharedPreferencesUtil(activity.getApplicationContext());
-        DatabaseReference databaseReference = getFireBaseReference("UserInformation/"+preferences.getToken()+"/rate");
-        TextView dialogHeaderText  =  view.findViewById(R.id.dialog_header);
+        DatabaseReference databaseReference = getFireBaseReference("UserInformation/" + preferences.getToken() + "/rate");
+        TextView dialogHeaderText = view.findViewById(R.id.dialog_header);
         RatingBar rating = view.findViewById(R.id.rate_me);
         rating.setRating(Float.parseFloat(preferences.getAppRating()));
         View yesButton = view.findViewById(R.id.layout_dialog_yes);
@@ -115,7 +134,7 @@ public class DialogUtil {
             public void onClick(View v) {
                 dialog.dismiss();
                 preferences.setAppRating(rating.getRating());
-                if(yesButtonclick!=null) {
+                if (yesButtonclick != null) {
                     yesButtonclick.onClick(v);
                 }
             }

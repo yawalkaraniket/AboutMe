@@ -80,6 +80,7 @@
     <string name="remove_selection">remove_selection</string>
     <string name="select_profile">Select Profile</string>
     <string name="right_navigation_selection">right_navigation_selection</string>
+    <string name="close">close</string>
     <string-array name="select_country">
         <item>india</item>
         <item>America</item>
