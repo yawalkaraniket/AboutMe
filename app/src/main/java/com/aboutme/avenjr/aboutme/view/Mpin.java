@@ -13,6 +13,7 @@ import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.FireBaseUtil;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.activity.HomeScreen;
+import com.aboutme.avenjr.aboutme.activity.MpinActivity;
 import com.aboutme.avenjr.aboutme.activity.UserInformation;
 import com.google.firebase.database.DatabaseReference;
 
@@ -118,6 +119,7 @@ public class Mpin extends RelativeLayout {
                                 preferences.setMPin(mPin.toString());
                                 preferences.putLoginWith("signIn");
                                 context.startActivity(intent);
+                                ((MpinActivity)context).finish();
                             }
                             clearAllSelectedView();
                             wantToConfirm = true;
@@ -129,6 +131,7 @@ public class Mpin extends RelativeLayout {
                         preferences.putLoginWith("signIn");
                         preferences.setMPin(mPin.toString());
                         context.startActivity(intent);
+                        ((MpinActivity)context).finish();
                     } else if (getSelectedCount() == 4) {
                         clearAllSelectedView();
                         mPin.clear();

@@ -123,6 +123,7 @@ public class MainActivity extends BaseActivity {
                 startButtonAnimation(continueWithMail);
                 Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivity(intent);
+                activity.finish();
                 removeAnimation(continueWithMail);
             }
         });
@@ -133,6 +134,7 @@ public class MainActivity extends BaseActivity {
                 Intent intent = new Intent(getBaseContext(), SignInActivity.class);
                 intent.putExtra("login_with", "signIn");
                 startActivity(intent);
+                activity.finish();
                 removeAnimation(signIn);
             }
         });
@@ -262,12 +264,6 @@ public class MainActivity extends BaseActivity {
         ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationX", 0f);
         animation.setDuration(500);
         animation.start();
-    }
-
-    @Override
-    public void onBackPressed() {
-        hideProgress();
-        activity.finish();
     }
 
     @Override
