@@ -57,6 +57,9 @@ dependencies {
     //  To store and retrieve the image from the firebase-storage.
     implementation 'com.google.firebase:firebase-storage:16.0.1'
 
+    //  For firebase notifications
+    compile 'com.google.firebase:firebase-messaging:17.1.0'
+
     // retrofit, gson
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

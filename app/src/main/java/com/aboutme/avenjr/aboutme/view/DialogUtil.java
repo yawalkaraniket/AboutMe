@@ -7,24 +7,18 @@ import android.net.ConnectivityManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
-import com.google.firebase.database.DatabaseReference;
-
-import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
 /**
  * Created by tudip on 1/5/18.
  */
 
 public class DialogUtil {
-
-    Activity activity;
 
     public Dialog yesCancelDialog(Activity activity, String titleText, String descriptionText,
                                   final View.OnClickListener positiveClick,
@@ -41,18 +35,8 @@ public class DialogUtil {
         dialog.show();
         dialogHeader.setText(titleText);
         dialogDescription.setText(descriptionText);
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        yes.setOnClickListener(v -> dialog.dismiss());
+        cancel.setOnClickListener(v -> dialog.dismiss());
 
         return dialog;
     }
@@ -68,19 +52,16 @@ public class DialogUtil {
         dialog.show();
         dialogHeaderText.setText(titleText);
         dialogDescritionText.setText(descriptionText);
-        yesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                if (yesButtonclick != null) {
-                    yesButtonclick.onClick(v);
-                }
+        yesButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            if (yesButtonclick != null) {
+                yesButtonclick.onClick(v);
             }
         });
         return dialog;
     }
 
-    public static Dialog noNetworkDialog(Activity activity) {
+    public static void noNetworkDialog(Activity activity) {
 
         View view = activity.getLayoutInflater().inflate(R.layout.no_network, null);
 
@@ -88,16 +69,11 @@ public class DialogUtil {
         final android.app.Dialog dialog = new android.app.Dialog(activity, R.style.dialog_style);
         dialog.setContentView(view);
         dialog.show();
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isConnectedToInternet(activity)) {
-                    dialog.dismiss();
-                }
+        refreshButton.setOnClickListener(v -> {
+            if (isConnectedToInternet(activity)) {
+                dialog.dismiss();
             }
         });
-
-        return dialog;
     }
 
     public static void errorDialog(Activity activity,String message) {
@@ -116,11 +92,10 @@ public class DialogUtil {
     }
 
 
-    public static Dialog rateMe(Activity activity, String titleText, final View.OnClickListener yesButtonclick) {
+    public static void rateMe(Activity activity, String titleText, final View.OnClickListener yesButtonclick) {
         View view = activity.getLayoutInflater().inflate(R.layout.rate_me, null);
 
         SharedPreferencesUtil preferences = new SharedPreferencesUtil(activity.getApplicationContext());
-        DatabaseReference databaseReference = getFireBaseReference("UserInformation/" + preferences.getToken() + "/rate");
         TextView dialogHeaderText = view.findViewById(R.id.dialog_header);
         RatingBar rating = view.findViewById(R.id.rate_me);
         rating.setRating(Float.parseFloat(preferences.getAppRating()));
@@ -129,17 +104,13 @@ public class DialogUtil {
         dialog.setContentView(view);
         dialog.show();
         dialogHeaderText.setText(titleText);
-        yesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                preferences.setAppRating(rating.getRating());
-                if (yesButtonclick != null) {
-                    yesButtonclick.onClick(v);
-                }
+        yesButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            preferences.setAppRating(rating.getRating());
+            if (yesButtonclick != null) {
+                yesButtonclick.onClick(v);
             }
         });
-        return dialog;
     }
 
 

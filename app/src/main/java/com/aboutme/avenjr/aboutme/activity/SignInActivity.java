@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -53,59 +52,53 @@ public class SignInActivity extends BaseActivity {
         CharSequence failText = "Sorry please enter right information...";
         final Activity activity = this;
 
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                id = userId.getText().toString().trim();
-                password = userPassword.getText().toString().trim();
-                Intent homeScreen = new Intent(getBaseContext(), MpinActivity.class);
-                if ((id.isEmpty()) && (password.isEmpty())) {
-                    displayToast(getApplicationContext(), failText);
-                } else {
-                    getFireBaseReference("UserInformation").orderByChild("email").equalTo(id).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                                    token = userSnapshot.getKey();
-                                    for (DataSnapshot programSnapshot : userSnapshot.getChildren()) {
-                                        userInfo.put(programSnapshot.getKey(), Objects.requireNonNull(programSnapshot.getValue()).toString());
-                                    }
+        buttonSubmit.setOnClickListener(v -> {
+            id = userId.getText().toString().trim();
+            password = userPassword.getText().toString().trim();
+            Intent homeScreen = new Intent(getBaseContext(), MpinActivity.class);
+            if ((id.isEmpty()) && (password.isEmpty())) {
+                displayToast(getApplicationContext(), failText);
+            } else {
+                getFireBaseReference("UserInformation").orderByChild("email").equalTo(id).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists() && preference.getToken().equals("null")) {
+                            for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                token = userSnapshot.getKey();
+                                for (DataSnapshot programSnapshot : userSnapshot.getChildren()) {
+                                    userInfo.put(programSnapshot.getKey(), Objects.requireNonNull(programSnapshot.getValue()).toString());
                                 }
-                                if (userInfo.get("password").equals(password)) {
-                                    DialogUtil.yesDialog(activity, "Login", "Login Successful", click -> {
-                                        startActivity(homeScreen);
-                                        preference.putLoginWith("email");
-                                        preference.setName(userInfo.get("name"));
-                                        preference.setEmail(userInfo.get("email"));
-                                        preference.setMPin(userInfo.get("mpin"));
-                                        preference.setProfileImageUrl("null");
-                                        preference.setToken(userInfo.get("databaseKey"));
-                                        preference.setAppRating(Float.valueOf(userInfo.get("rate")));
-                                        activity.finish();
-                                    });
-                                } else {
-                                    displayToast(getBaseContext(), "please check your password..");
-                                }
-                            } else {
-                                DialogUtil.errorDialog(activity,"please check your id...");
                             }
+                            if (userInfo.get("password").equals(password)) {
+                                DialogUtil.yesDialog(activity, "Login", "Login Successful", click -> {
+                                    startActivity(homeScreen);
+                                    preference.putLoginWith("email");
+                                    preference.setName(userInfo.get("name"));
+                                    preference.setEmail(userInfo.get("email"));
+                                    preference.setMPin(userInfo.get("mpin"));
+                                    preference.setProfileImageUrl("null");
+                                    preference.setToken(userInfo.get("databaseKey"));
+                                    preference.setAppRating(Float.valueOf(userInfo.get("rate")));
+                                    activity.finish();
+                                });
+                            } else {
+                                displayToast(getBaseContext(), "please check your password..");
+                            }
+                        } else {
+                            DialogUtil.errorDialog(activity,"please check your id...");
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
-                }
+                    }
+                });
             }
         });
-        buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, ResetPassword.class);
-                startActivity(intent);
-            }
+        buttonForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, ResetPassword.class);
+            startActivity(intent);
         });
     }
 

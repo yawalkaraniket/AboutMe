@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.WelcomeScreenActivity">
+
+    <RelativeLayout
+        android:id="@+id/blank_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/main_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/blank_layout"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:text="M"
+            android:textColor="@color/logo_color"
+            android:textSize="130sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-15dp"
+            android:focusable="false"
+            android:text="E"
+            android:textStyle="bold"
+            android:textColor="@color/logo_color"
+            android:textSize="80sp"
+            android:layout_marginStart="-20dp" />
+    </LinearLayout>
+
+    <com.aboutme.avenjr.aboutme.view.AppTextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/main_logo"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/let_s_manage_yourself"
+        android:textColor="@color/dark_black"
+        android:textSize="20sp"
+        android:layout_marginStart="100dp" />
+</RelativeLayout>

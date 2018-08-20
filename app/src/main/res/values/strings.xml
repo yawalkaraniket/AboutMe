@@ -73,7 +73,7 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="sign_up">SignUp</string>
     <string name="about_me_user_id">user@aboutme.com</string>
-    <string name="user_token">token</string>
+    <string name="user_token">null</string>
     <string name="app_rate">0.0f</string>
     <string name="category_selection">select and deselect the category</string>
     <string name="back_click">back_header_click</string>
@@ -81,6 +81,8 @@
     <string name="select_profile">Select Profile</string>
     <string name="right_navigation_selection">right_navigation_selection</string>
     <string name="close">close</string>
+    <string name="welcome_logo">welcome logo</string>
+    <string name="let_s_manage_yourself">Let\'s manage yourself...</string>
     <string-array name="select_country">
         <item>india</item>
         <item>America</item>

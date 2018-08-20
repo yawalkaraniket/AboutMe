@@ -19,6 +19,7 @@
     <color name="light_blue">#41f49b</color>
     <color name="dark_gray">#9db2a8</color>
     <color name="selector_border">#bf42f4</color>
+    <color name="logo_color">#6745a5</color>
     <color name="app_background">#ddd5e8</color>
     <color name="error_background">#ffb3b3</color>
 </resources>

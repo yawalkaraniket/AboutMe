@@ -2,10 +2,12 @@ package com.aboutme.avenjr.aboutme.activity;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -123,7 +125,6 @@ public class MainActivity extends BaseActivity {
                 startButtonAnimation(continueWithMail);
                 Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivity(intent);
-                activity.finish();
                 removeAnimation(continueWithMail);
             }
         });
@@ -134,7 +135,6 @@ public class MainActivity extends BaseActivity {
                 Intent intent = new Intent(getBaseContext(), SignInActivity.class);
                 intent.putExtra("login_with", "signIn");
                 startActivity(intent);
-                activity.finish();
                 removeAnimation(signIn);
             }
         });
