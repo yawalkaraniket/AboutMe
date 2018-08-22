@@ -22,8 +22,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_below="@id/navigation_header"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
@@ -67,6 +67,19 @@
                 android:textColor="@color/white"
                 android:textSize="15sp" />
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/my_friends"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/white"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/profile_info_layout">
+            <!--<ImageView-->
+                <!--android:layout_width=""-->
+                <!--android:layout_height="" />-->
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <RelativeLayout

@@ -62,7 +62,7 @@ public class SignInActivity extends BaseActivity {
                 getFireBaseReference("UserInformation").orderByChild("email").equalTo(id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists() && preference.getToken().equals("null")) {
+                        if (dataSnapshot.exists()) {
                             for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                 token = userSnapshot.getKey();
                                 for (DataSnapshot programSnapshot : userSnapshot.getChildren()) {

@@ -18,8 +18,10 @@ import com.aboutme.avenjr.aboutme.Adapter.ProfileAdapter;
 import com.aboutme.avenjr.aboutme.R;
 import com.aboutme.avenjr.aboutme.Utils.ImageUtil;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
+import com.aboutme.avenjr.aboutme.activity.MyFriends;
 import com.aboutme.avenjr.aboutme.activity.ProfileSectionDescription;
 import com.aboutme.avenjr.aboutme.data.ProfileInfo;
+import com.aboutme.avenjr.aboutme.fragment.BaseFragment;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +38,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference;
 
-public class ProfileHome extends Fragment {
+public class ProfileHome extends BaseFragment {
 
     @BindView(R.id.navigation_header)
     NavigationHeader header;
@@ -58,6 +60,9 @@ public class ProfileHome extends Fragment {
 
     @BindView(R.id.profile_info_layout)
     RelativeLayout profileInfoParent;
+
+    @BindView(R.id.my_friends)
+    RelativeLayout friends;
 
     public static ArrayList<String> profileSections = new ArrayList<>();
     ProfileInfo profileInfo;
@@ -107,6 +112,12 @@ public class ProfileHome extends Fragment {
 
             }
         });
+    }
+
+    @OnClick(R.id.my_friends)
+    public void showFriends() {
+        Intent intent = new Intent(getActivity(), MyFriends.class);
+        getActivity().startActivity(intent);
     }
 
     @OnClick(R.id.profile_header)

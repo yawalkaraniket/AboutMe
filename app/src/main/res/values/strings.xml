@@ -83,6 +83,9 @@
     <string name="close">close</string>
     <string name="welcome_logo">welcome logo</string>
     <string name="let_s_manage_yourself">Let\'s manage yourself...</string>
+    <string name="navigation_header">Navigation Header</string>
+    <string name="place_call">place_call</string>
+    <string name="find_location">find_location</string>
     <string-array name="select_country">
         <item>india</item>
         <item>America</item>
