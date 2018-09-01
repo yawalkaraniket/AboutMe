@@ -34,16 +34,4 @@ public class FriendsDetailsFragment extends Fragment {
         ButterKnife.bind(view);
         return view;
     }
-
-    @OnClick(R.id.place_call)
-    public void callFriend(){
-        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:7875430906"));
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.find_location)
-    public void searchFriend(){
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("Tudip Technology, Datt mandir road wakad"));
-        startActivity(intent);
-    }
 }

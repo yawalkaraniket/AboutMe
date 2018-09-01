@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.media.MediaCasException;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
@@ -17,9 +19,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.LocalHelper;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.services.NetworkService;
 import com.aboutme.avenjr.aboutme.view.DialogUtil;
@@ -69,6 +73,9 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.main_layout)
     RelativeLayout body;
+
+    @BindView(R.id.temp)
+    TextView temp;
 
     public static GoogleSignInClient mGoogleApiClient;
     public static FirebaseAuth mAuth;

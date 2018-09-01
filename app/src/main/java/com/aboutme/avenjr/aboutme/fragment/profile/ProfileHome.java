@@ -20,6 +20,7 @@ import com.aboutme.avenjr.aboutme.Utils.ImageUtil;
 import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.activity.MyFriends;
 import com.aboutme.avenjr.aboutme.activity.ProfileSectionDescription;
+import com.aboutme.avenjr.aboutme.activity.ViewBindingExample;
 import com.aboutme.avenjr.aboutme.data.ProfileInfo;
 import com.aboutme.avenjr.aboutme.fragment.BaseFragment;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;

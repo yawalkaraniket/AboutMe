@@ -99,6 +99,7 @@
         android:layout_below="@+id/sign_in_buttons"
         >
         <TextView
+            android:id="@+id/temp"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:text="@string/already_have_an_account"

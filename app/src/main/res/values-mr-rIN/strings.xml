@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AboutMe</string>
+    <string name="coninue_with_google">Gmail ने साइन इन करा</string>
+    <string name="sign_in_with_facebook">Facebook ने साइन इन करा</string>
+    <string name="sign_up_with_mail">मेल ने साइन इन करा</string>
+</resources>

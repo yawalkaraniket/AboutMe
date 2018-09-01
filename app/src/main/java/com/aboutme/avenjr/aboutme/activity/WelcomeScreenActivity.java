@@ -1,15 +1,22 @@
 package com.aboutme.avenjr.aboutme.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.aboutme.avenjr.aboutme.R;
+import com.aboutme.avenjr.aboutme.Utils.LocalHelper;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 2000;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocalHelper.onAttach(base, "en"));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

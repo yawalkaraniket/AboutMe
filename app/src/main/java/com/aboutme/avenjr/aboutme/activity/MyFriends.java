@@ -77,4 +77,12 @@ public class MyFriends extends BaseActivity implements myFriendsFragment.selecte
         }
         startActivity(intent);
     }
+
+    @OnClick(R.id.find_location)
+    public void searchFriend(){
+        Uri mapUri = Uri.parse("geo:0,0?q=Datt mandir road wakad");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
+    }
 }
