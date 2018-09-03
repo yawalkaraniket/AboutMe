@@ -31,6 +31,8 @@ public class RecyclerViewAdapterExample extends RecyclerView.Adapter<RecyclerVie
     private Context mContext;
 
     public static final String BASE_URL = "http://api.themoviedb.org/3/";
+    public static final String BASE_URL_FOR_ZOMATO = "https://developers.zomato.com/api/v2.1/";
+
     private ArrayList<String> data;
     private ArrayList<String> imageData;
 

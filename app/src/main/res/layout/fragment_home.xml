@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/app_background"
     tools:context="com.aboutme.avenjr.aboutme.fragment.HomeFragment">
 
@@ -22,4 +23,54 @@
             android:layout_marginTop="50dp"
             android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/actext_search_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:animateLayoutChanges="true">
+
+        <AutoCompleteTextView
+            android:padding="10dp"
+            android:id="@+id/actext_search"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/input_text_view_layout"
+            tools:ignore="LabelFor"
+            android:hint="search screen"/>
+        <ImageView
+            android:id="@+id/remove_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/shadow_circle"
+            android:contentDescription="@string/remove_selection"
+            android:padding="6dp"
+            android:src="@drawable/deselect_button"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/search_screen_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/shadow_circle"
+        >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:civ_circle_background_color="@color/dark_black"
+        android:src="@drawable/search_white"
+        app:civ_border_color="@color/black_transparent"
+        app:civ_border_width="2dp">
+    </de.hdodenhof.circleimageview.CircleImageView>
+    </RelativeLayout>
 </RelativeLayout>

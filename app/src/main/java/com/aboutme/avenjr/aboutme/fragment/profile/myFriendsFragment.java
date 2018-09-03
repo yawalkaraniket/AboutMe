@@ -1,26 +1,20 @@
 package com.aboutme.avenjr.aboutme.fragment.profile;
 
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.aboutme.avenjr.aboutme.R;
-import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -35,16 +29,16 @@ import static com.aboutme.avenjr.aboutme.Utils.FireBaseUtil.getFireBaseReference
 
 public class myFriendsFragment extends ListFragment {
 
+    ArrayList<String> userCompleteInfo;
+    selectedListItem activity;
 
     public myFriendsFragment() {
         // Required empty public constructor
     }
 
-    selectedListItem activity;
-
     public interface selectedListItem
     {
-        void selectedListItemPosition(int position);
+        void selectedListItemPosition(int position,String selectedItem);
     }
 
     @Override
@@ -83,16 +77,35 @@ public class myFriendsFragment extends ListFragment {
         });
 
 
-        ArrayList<String> friends = new ArrayList<>();
-        friends.add("aniket");
-        friends.add("shubham");
-        friends.add("yash");
 
-        setListAdapter(new ArrayAdapter<>(Objects.requireNonNull(getActivity()),android.R.layout.simple_expandable_list_item_1,friends));
+        DatabaseReference mDatabaseReference = getFireBaseReference("UserInformation");
+        ArrayList<ArrayList<String>> listInfo = new ArrayList<>();
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                userCompleteInfo = new ArrayList<>();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for(DataSnapshot s: snapshot.getChildren() ){
+                        if(s.getKey().equals("name"))
+                        userCompleteInfo.add(s.getValue().toString());
+                    }
+                    listInfo.add(userCompleteInfo);
+                }
+                setListAdapter(new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
+                        android.R.layout.simple_expandable_list_item_1,listInfo.get(0)));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-            activity.selectedListItemPosition(position);
+            activity.selectedListItemPosition(position,userCompleteInfo.get(position));
     }
 }

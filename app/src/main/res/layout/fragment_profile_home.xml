@@ -75,9 +75,16 @@
             android:layout_centerInParent="true"
             android:layout_margin="10dp"
             android:layout_below="@+id/profile_info_layout">
-            <!--<ImageView-->
-                <!--android:layout_width=""-->
-                <!--android:layout_height="" />-->
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/my_added_friends"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/white"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/my_friends"
+            android:layout_below="@+id/profile_info_layout">
         </RelativeLayout>
 
     </RelativeLayout>

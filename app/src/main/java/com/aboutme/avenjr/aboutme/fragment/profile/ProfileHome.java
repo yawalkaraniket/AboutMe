@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,6 +64,9 @@ public class ProfileHome extends BaseFragment {
     @BindView(R.id.my_friends)
     RelativeLayout friends;
 
+    @BindView(R.id.my_added_friends)
+    RelativeLayout myFriends;
+
     public static ArrayList<String> profileSections = new ArrayList<>();
     ProfileInfo profileInfo;
     SharedPreferencesUtil preferences;
@@ -118,7 +120,15 @@ public class ProfileHome extends BaseFragment {
     @OnClick(R.id.my_friends)
     public void showFriends() {
         Intent intent = new Intent(getActivity(), MyFriends.class);
-        getActivity().startActivity(intent);
+        intent.putExtra("fragment","myFriendsFragment");
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.my_added_friends)
+    public void addedFriends(){
+        Intent intent = new Intent(getActivity(), MyFriends.class);
+        intent.putExtra("fragment","myAddedFriendsFragment");
+        startActivity(intent);
     }
 
     @OnClick(R.id.profile_header)
