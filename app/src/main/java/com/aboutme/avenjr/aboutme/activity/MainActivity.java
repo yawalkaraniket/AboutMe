@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.media.MediaCasException;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -145,6 +146,16 @@ public class MainActivity extends BaseActivity {
                 removeAnimation(signIn);
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     private void verifyAlreadyLogin() {

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"></com.aboutme.avenjr.aboutme.view.NavigationHeader>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/other_fragment">
@@ -32,6 +32,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             tools:layout="@layout/fragment_friends_details"></fragment>
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SqlOperations">
+    <Button
+        android:layout_margin="5dp"
+        android:id="@+id/btnAdd"
+        android:text="Add User"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+
+    <Button
+        android:layout_toRightOf="@+id/btnAdd"
+        android:layout_margin="5dp"
+        android:id="@+id/update_user"
+        android:text="Update User"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+
+    <Button
+        android:layout_toRightOf="@+id/update_user"
+        android:layout_margin="5dp"
+        android:id="@+id/remove_user"
+        android:text="Remove User"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:id="@+id/table_row_count"
+        android:layout_margin="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true" />
+
+    <FrameLayout
+        android:layout_margin="10dp"
+        android:id="@+id/base_fragment"
+        android:background="@color/app_background"
+        android:layout_below="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+</RelativeLayout>
