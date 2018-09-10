@@ -86,6 +86,11 @@
     <string name="navigation_header" translatable="false">Navigation Header</string>
     <string name="place_call" translatable="false">place_call</string>
     <string name="find_location" translatable="false">find_location</string>
+    <string name="update_user">Update User</string>
+    <string name="add_user">Add User</string>
+    <string name="remove_user">Remove User</string>
+    <string name="update">Update</string>
+    <string name="enter_your_age">enter your age...</string>
     <string-array name="select_country">
         <item>india</item>
         <item>America</item>
