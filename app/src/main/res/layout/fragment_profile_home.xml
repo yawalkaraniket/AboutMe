@@ -69,7 +69,7 @@
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/my_friends"
-            android:layout_width="100dp"
+            android:layout_width="60dp"
             android:layout_height="100dp"
             android:background="@color/white"
             android:layout_centerInParent="true"
@@ -78,7 +78,7 @@
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/my_added_friends"
-            android:layout_width="100dp"
+            android:layout_width="60dp"
             android:layout_height="100dp"
             android:background="@color/white"
             android:layout_centerInParent="true"
@@ -88,13 +88,24 @@
         </RelativeLayout>
         <Button
             android:id="@+id/sql_updates"
-            android:layout_width="100dp"
+            android:layout_width="60dp"
             android:text="SQL Operations"
             android:layout_height="100dp"
             android:background="@color/white"
             android:layout_centerInParent="true"
             android:layout_margin="10dp"
             android:layout_toLeftOf="@+id/my_friends"
+            android:layout_below="@+id/profile_info_layout">
+        </Button>
+        <Button
+            android:id="@+id/rss_feeds"
+            android:layout_width="60dp"
+            android:text="Rss Feeds"
+            android:layout_height="100dp"
+            android:background="@color/white"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@id/my_added_friends"
             android:layout_below="@+id/profile_info_layout">
         </Button>
 

@@ -89,7 +89,8 @@
 
         <activity android:name=".activity.MyFriends" />
         <activity android:name=".activity.ViewBindingExample" />
-        <activity android:name=".activity.SqlOperations"></activity>
+        <activity android:name=".activity.SqlOperations" />
+        <activity android:name=".activity.RssFeeds"></activity>
     </application>
 
 </manifest>
