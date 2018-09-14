@@ -20,10 +20,10 @@ public interface UserDao {
     int countUsers();
 
     @Insert
-    void insertAll(User... users);
+    void insertAll(User user);
 
-    @Delete
-    void delete(User user);
+    @Query("DELETE FROM user WHERE first_name LIKE  :firstName")
+    void delete(String firstName);
 }
 
 
