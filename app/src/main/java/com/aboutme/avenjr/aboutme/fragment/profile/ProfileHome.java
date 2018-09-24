@@ -20,6 +20,7 @@ import com.aboutme.avenjr.aboutme.Utils.SharedPreferencesUtil;
 import com.aboutme.avenjr.aboutme.activity.MyFriends;
 import com.aboutme.avenjr.aboutme.activity.ProfileSectionDescription;
 import com.aboutme.avenjr.aboutme.activity.RssFeeds;
+import com.aboutme.avenjr.aboutme.activity.SmsSend;
 import com.aboutme.avenjr.aboutme.activity.SqlOperations;
 import com.aboutme.avenjr.aboutme.activity.ViewBindingExample;
 import com.aboutme.avenjr.aboutme.data.ProfileInfo;
@@ -136,6 +137,12 @@ public class ProfileHome extends BaseFragment {
     @OnClick(R.id.rss_feeds)
     public void rssFeeds(){
         Intent intent = new Intent(getActivity(), RssFeeds.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.sms_send)
+    public void sendSms(){
+        Intent intent = new Intent(getActivity(), SmsSend.class);
         startActivity(intent);
     }
 

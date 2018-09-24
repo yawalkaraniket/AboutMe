@@ -67,10 +67,7 @@
         android:layout_centerVertical="true"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:civ_circle_background_color="@color/dark_black"
-        android:src="@drawable/search_white"
-        app:civ_border_color="@color/black_transparent"
-        app:civ_border_width="2dp">
+        android:src="@drawable/search_white">
     </de.hdodenhof.circleimageview.CircleImageView>
     </RelativeLayout>
 </RelativeLayout>

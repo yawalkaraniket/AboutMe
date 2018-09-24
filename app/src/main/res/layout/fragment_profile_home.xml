@@ -108,6 +108,17 @@
             android:layout_toRightOf="@id/my_added_friends"
             android:layout_below="@+id/profile_info_layout">
         </Button>
+        <Button
+            android:id="@+id/sms_send"
+            android:layout_width="60dp"
+            android:text="Send SMS"
+            android:layout_height="100dp"
+            android:background="@color/white"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@+id/sql_updates"
+            android:layout_below="@+id/profile_info_layout">
+        </Button>
 
     </RelativeLayout>
 

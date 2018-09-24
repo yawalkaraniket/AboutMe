@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.aboutme.avenjr.aboutme.data.MovieResponse;
 import com.aboutme.avenjr.aboutme.data.ZomatoApiResponse;
 import com.aboutme.avenjr.aboutme.data.apiUtil;
 import com.aboutme.avenjr.aboutme.interfaces.RecyclerViewListener;
+import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import com.aboutme.avenjr.aboutme.view.NavigationHeader;
 
 import java.util.ArrayList;
@@ -76,6 +78,12 @@ public class HomeFragment extends BaseFragment {
 
         acTestView.setThreshold(2);
         acTestView.setAdapter(arrayAdapter);
+        acTestView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DialogUtil.errorDialog(getActivity(),"Position"+parent.getAdapter().getItem(position));
+            }
+        });
 
         //      Zomato API implementation but its not working
         apiUtil.getBaseUriForZomato().enqueue(new Callback<ZomatoApiResponse>() {
