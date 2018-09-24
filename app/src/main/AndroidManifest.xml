@@ -79,19 +79,11 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".firebaseNotificaion.MyFirebaseMessagingService"
-            android:stopWithTask="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
         <activity android:name=".activity.MyFriends" />
         <activity android:name=".activity.ViewBindingExample" />
         <activity android:name=".activity.SqlOperations" />
         <activity android:name=".activity.RssFeeds" />
-        <activity android:name=".activity.SmsSend"></activity>
+        <activity android:name=".activity.SmsSend" />
     </application>
 
 </manifest>

@@ -1,5 +1,4 @@
 package com.aboutme.avenjr.aboutme.activity;
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -22,6 +21,10 @@ import com.aboutme.avenjr.aboutme.view.DialogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.aboutme.avenjr.aboutme.R;
 
 public class SmsSend extends AppCompatActivity {
 
